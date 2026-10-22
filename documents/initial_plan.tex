@@ -1,0 +1,405 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{titlesec}
+
+% --- Hyperref Setup ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+\begin{document}
+
+% ==========================================
+% TITLE PAGE
+% ==========================================
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Large \textsc{Ensemble Learning -- Research Project (2026/2027)}}\\[0.5cm]
+    {\large Instructor: Stanisław Kaźmierczak}\\[3cm]
+    
+    % --- Project Title ---
+    \rule{\linewidth}{0.5mm} \\[0.4cm]
+    {\huge \bfseries Sequential Functional Orthogonality via Triangular Stop-Gradient Masks in Tabular ResNet Ensembles \\[0.2cm] }
+    {\Large \textit{Project 1: Initial Plan}}
+    \rule{\linewidth}{0.5mm} \\[2.5cm]
+    
+    % --- Authors (Space for 2) ---
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft} \large
+            \emph{Author 1:}\\
+            {Egor Kachanouski}\\
+            {\small Student ID: [000000]}\\
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright} \large
+            \emph{Author 2:}\\
+            {Antoni Kingston}\\
+            {\small Student ID: 327284}\\
+        \end{flushright}
+    \end{minipage}
+    
+    \vfill
+    
+    % --- Date ---
+    {\large \today}
+    
+\end{titlepage}
+
+% ==========================================
+% TABLE OF CONTENTS
+% ==========================================
+\tableofcontents
+\newpage
+
+% ==========================================
+% MAIN CONTENT
+% ==========================================
+
+\section{Introduction and Research Problem}
+Combining multiple models in an ensemble is a primary mechanism for reducing variance and improving generalization in machine learning \cite{kuncheva2016getting}. While tree-based ensembles have historically dominated structured tabular benchmarks \cite{grinsztajn2022why}, well-regularized Tabular Neural Networks (TNNs)—such as TabNet \cite{arik2021tabnet}, well-tuned dense networks \cite{kadra2021well}, and Tabular ResNets \cite{grinsztajn2022why}—have narrowed this performance gap, particularly when deployed as ensembles.
+
+Across deep learning domains, training an ensemble of neural networks presents a fundamental challenge in structuring how constituent models partition the feature space:
+\begin{enumerate}
+    \item \textbf{Unregularized Training:} In general neural ensembles, training multiple networks without explicit diversity constraints relies solely on random weight initialization to explore distinct local minima in the loss landscape \cite{fort2019deep}. Because no mechanism actively penalizes representational overlap, independently initialized networks frequently converge toward redundant latent features. This general phenomenon becomes particularly pronounced when applying TNNs to tabular datasets, where a small subset of informative features often dominates the target variance \cite{grinsztajn2022why}.
+    \item \textbf{Symmetric Repulsion:} Methods such as Negative Correlation Learning (NCL) \cite{liu1999ensemble} and Orthogonal Ensemble Networks \cite{larrazabal2021orthogonal} introduce symmetric pairwise similarity penalties across models. However, because symmetric penalties apply bidirectional gradients to all models simultaneously, no single model is permitted to greedily capture the primary predictive representation, and learners may collude by introducing mutually canceling biases to satisfy the penalty \cite{jeffares2023joint}.
+\end{enumerate}
+
+To resolve this issue, this project investigates \textbf{Sequential Functional Orthogonality via a Triangular Stop-Gradient Mask (SFOvTSGM)} for additive ensembles of Tabular ResNet models. By applying a strictly lower-triangular similarity penalty coupled with a stop-gradient operator ($\text{sg}$) to the batch-centered latent representations, we impose an asymmetric hierarchy ($1 < 2 < \dots < M$) during simultaneous training. The primary network ($m=1$) is exempted from the orthogonality penalty, allowing it to capture the dominant data structure undisturbed. Each subsequent network ($m > 1$) contributes to the ensemble prediction while being repelled from the detached latent representations of all preceding networks ($j < m$).
+
+
+\section{Literature Review}
+
+\paragraph{Ensemble Objectives and Representation Redundancy.}
+The predictive advantage of an ensemble depends on balancing individual model capability with inter-model diversity \cite{kuncheva2016getting}. Early neural ensemble frameworks such as Negative Correlation Learning (NCL) \cite{liu1999ensemble} modified the training objective to decorrelate errors across models. Later, Fort et al. \cite{fort2019deep} demonstrated that training separate neural networks from different random initializations guides them into distinct basins of attraction in the loss landscape. To reduce the memory overhead of explicit ensembles, Wen et al. \cite{wen2020batchensemble} introduced BatchEnsemble, which parameterizes ensemble members via rank-1 scaling adapters over a shared weight matrix. However, subsequent theoretical and empirical work by Jeffares et al. \cite{jeffares2023joint} showed that naively optimizing joint ensemble losses or symmetric diversity penalties leads to learner collusion, where individual networks shift their representations in opposing directions that cancel out upon aggregation without improving test generalization.
+
+\paragraph{Latent Geometry and Asymmetric Orthogonalization.}
+Quantifying or penalizing redundancy in hidden layers requires similarity metrics invariant to neuron permutations and orthogonal transformations. Kornblith et al. \cite{kornblith2019similarity} introduced Centered Kernel Alignment (CKA), which compares the geometric structures of two latent spaces via their centered pairwise Gram matrices. In computer vision, Larrazabal et al. \cite{larrazabal2021orthogonal} showed that applying orthogonality constraints to latent representations improves ensemble performance, though their formulation relied on symmetric pairwise repulsion.
+
+To enforce ordered orthogonality without perturbing preceding representations, asymmetric stop-gradient operators have been developed in adjacent fields:
+\begin{itemize}
+    \item \textbf{Spectral Decomposition:} Gemp et al. \cite{gemp2021eigengame} and Deng et al. \cite{deng2022neuralef} formulated a simultaneous analog to Gram--Schmidt orthogonalization for learning ordered eigenfunctions. By applying a strictly lower-triangular penalty where function $m$ orthogonalizes against $\text{sg}(f_j)$ for $j < m$, the top function converges to the principal component undisturbed while higher-index functions span orthogonal complements in parallel.
+    \item \textbf{Sequential Representation Repulsion:} In medical anomaly detection, Gu et al. \cite{gu2024revisiting} trained autoencoder ensembles sequentially, penalizing the CKA similarity between the active learner and previously frozen learners to prevent representation collapse.
+\end{itemize}
+
+\paragraph{Tabular Neural Networks and Regularization.}
+Because tabular data consists of heterogeneous columns lacking spatial or sequential locality, neural networks are highly susceptible to overfitting uninformative features \cite{grinsztajn2022why}. Arik and Pfister \cite{arik2021tabnet} introduced TabNet, utilizing sequential attention for instance-wise feature selection. Conversely, Kadra et al. \cite{kadra2021well} and Grinsztajn et al. \cite{grinsztajn2022why} demonstrated that dense architectures—specifically Pre-Activation Tabular ResNets equipped with residual skip connections, batch normalization, and heavy dropout—provide a strong, computationally efficient inductive bias for tabular manifolds. To further regularize tabular representations, Jeffares et al. \cite{jeffares2023tangos} proposed TANGOS, which enforces symmetric gradient orthogonality among neurons within a single network to encourage latent specialization.
+
+
+\section{Proposed Method and Validation Procedure}
+
+While intra-model orthogonality \cite{jeffares2023tangos} restricts synergistic neuron co-adaptation within a single network, unregularized tabular ensembles \cite{fort2019deep, wen2020batchensemble, grinsztajn2022why} do not explicitly prevent constituent networks from learning redundant latent representations. Combining the simultaneous lower-triangular stop-gradient operator \cite{gemp2021eigengame, deng2022neuralef} with latent geometric repulsion \cite{kornblith2019similarity, gu2024revisiting} provides a mechanism to enforce ordered inter-model specialization across Tabular ResNet ensembles while preserving internal feature co-adaptation.
+
+\subsection{Proposed Architecture and Methodology}
+
+\paragraph{Tabular ResNet Backbone.}
+We consider an ensemble $\mathcal{E} = \{f_1, f_2, \dots, f_M\}$ of $M$ separate Tabular ResNet models \cite{grinsztajn2022why} with independent parameters $\theta_1, \dots, \theta_M$. Each network maps an input vector of numerical and encoded categorical features into a $d$-dimensional hidden space via an initial linear projection stem, followed by $L$ pre-activation residual blocks. Each residual block updates its intermediate representation $u \in \mathbb{R}^d$ according to:
+\begin{equation}
+    \text{ResBlock}(u) = u + \text{Drop}_2\Big(W_2 \, \text{Drop}_1\big(\text{ReLU}(W_1 \, \text{BN}(u) + b_1)\big) + b_2\Big),
+\end{equation}
+where $W_1, W_2 \in \mathbb{R}^{d \times d}$ and $b_1, b_2 \in \mathbb{R}^d$ are learnable weights and biases, $\text{BN}(\cdot)$ denotes Batch Normalization, and $\text{Drop}_1, \text{Drop}_2$ denote Dropout layers. Unlike vision ResNets, dense linear layers enable global feature mixing at every block, while dual dropout regularizes against tabular overfitting. After the final residual block, the normalized activation matrix $Z_m = \text{ReLU}(\text{BN}(U_m^{(L)})) \in \mathbb{R}^{B \times d}$ across a mini-batch of size $B$ serves as the penultimate latent representation prior to the linear prediction head.
+
+\paragraph{Additive Ensemble Prediction.}
+Given an input mini-batch $X \in \mathbb{R}^{B \times D}$ with target $Y$, each Tabular ResNet $m \in \{1, \dots, M\}$ computes its penultimate latent matrix $Z_m \in \mathbb{R}^{B \times d}$ and functional output $f_m(X)$ (raw logits in classification or continuous predictions in regression). Rather than uniform averaging, the inference-time prediction $\hat{Y}$ of the ensemble is formed as an additive expansion:
+\begin{equation}
+    \hat{Y} = f_1(X) + \nu \sum_{m=2}^{M} f_m(X),
+\end{equation}
+where $f_1(X)$ acts as the unregularized base predictor and $\nu \in (0, 1]$ is a shrinkage coefficient scaling the contributions of subsequent orthogonalized learners.
+
+\paragraph{Sequential Functional Orthogonality (SFOvTSGM) Objective.}
+Let $H = I_B - \frac{1}{B}\mathbf{1}\mathbf{1}^\top$ be the batch-centering matrix, such that $\tilde{Z}_m = H Z_m = Z_m - \frac{1}{B}\mathbf{1}\mathbf{1}^\top Z_m$ denotes the zero-mean latent representation matrix across the mini-batch. To impose a sequential hierarchy $1 < 2 < \dots < M$ during simultaneous training, we define the repulsion penalty for network $m$ using a strictly lower-triangular sum over batch-centered, stop-gradient ($\text{sg}$) detached representations:
+\begin{equation}
+    \mathcal{L}_{\text{SFO}}^{(m)} = \sum_{j=1}^{m-1} \Phi\Big(H Z_m, \, \text{sg}(H Z_j)\Big) = \sum_{j=1}^{m-1} \Phi\Big(\tilde{Z}_m, \, \text{sg}(\tilde{Z}_j)\Big), \quad \text{with } \mathcal{L}_{\text{SFO}}^{(1)} = 0,
+\end{equation}
+where $\frac{\partial \, \text{sg}(\tilde{Z}_j)}{\partial \theta_j} = 0$ and $\Phi(\cdot, \cdot) \in [0, 1]$ is a differentiable similarity measure.
+
+The total loss function is composed of the task prediction loss of the entire ensemble and the normalized sequential orthogonalization penalty:
+\begin{equation}
+    \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{task}}\big(\hat{Y}, Y\big) + \lambda \sum_{m=2}^{M} \frac{1}{m-1} \mathcal{L}_{\text{SFO}}^{(m)},
+\end{equation}
+where $\mathcal{L}_{\text{task}}$ is Cross-Entropy or Mean Squared Error (MSE), and $\lambda > 0$ controls the orthogonalization strength. Because no repulsion gradients flow into $\theta_1$, the first network greedily captures the primary functional relationship, while each network $m > 1$ learns complementary residual features within the latent subspace orthogonal to $\{Z_1, \dots, Z_{m-1}\}$.
+
+\paragraph{Similarity Measures ($\Phi$).}
+We will evaluate and compare two formulations of $\Phi\big(\tilde{Z}_m, \text{sg}(\tilde{Z}_j)\big)$:
+\begin{enumerate}
+    \item \textbf{Linear Centered Kernel Alignment (CKA) \cite{kornblith2019similarity}:} CKA measures the holistic geometric similarity between two latent spaces by comparing their inter-sample similarity structures (Gram matrices $K_m = \tilde{Z}_m \tilde{Z}_m^\top \in \mathbb{R}^{B \times B}$). By normalizing the Hilbert--Schmidt Independence Criterion (HSIC), Linear CKA can be computed in feature space in $\mathcal{O}(B d^2)$ time:
+    \begin{equation}
+        \Phi_{\text{CKA}}\big(\tilde{Z}_m, \text{sg}(\tilde{Z}_j)\big) = \frac{\|\tilde{Z}_m^\top \, \text{sg}(\tilde{Z}_j)\|_F^2}{\|\tilde{Z}_m^\top \tilde{Z}_m\|_F \, \|\text{sg}(\tilde{Z}_j)^\top \text{sg}(\tilde{Z}_j)\|_F + \epsilon}.
+    \end{equation}
+    Linear CKA is invariant to orthogonal transformations (rotations, reflections, and neuron permutations) and isotropic scaling. Minimizing $\Phi_{\text{CKA}}$ forces network $m$ to alter the pairwise distance geometry among data points relative to networks $1 \dots m-1$.
+    
+    \item \textbf{Squared Functional Cosine Similarity:} Whereas CKA compares full $d$-dimensional relational geometry, Squared Functional Cosine Similarity enforces direct coordinate-wise orthogonality between aligned latent dimensions across the batch dimension. Treating each column $\tilde{z}_{m,k} \in \mathbb{R}^B$ ($k \in \{1, \dots, d\}$) as a function evaluated on the $B$ batch samples, the metric computes the mean squared cosine of the angle between corresponding feature trajectories:
+    \begin{equation}
+        \Phi_{\text{Cos}}\big(\tilde{Z}_m, \text{sg}(\tilde{Z}_j)\big) = \frac{1}{d} \sum_{k=1}^{d} \left( \frac{\tilde{z}_{m,k}^\top \, \text{sg}(\tilde{z}_{j,k})}{\|\tilde{z}_{m,k}\|_2 \, \|\text{sg}(\tilde{z}_{j,k})\|_2 + \epsilon} \right)^2.
+    \end{equation}
+    Computed in $\mathcal{O}(B d)$ time, minimizing $\Phi_{\text{Cos}}$ acts as a direct batch-wise Gram--Schmidt projection, forcing the $k$-th latent unit of model $m$ to be uncorrelated with the $k$-th latent unit of preceding models across the input distribution.
+\end{enumerate}
+
+\paragraph{Baselines and Ablations.}
+Using the Tabular ResNet architecture, we will compare six configurations: (1) Single Tabular ResNet, (2) Single Tabular ResNet + TANGOS \cite{jeffares2023tangos}, (3) Tabular ResNet + BatchEnsemble \cite{wen2020batchensemble} (parameter-efficient shared-weight baseline), (4) Unregularized Tabular ResNet Ensemble ($\lambda = 0$), (5) Symmetric Orthogonal Tabular ResNet Ensemble (bidirectional repulsion without stop-gradient), and (6) Tabular ResNet Ensemble + SFOvTSGM (evaluated with both $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$).
+
+\subsection{Validation Procedure}
+All experiments will use $5$-fold cross-validation (stratified for classification, standard for regression). Within each fold, the remaining $80\%$ of data will be divided into $64\%$ training and $16\%$ validation for early stopping and hyperparameter tuning. Final configurations will be trained across $5$ fixed random seeds per fold to report the mean and standard deviation of all metrics.
+
+\subsection{Evaluation Metrics}
+\begin{itemize}
+    \item \textbf{Classification:} Accuracy, Area Under the ROC Curve (ROC-AUC), and Negative Log-Likelihood (NLL).
+    \item \textbf{Regression:} Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and $R^2$ score.
+    \item \textbf{Ensemble Diagnostics:} (i) Staged cumulative test performance $\hat{Y}^{(m)} = f_1(X) + \nu \sum_{j=2}^m f_j(X)$ as a function of ensemble depth $m \in \{1, \dots, M\}$ to quantify the marginal contribution of each successive learner, (ii) functional norm profiles $\|f_m(X)\|_2$ across index $m$, and (iii) post-training pairwise CKA and cosine similarity matrices across the $M$ networks.
+    \item \textbf{Hardware-Independent Computational Cost:} To evaluate efficiency independent of hardware or software implementation details, we will report: (i) \textbf{Floating-Point Operations (FLOPs)} per training step (accounting for both the forward/backward pass of the $M$ networks and the $\mathcal{O}(M^2 B d^2)$ or $\mathcal{O}(M^2 B d)$ overhead of $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$), (ii) \textbf{Total FLOPs to Convergence} (FLOPs per step multiplied by the number of steps to early stopping), and (iii) \textbf{Total Trainable Parameters}.
+\end{itemize}
+
+
+\section{Hyperparameters and Tuning Strategy}
+
+\subsection{Planned Algorithm Hyperparameters}
+The hyperparameters are partitioned into three categories: (1) shared Tabular ResNet backbone and optimization parameters, (2) ensemble and SFOvTSGM parameters, and (3) baseline-specific regularization parameters. Table~\ref{tab:hyperparameters} summarizes the planned search spaces and default values.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Hyperparameter search spaces and fixed defaults across evaluated models.}
+    \label{tab:hyperparameters}
+    \vspace{0.2cm}
+    \begin{tabular}{lllc}
+        \toprule
+        \textbf{Category} & \textbf{Hyperparameter} & \textbf{Search Space / Values} & \textbf{Distribution / Type} \\
+        \midrule
+        \textbf{Backbone} 
+        & Residual blocks ($L$) & $\{2, 3, 4\}$ & Discrete \\
+        (Tabular ResNet) & Hidden dimension ($d$) & $\{64, 128, 256\}$ & Discrete \\
+        & Dropout rate ($p_{\text{drop}}$) & $[0.0, 0.5]$ & Uniform \\
+        & Categorical embedding dim.\ & $\{8, 16, 32\}$ & Discrete \\
+        \midrule
+        \textbf{Optimization} 
+        & Optimizer & AdamW & Fixed \\
+        & Learning rate ($\eta$) & $[10^{-4}, 5 \times 10^{-3}]$ & Log-uniform \\
+        & Weight decay ($\gamma$) & $[10^{-6}, 10^{-2}]$ & Log-uniform \\
+        & Batch size ($B$) & $\{128, 256, 512\}$ & Dataset-dependent \\
+        & Max epochs / Patience & $200$ / $16$ & Fixed \\
+        \midrule
+        \textbf{Ensemble \&} 
+        & Ensemble size ($M$) & $8$ (ablation: $\{2, 4, 8, 16\}$) & Fixed (Grid) \\
+        \textbf{SFOvTSGM} & Shrinkage coefficient ($\nu$) & $[0.05, 1.0]$ & Log-uniform \\
+        & Orthogonality weight ($\lambda$) & $[10^{-3}, 10^{1}]$ & Log-uniform \\
+        & Similarity metric ($\Phi$) & $\{\Phi_{\text{CKA}}, \Phi_{\text{Cos}}\}$ & Categorical \\
+        \midrule
+        \textbf{Baselines} 
+        & Symm.\ Ortho.\ weight ($\lambda_{\text{sym}}$) & $[10^{-3}, 10^{1}]$ & Log-uniform \\
+        (TANGOS / BatchEns.) & TANGOS sparsity ($\lambda_1$) & $[10^{-4}, 10^{-1}]$ & Log-uniform \\
+        & TANGOS orthogonality ($\lambda_2$) & $[10^{-3}, 10^{0}]$ & Log-uniform \\
+        & BatchEnsemble sub-models ($M$) & $8$ & Fixed \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\paragraph{Batch Size Selection ($B$).}
+Because both $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$ estimate empirical covariance and directional alignment across mini-batch samples, batch size $B$ directly affects the variance of the orthogonality gradient. To avoid rank-deficient Gram matrices when $B < d$, we will enforce $B \ge d$ by setting $B = 256$ for standard datasets ($N \le 50\text{k}$) and $B = 512$ for larger datasets, falling back to $B = 128$ (with $d \le 128$) only on small datasets ($N < 2\text{k}$).
+
+\subsection{Selection and Tuning Strategy}
+Tuning both architectural dimensions ($L, d$) and method-specific regularization hyperparameters simultaneously for every ensemble configuration across $24$ datasets is computationally prohibitive and introduces confounding capacity differences between baselines. Following established tabular benchmarking protocols \cite{kadra2021well, grinsztajn2022why}, we will employ a controlled \textbf{Two-Stage Bayesian Optimization Protocol} implemented via \texttt{Optuna} using the Tree-structured Parzen Estimator (TPE) sampler:
+
+\begin{enumerate}
+    \item \textbf{Stage 1 (Backbone Architecture Calibration):} For each dataset, we first calibrate the single unregularized Tabular ResNet over $40$ TPE trials on the validation split (or load the validated reference configuration from the Inria Tabular Benchmark \cite{grinsztajn2022why}) to determine the optimal structural configuration $(L^*, d^*, p_{\text{drop}}^*)$. Freezing $(L^*, d^*, p_{\text{drop}}^*)$ across all subsequent ensemble methods on that dataset guarantees that all models share an identical per-learner parameter count and representational capacity, isolating the effect of the training objective.
+    \item \textbf{Stage 2 (Method-Specific Hyperparameter Tuning):} With the backbone architecture fixed to $(L^*, d^*, p_{\text{drop}}^*)$, each method tunes its specific regularization and optimization parameters over $30$ TPE trials per dataset:
+    \begin{itemize}
+        \item \textit{SFOvTSGM Ensembles:} Tune $(\lambda, \nu, \eta, \gamma)$ separately for $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$.
+        \item \textit{Symmetric Orthogonal Ensemble:} Tune $(\lambda_{\text{sym}}, \eta, \gamma)$.
+        \item \textit{Unregularized Ensemble \& BatchEnsemble:} Tune $(\eta, \gamma)$ with $\lambda = 0$.
+        \item \textit{Single ResNet + TANGOS:} Tune $(\lambda_1, \lambda_2, \eta, \gamma)$.
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Pruning and Early Stopping.}
+During all tuning trials, training is monitored on the $16\%$ validation split using the primary task loss (Cross-Entropy for classification, MSE for regression) without the regularization penalty term, ensuring fair comparison across varying values of $\lambda$. Early stopping is triggered if validation loss does not improve for $16$ consecutive epochs, and \texttt{Optuna}'s \texttt{MedianPruner} (with a $10$-epoch warmup) will terminate unpromising trials early. To prevent data leakage, hyperparameter tuning will be performed on Fold 1's training/validation split, and the selected configuration will be evaluated across all $5$ cross-validation folds and $5$ random seeds.
+
+
+\section{Datasets and Preprocessing}
+
+To satisfy the requirement of evaluating at least $12$ classification and $12$ regression tasks while minimizing redundant hyperparameter tuning compute, all $24$ datasets are sourced directly from the standardized \textbf{Inria Tabular Benchmark} curated by Grinsztajn et al. \cite{grinsztajn2022why} (hosted on OpenML under Benchmark Suites $334, 335, 336,$ and $337$, and on Hugging Face at \texttt{inria-soda/tabular-benchmark}, with reference code in the \texttt{LeoGrin/tabular-benchmark} repository), alongside overlapping datasets evaluated in the Cambridge \texttt{vanderschaarlab/TANGOS} repository \cite{jeffares2023tangos}.
+
+This selection provides two practical advantages:
+\begin{enumerate}
+    \item \textbf{Reuse of Validated Baseline Artifacts:} Because Single Tabular ResNet and TANGOS have already been tuned and benchmarked on these OpenML tasks by Grinsztajn et al. \cite{grinsztajn2022why} and Jeffares et al. \cite{jeffares2023tangos}, we can utilize the published hyperparameter logs and baseline checkpoints from \texttt{LeoGrin/tabular-benchmark} to reduce Stage 1 tuning overhead.
+    \item \textbf{Controlled Sample Sizes:} We select datasets within $N \in [4{,}177, \, 98{,}049]$ so that $5$-fold cross-validation across $5$ seeds remains computationally tractable on a single GPU, while ensuring every training fold contains enough samples to support batch sizes $B \in \{256, 512\}$ required for low-variance batch-wise $\Phi_{\text{CKA}}$ estimation.
+\end{enumerate}
+
+\subsection{Classification Datasets}
+Table~\ref{tab:clf_datasets} summarizes the $12$ tabular classification datasets from the Inria OpenML benchmark suites ($334$ and $337$) \cite{grinsztajn2022why}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Summary of the $12$ benchmark tabular classification datasets (OpenML Suites $334$ \& $337$).}
+    \label{tab:clf_datasets}
+    \vspace{0.2cm}
+    \small
+    \begin{tabular}{llrrrrcc}
+        \toprule
+        \textbf{Dataset Name} & \textbf{OpenML ID / Suite} & \textbf{Samples ($N$)} & \textbf{\# Num} & \textbf{\# Cat/Bin} & \textbf{Classes} & \textbf{Batch ($B$)} \\
+        \midrule
+        Electricity & ID $44156$ \cite{grinsztajn2022why} & $38{,}474$ & $7$ & $1$ & $2$ & $256$ \\
+        Eye Movements & ID $44157$ \cite{grinsztajn2022why} & $7{,}608$ & $20$ & $3$ & $2$ & $256$ \\
+        MagicTelescope & ID $44125$ \cite{grinsztajn2022why} & $13{,}376$ & $10$ & $0$ & $2$ & $256$ \\
+        Bank Marketing & ID $44126$ \cite{grinsztajn2022why} & $10{,}578$ & $7$ & $0$ & $2$ & $256$ \\
+        Credit & ID $44089$ \cite{grinsztajn2022why} & $16{,}714$ & $10$ & $0$ & $2$ & $256$ \\
+        Default Credit Card & ID $44124$ \cite{grinsztajn2022why} & $13{,}272$ & $20$ & $1$ & $2$ & $256$ \\
+        Jannis & ID $44131$ \cite{grinsztajn2022why, jeffares2023tangos} & $57{,}580$ & $54$ & $0$ & $2$ & $512$ \\
+        Higgs (Subsampled) & ID $44129$ \cite{grinsztajn2022why, jeffares2023tangos} & $94{,}016$ & $24$ & $0$ & $2$ & $512$ \\
+        Pol & ID $44122$ \cite{grinsztajn2022why} & $10{,}082$ & $26$ & $0$ & $2$ & $256$ \\
+        MiniBooNE & ID $44128$ \cite{grinsztajn2022why} & $72{,}998$ & $50$ & $0$ & $2$ & $512$ \\
+        Compass & ID $44162$ \cite{grinsztajn2022why} & $16{,}644$ & $9$ & $8$ & $2$ & $256$ \\
+        Covertype (Inria) & ID $44159$ \cite{grinsztajn2022why} & $42{,}368$ & $10$ & $44$ & $2$ & $512$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Regression Datasets}
+Table~\ref{tab:reg_datasets} summarizes the $12$ tabular regression datasets from the Inria OpenML benchmark suites ($335$ and $336$) \cite{grinsztajn2022why}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Summary of the $12$ benchmark tabular regression datasets (OpenML Suites $335$ \& $336$).}
+    \label{tab:reg_datasets}
+    \vspace{0.2cm}
+    \small
+    \begin{tabular}{llrrrrc}
+        \toprule
+        \textbf{Dataset Name} & \textbf{OpenML ID / Suite} & \textbf{Samples ($N$)} & \textbf{\# Num} & \textbf{\# Cat/Bin} & \textbf{Batch ($B$)} \\
+        \midrule
+        California Housing & ID $44025$ \cite{grinsztajn2022why} & $20{,}640$ & $8$ & $0$ & $256$ \\
+        House 16H & ID $44139$ \cite{grinsztajn2022why} & $22{,}784$ & $16$ & $0$ & $256$ \\
+        Diamonds & ID $44059$ \cite{grinsztajn2022why} & $53{,}940$ & $6$ & $3$ & $512$ \\
+        Elevators & ID $44137$ \cite{grinsztajn2022why} & $16{,}599$ & $16$ & $0$ & $256$ \\
+        Abalone & ID $44956$ \cite{grinsztajn2022why} & $4{,}177$ & $7$ & $1$ & $256$ \\
+        CPU Act & ID $44132$ \cite{grinsztajn2022why} & $8{,}192$ & $21$ & $0$ & $256$ \\
+        Ailerons & ID $44136$ \cite{grinsztajn2022why} & $13{,}750$ & $33$ & $0$ & $256$ \\
+        Brazilian Houses & ID $44141$ \cite{grinsztajn2022why} & $10{,}692$ & $8$ & $3$ & $256$ \\
+        Bike Sharing Demand & ID $44142$ \cite{grinsztajn2022why} & $17{,}379$ & $6$ & $5$ & $256$ \\
+        House Sales & ID $44144$ \cite{grinsztajn2022why} & $21{,}613$ & $15$ & $2$ & $256$ \\
+        Miami Housing 2016 & ID $44146$ \cite{grinsztajn2022why} & $13{,}932$ & $13$ & $0$ & $256$ \\
+        Superconduct & ID $44148$ \cite{grinsztajn2022why} & $21{,}263$ & $79$ & $0$ & $256$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Preprocessing Procedures}
+To guarantee zero data leakage across cross-validation splits, all preprocessing statistics (imputation values, quantile parameters, and target normalization) are fitted strictly on the $64\%$ training partition of each fold and applied deterministically to the validation ($16\%$) and test ($20\%$) partitions. Following the standardized preprocessing protocol of the Inria Tabular Benchmark \cite{grinsztajn2022why}:
+
+\begin{enumerate}
+    \item \textbf{Numerical Features:} Missing numerical values are imputed using the median of the respective feature on the training split. Continuous features are transformed using \texttt{scikit-learn}'s \texttt{QuantileTransformer} (mapping distributions to a standard normal distribution $\mathcal{N}(0, 1)$), which mitigates the impact of heavy-tailed outliers and skewed feature distributions common in tabular datasets.
+    \item \textbf{Categorical and Binary Features:} Missing categorical values are assigned to a dedicated \texttt{<UNK>} token. Binary features are mapped to $\{0, 1\}$, while multi-category features are ordinal-encoded and passed to learnable entity embedding lookup tables within the Tabular ResNet input stem. Categories appearing only in validation/test splits are routed to the \texttt{<UNK>} embedding.
+    \item \textbf{Regression Target Standardization:} For all regression tasks, target values $y$ are standardized to zero mean and unit variance ($\tilde{y} = (y - \mu_{\text{train}}) / \sigma_{\text{train}}$) during training so that MSE loss magnitudes and orthogonality regularization weights $\lambda$ remain on a consistent scale across datasets. Model predictions are inverse-transformed back to the original target scale prior to computing RMSE and MAE.
+\end{enumerate}
+
+
+\section{Results Aggregation and Statistical Analysis}
+
+\subsection{Approach to Aggregating Results}
+Our experimental design evaluates $K$ model configurations across $N_{\text{clf}} = 12$ classification datasets and $N_{\text{reg}} = 12$ regression datasets ($N_{\text{total}} = 24$), with each dataset evaluated over $F = 5$ cross-validation folds and $S = 5$ fixed random seeds per fold. We aggregate results at two levels:
+
+\paragraph{1. Within-Dataset Aggregation (Capturing Accuracy and Stability).}
+Let $m_{d,c}^{(f,s)}$ denote the test-set metric of model configuration $c \in \{1, \dots, K\}$ on dataset $d$, fold $f \in \{1, \dots, F\}$, and random seed $s \in \{1, \dots, S\}$. First, we compute the fold-level mean across seeds, $\bar{m}_{d,c}^{(f)} = \frac{1}{S}\sum_{s=1}^S m_{d,c}^{(f,s)}$, and the within-fold seed standard deviation, $s_{d,c}^{(f)} = \sqrt{\frac{1}{S-1}\sum_{s=1}^S \big(m_{d,c}^{(f,s)} - \bar{m}_{d,c}^{(f)}\big)^2}$. For every dataset--model pair, we report:
+\begin{equation}
+    \hat{\mu}_{d,c} = \frac{1}{F} \sum_{f=1}^{F} \bar{m}_{d,c}^{(f)}, \qquad 
+    \sigma_{\text{fold}}(d,c) = \sqrt{\frac{1}{F-1} \sum_{f=1}^{F} \big(\bar{m}_{d,c}^{(f)} - \hat{\mu}_{d,c}\big)^2}, \qquad 
+    \bar{\sigma}_{\text{seed}}(d,c) = \frac{1}{F} \sum_{f=1}^{F} s_{d,c}^{(f)}.
+\end{equation}
+Reporting both $\sigma_{\text{fold}}$ (sensitivity to data partitioning) and $\bar{\sigma}_{\text{seed}}$ (sensitivity to random weight initialization) allows us to evaluate whether $\text{SFOvTSGM}$ reduces prediction variance and stabilizes convergence even on tasks where mean accuracy gains are modest.
+
+\paragraph{2. Cross-Dataset Aggregation.}
+Because raw metrics (such as RMSE, MAE, or NLL) vary in scale and baseline difficulty across datasets, direct arithmetic averaging of raw scores across datasets is dominated by high-variance tasks. We will aggregate performance across the $12$ classification datasets, the $12$ regression datasets, and all $24$ datasets combined using three scale-invariant summaries:
+\begin{itemize}
+    \item \textbf{Mean Rank ($\bar{R}_c$):} On each dataset $d$, the $K$ configurations are ranked from $1$ (best) to $K$ (worst) based on $\hat{\mu}_{d,c}$ (assigning average ranks in the event of ties). We report the mean rank $\bar{R}_c = \frac{1}{N_d} \sum_{d=1}^{N_d} R_{d,c}$ \cite{demsar2006statistical}.
+    \item \textbf{Relative Error / Loss Ratio (Geometric Mean):} For strictly positive loss metrics (NLL for classification, RMSE and MAE for regression), we normalize each model's score on dataset $d$ by the Single Tabular ResNet baseline score, $r_{d,c} = \hat{\mu}_{d,c} / \hat{\mu}_{d,\text{Single}}$, and compute the geometric mean across datasets: $\text{GM}_c = \left(\prod_{d=1}^{N_d} r_{d,c}\right)^{1/N_d}$.
+    \item \textbf{Pairwise Win / Tie / Loss Counts:} Summary tables tabulating how many datasets a given method improves upon, ties, or degrades relative to the Unregularized Ensemble and Single ResNet baselines.
+\end{itemize}
+
+\subsection{Planned Statistical Tests}
+To ensure that observed differences are not artifacts of random variation, we follow the non-parametric statistical testing framework established by Dem\v{s}ar \cite{demsar2006statistical} and refined by Benavoli et al. \cite{benavoli2016should}. All tests will be conducted at a significance level of $\alpha = 0.05$.
+
+\paragraph{1. Omnibus Multi-Model Comparison (Friedman Test with Iman--Davenport Correction).}
+To test the global null hypothesis $H_0$ that all $K$ evaluated methods perform equally well across $N_d$ datasets ($N_d = 12$ for task-specific analysis; $N_d = 24$ for unified rank analysis across all tasks using NLL and RMSE ranks), we compute the Friedman statistic $\chi_F^2$ alongside the less conservative Iman--Davenport $F_F$ statistic:
+\begin{equation}
+    \chi_F^2 = \frac{12 N_d}{K(K+1)} \left[ \sum_{c=1}^{K} \bar{R}_c^2 - \frac{K(K+1)^2}{4} \right], \qquad 
+    F_F = \frac{(N_d - 1)\chi_F^2}{N_d(K - 1) - \chi_F^2},
+\end{equation}
+where $F_F$ follows an $F$-distribution with $(K - 1)$ and $(K - 1)(N_d - 1)$ degrees of freedom.
+
+\paragraph{2. Post-Hoc Comparisons and Critical Difference Diagrams.}
+If the omnibus test rejects $H_0$ ($p < 0.05$), we will conduct two complementary post-hoc analyses:
+\begin{itemize}
+    \item \textbf{Nemenyi Post-Hoc Test and Critical Difference (CD) Diagrams \cite{demsar2006statistical}:} For visual all-pairs comparison, we will generate CD diagrams where methods whose average ranks differ by less than $\text{CD} = q_\alpha \sqrt{\frac{K(K+1)}{6 N_d}}$ are connected by a horizontal clique bar.
+    \item \textbf{Wilcoxon Signed-Rank Test with Holm--Bonferroni Correction \cite{benavoli2016should}:} Because rank-based Nemenyi tests have lower statistical power and depend on the pool of third-party baselines, we will conduct paired two-sided \textbf{Wilcoxon Signed-Rank Tests} directly comparing our proposed $\text{SFOvTSGM}$ ensembles against each baseline (Unregularized Ensemble, Symmetric Orthogonal Ensemble, BatchEnsemble, and TANGOS). For comparisons on a single metric across $N_d = 12$ datasets, we use raw paired differences $\Delta_d = \hat{\mu}_{d,A} - \hat{\mu}_{d,B}$; for combined $N_d = 24$ tests, we use relative loss ratios $r_{d,c}$. To control the Family-Wise Error Rate (FWER) across multiple pairwise comparisons, $p$-values will be adjusted using the step-down \textbf{Holm--Bonferroni procedure}.
+\end{itemize}
+
+\paragraph{3. Within-Dataset Hypothesis Testing.}
+Because repeating experiments across random seeds within a dataset does not by itself establish statistical significance, we will test whether performance differences on each individual dataset $d$ are statistically distinguishable from noise. Specifically, we will apply a paired two-sided test across the fold-level scores $\bar{m}_{d,c}^{(f)}$, marking statistically significant improvements over the Unregularized Ensemble baseline in bold in all per-dataset result tables.
+
+\section{Reproducibility and Declarations}
+
+\subsection{Reproducibility}
+To guarantee full experimental reproducibility across hardware environments, the project will enforce strict determinism and standardized code distribution:
+
+\begin{enumerate}
+    \item \textbf{Deterministic Random Seeding:} All sources of stochasticity—including dataset cross-validation partitioning, weight initialization, dropout masks, mini-batch shuffling, and Bayesian hyperparameter sampling—will be controlled using fixed integer seeds:
+    \begin{itemize}
+        \item Cross-validation splits (\texttt{StratifiedKFold} and \texttt{KFold} in \texttt{scikit-learn}) and \texttt{Optuna}'s \texttt{TPESampler} will be initialized with a fixed master seed ($s_{\text{master}} = 42$).
+        \item For the $S = 5$ repeated evaluation runs per fold, all random number generators (\texttt{python.random}, \texttt{numpy.random}, \texttt{torch.manual\_seed}, and \texttt{torch.cuda.manual\_seed\_all}) will be explicitly initialized with the fixed seed set $\mathcal{S} = \{42, 67, 69, 228, 2137\}$.
+        \item Within each $M$-model ensemble run initialized with global seed $s \in \mathcal{S}$, individual member networks $f_m$ ($m \in \{1, \dots, M\}$) will be initialized deterministically using derived sub-seeds $s_m = 1000 s + m$ so that starting weights are distinct across learners yet strictly reproducible across runs.
+        \item PyTorch deterministic execution flags (\texttt{torch.backends.cudnn.deterministic = True} and \texttt{torch.backends.cudnn.benchmark = False}) will be enabled during training and evaluation.
+    \end{itemize}
+    \item \textbf{Public Repository and Execution Instructions:} All source code, preprocessing pipelines, tuned hyperparameter configuration files, and statistical analysis scripts will be maintained in a public GitHub repository (and included in the final LeON submission archive). The repository will contain:
+    \begin{itemize}
+        \item A pinned environment specification (\texttt{requirements.txt} and \texttt{environment.yml}) locking exact versions of Python, PyTorch, CUDA, \texttt{scikit-learn}, \texttt{openml}, and \texttt{optuna}.
+        \item Automated data-fetching scripts that download and cache the $24$ OpenML datasets via their exact dataset IDs (Tables~\ref{tab:clf_datasets} and~\ref{tab:reg_datasets}).
+        \item A step-by-step \texttt{README.md} documenting the exact command-line instructions required to reproduce hyperparameter tuning, model training, metric aggregation, and figure/table generation from scratch.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{External Code and AI Usage Disclosure}
+
+\paragraph{Planned Use and Modification of External Code.}
+In accordance with course guidelines, any external code utilized for baselines or data loading will be explicitly cited in the final report and substantially modified to fit our experimental pipeline:
+\begin{itemize}
+    \item \textbf{Data Loading and Tabular ResNet Reference:} We will adapt dataset loading utilities and reference Tabular ResNet block definitions from the open-source Inria Tabular Benchmark repository (\texttt{LeoGrin/tabular-benchmark}) \cite{grinsztajn2022why}, modifying the architecture to expose penultimate batch-centered latent representations $\tilde{Z}_m$ and support simultaneous multi-model forward passes.
+    \item \textbf{TANGOS Baseline:} We will adapt the intra-model gradient orthogonalization loss calculation from the official Cambridge repository (\texttt{vanderschaarlab/TANGOS}) \cite{jeffares2023tangos}, integrating it into our unified Tabular ResNet training loop.
+    \item \textbf{Original Implementation:} The core contributions of this project—specifically the additive multi-network ensemble wrapper, the lower-triangular stop-gradient mask ($\text{SFOvTSGM}$), and the vectorized $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$ repulsion loss modules—will be implemented from scratch in PyTorch.
+\end{itemize}
+
+\paragraph{AI Usage Disclosure.}
+In compliance with the course policy on artificial intelligence disclosure, the authors declare that the text, mathematical typesetting, and LaTeX structure of this Project Plan (spanning Sections~1 through~7 and the accompanying BibTeX bibliography) were generated in their entirety by a Large Language Model (AI assistant). 
+
+This generation process was conducted under continuous, substantial human supervision and direction. Specifically, the human authors:
+\begin{enumerate}
+    \item Conceived the core research direction (investigating concept geometry in latent spaces and formulating Sequential Functional Orthogonality via a triangular stop-gradient mask for additive neural boosting).
+    \item Directed the literature audit, critically questioning initial AI claims regarding mathematical equivalence and domain novelty to ensure accurate attribution of prior work in spectral decomposition and representation similarity.
+    \item Audited and corrected the mathematical formulations of the training objective, inference-time additive expansion, batch centering, backbone selection (restricting experiments to Tabular ResNet), and boosting-appropriate diagnostic metrics.
+    \item Enforced institutional and logistical constraints on dataset selection, computational cost metrics, and bibliography sourcing, reviewing and approving every section of the final document.
+\end{enumerate}
+
+
+% ==========================================
+% REFERENCES
+% ==========================================
+\newpage
+\bibliographystyle{plain}
+\bibliography{bibliography} 
+
+\end{document}

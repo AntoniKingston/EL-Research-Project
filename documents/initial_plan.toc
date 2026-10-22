@@ -1,0 +1,37 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction and Research Problem}{2}{section.1}%
+\contentsline {section}{\numberline {2}Literature Review}{2}{section.2}%
+\contentsline {paragraph}{Ensemble Objectives and Representation Redundancy.}{2}{section.2}%
+\contentsline {paragraph}{Latent Geometry and Asymmetric Orthogonalization.}{2}{section.2}%
+\contentsline {paragraph}{Tabular Neural Networks and Regularization.}{3}{section.2}%
+\contentsline {section}{\numberline {3}Proposed Method and Validation Procedure}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Proposed Architecture and Methodology}{3}{subsection.3.1}%
+\contentsline {paragraph}{Tabular ResNet Backbone.}{3}{subsection.3.1}%
+\contentsline {paragraph}{Additive Ensemble Prediction.}{4}{equation.1}%
+\contentsline {paragraph}{Sequential Functional Orthogonality (SFOvTSGM) Objective.}{4}{equation.2}%
+\contentsline {paragraph}{Similarity Measures ($\Phi $).}{4}{equation.4}%
+\contentsline {paragraph}{Baselines and Ablations.}{5}{equation.6}%
+\contentsline {subsection}{\numberline {3.2}Validation Procedure}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Evaluation Metrics}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Hyperparameters and Tuning Strategy}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Planned Algorithm Hyperparameters}{5}{subsection.4.1}%
+\contentsline {paragraph}{Batch Size Selection ($B$).}{6}{table.1}%
+\contentsline {subsection}{\numberline {4.2}Selection and Tuning Strategy}{6}{subsection.4.2}%
+\contentsline {paragraph}{Pruning and Early Stopping.}{7}{Item.6}%
+\contentsline {section}{\numberline {5}Datasets and Preprocessing}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Classification Datasets}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Regression Datasets}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Preprocessing Procedures}{7}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Results Aggregation and Statistical Analysis}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Approach to Aggregating Results}{9}{subsection.6.1}%
+\contentsline {paragraph}{1. Within-Dataset Aggregation (Capturing Accuracy and Stability).}{9}{subsection.6.1}%
+\contentsline {paragraph}{2. Cross-Dataset Aggregation.}{9}{equation.7}%
+\contentsline {subsection}{\numberline {6.2}Planned Statistical Tests}{10}{subsection.6.2}%
+\contentsline {paragraph}{1. Omnibus Multi-Model Comparison (Friedman Test with Iman--Davenport Correction).}{10}{subsection.6.2}%
+\contentsline {paragraph}{2. Post-Hoc Comparisons and Critical Difference Diagrams.}{10}{equation.8}%
+\contentsline {paragraph}{3. Within-Dataset Hypothesis Testing.}{10}{equation.8}%
+\contentsline {section}{\numberline {7}Reproducibility and Declarations}{10}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Reproducibility}{10}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}External Code and AI Usage Disclosure}{11}{subsection.7.2}%
+\contentsline {paragraph}{Planned Use and Modification of External Code.}{11}{subsection.7.2}%
+\contentsline {paragraph}{AI Usage Disclosure.}{11}{subsection.7.2}%

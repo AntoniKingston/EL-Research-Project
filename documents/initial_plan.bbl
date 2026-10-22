@@ -1,0 +1,101 @@
+\begin{thebibliography}{10}
+
+\bibitem{arik2021tabnet}
+Sercan~{\"O} Arik and Tomas Pfister.
+\newblock {TabNet}: Attentive interpretable tabular learning.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~35, pages 6679--6687, 2021.
+
+\bibitem{benavoli2016should}
+Alessio Benavoli, Giorgio Corani, and Francesca Mangili.
+\newblock Should we really use post-hoc tests based on mean-ranks?
+\newblock {\em Journal of Machine Learning Research}, 17(5):1--10, 2016.
+
+\bibitem{demsar2006statistical}
+Janez Dem{\v{s}}ar.
+\newblock Statistical comparisons of classifiers over multiple data sets.
+\newblock {\em Journal of Machine Learning Research}, 7:1--30, 2006.
+
+\bibitem{deng2022neuralef}
+Zhijie Deng, Jiaxin Shi, and Jun Zhu.
+\newblock {NeuralEF}: Deconstructing kernels by deep neural networks.
+\newblock In {\em International Conference on Machine Learning (ICML)}, pages
+  4976--4992. PMLR, 2022.
+
+\bibitem{fort2019deep}
+Stanislav Fort, Huiyi Hu, and Balaji Lakshminarayanan.
+\newblock Deep ensembles: A loss landscape perspective.
+\newblock {\em arXiv preprint arXiv:1912.02757}, 2019.
+
+\bibitem{gemp2021eigengame}
+Ian Gemp, Brian McWilliams, Claire Vernade, and Thore Graepel.
+\newblock {EigenGame}: {PCA} as a {Nash} equilibrium.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2021.
+
+\bibitem{grinsztajn2022why}
+L{\'e}o Grinsztajn, Edouard Oyallon, and Ga{\"e}l Varoquaux.
+\newblock Why do tree-based models still outperform deep learning on typical
+  tabular data?
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)
+  Datasets and Benchmarks Track}, volume~35, pages 507--520, 2022.
+
+\bibitem{gu2024revisiting}
+Yi~Gu, Yi~Lin, Kwang-Ting Cheng, and Hao Chen.
+\newblock Revisiting deep ensemble uncertainty for enhanced medical anomaly
+  detection.
+\newblock In {\em Medical Image Computing and Computer Assisted Intervention
+  (MICCAI)}, 2024.
+
+\bibitem{jeffares2023tangos}
+Alan Jeffares, Tennison Liu, Jonathan Crabb{\'e}, Fergus Imrie, and Mihaela
+  van~der Schaar.
+\newblock {TANGOS}: Regularizing tabular neural networks through gradient
+  orthogonalization and specialization.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2023.
+
+\bibitem{jeffares2023joint}
+Alan Jeffares, Tennison Liu, Jonathan Crabb{\'e}, and Mihaela van~der Schaar.
+\newblock Joint training of deep ensembles fails due to learner collusion.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)},
+  volume~36, 2023.
+
+\bibitem{kadra2021well}
+Arlind Kadra, Marius Lindauer, Frank Hutter, and Josif Grabocka.
+\newblock Well-tuned simple nets excel on tabular datasets.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)},
+  volume~34, pages 23928--23941, 2021.
+
+\bibitem{kornblith2019similarity}
+Simon Kornblith, Mohammad Norouzi, Honglak Lee, and Geoffrey Hinton.
+\newblock Similarity of neural network representations revisited.
+\newblock In {\em International Conference on Machine Learning (ICML)}, pages
+  3519--3529. PMLR, 2019.
+
+\bibitem{kuncheva2016getting}
+Ludmila~I Kuncheva.
+\newblock Getting lost in the wealth of classifier ensembles?
+\newblock In {\em 5th International Conference on Pattern Recognition
+  Applications and Methods (ICPRAM 2016)}. Keynote presentation, Rome, Italy,
+  2016.
+
+\bibitem{larrazabal2021orthogonal}
+Agostina~J Larrazabal, Cesar Martinez, Jose Dolz, and Enzo Ferrante.
+\newblock Orthogonal ensemble networks for biomedical image segmentation.
+\newblock In {\em Medical Image Computing and Computer Assisted Intervention
+  (MICCAI)}, pages 594--603. Springer, 2021.
+
+\bibitem{liu1999ensemble}
+Yong Liu and Xin Yao.
+\newblock Ensemble learning via negative correlation.
+\newblock {\em Neural Networks}, 12(10):1399--1404, 1999.
+
+\bibitem{wen2020batchensemble}
+Yeming Wen, Dustin Tran, and Jimmy Ba.
+\newblock {BatchEnsemble}: An alternative approach to efficient ensemble and
+  lifelong learning.
+\newblock In {\em International Conference on Learning Representations (ICLR)},
+  2020.
+
+\end{thebibliography}
