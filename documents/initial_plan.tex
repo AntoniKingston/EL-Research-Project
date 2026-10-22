@@ -37,7 +37,7 @@
     % --- Project Title ---
     \rule{\linewidth}{0.5mm} \\[0.4cm]
     {\huge \bfseries Sequential Functional Orthogonality via Triangular Stop-Gradient Masks in Tabular ResNet Ensembles \\[0.2cm] }
-    {\Large \textit{Project 1: Initial Plan}}
+    {\Large \textit{Initial Plan}}
     \rule{\linewidth}{0.5mm} \\[2.5cm]
     
     % --- Authors (Space for 2) ---
@@ -75,7 +75,7 @@
 % ==========================================
 
 \section{Introduction and Research Problem}
-Combining multiple models in an ensemble is a primary mechanism for reducing variance and improving generalization in machine learning \cite{kuncheva2016getting}. While tree-based ensembles have historically dominated structured tabular benchmarks \cite{grinsztajn2022why}, well-regularized Tabular Neural Networks (TNNs)—such as TabNet \cite{arik2021tabnet}, well-tuned dense networks \cite{kadra2021well}, and Tabular ResNets \cite{grinsztajn2022why}—have narrowed this performance gap, particularly when deployed as ensembles.
+Combining multiple models in an ensemble is a primary mechanism for reducing variance and improving generalization in machine learning. While tree-based ensembles have historically dominated structured tabular benchmarks \cite{grinsztajn2022why}, well-regularized Tabular Neural Networks (TNNs)—such as TabNet \cite{arik2021tabnet}, well-tuned dense networks \cite{kadra2021well}, and Tabular ResNets \cite{grinsztajn2022why}—have narrowed this performance gap, particularly when deployed as ensembles.
 
 Across deep learning domains, training an ensemble of neural networks presents a fundamental challenge in structuring how constituent models partition the feature space:
 \begin{enumerate}
@@ -89,7 +89,7 @@ To resolve this issue, this project investigates \textbf{Sequential Functional O
 \section{Literature Review}
 
 \paragraph{Ensemble Objectives and Representation Redundancy.}
-The predictive advantage of an ensemble depends on balancing individual model capability with inter-model diversity \cite{kuncheva2016getting}. Early neural ensemble frameworks such as Negative Correlation Learning (NCL) \cite{liu1999ensemble} modified the training objective to decorrelate errors across models. Later, Fort et al. \cite{fort2019deep} demonstrated that training separate neural networks from different random initializations guides them into distinct basins of attraction in the loss landscape. To reduce the memory overhead of explicit ensembles, Wen et al. \cite{wen2020batchensemble} introduced BatchEnsemble, which parameterizes ensemble members via rank-1 scaling adapters over a shared weight matrix. However, subsequent theoretical and empirical work by Jeffares et al. \cite{jeffares2023joint} showed that naively optimizing joint ensemble losses or symmetric diversity penalties leads to learner collusion, where individual networks shift their representations in opposing directions that cancel out upon aggregation without improving test generalization.
+The predictive advantage of an ensemble depends on balancing individual model capability with inter-model diversity. Early neural ensemble frameworks such as Negative Correlation Learning (NCL) \cite{liu1999ensemble} modified the training objective to decorrelate errors across models. Later, Fort et al. \cite{fort2019deep} demonstrated that training separate neural networks from different random initializations guides them into distinct basins of attraction in the loss landscape. To reduce the memory overhead of explicit ensembles, Wen et al. \cite{wen2020batchensemble} introduced BatchEnsemble, which parameterizes ensemble members via rank-1 scaling adapters over a shared weight matrix. However, subsequent theoretical and empirical work by Jeffares et al. \cite{jeffares2023joint} showed that naively optimizing joint ensemble losses or symmetric diversity penalties leads to learner collusion, where individual networks shift their representations in opposing directions that cancel out upon aggregation without improving test generalization.
 
 \paragraph{Latent Geometry and Asymmetric Orthogonalization.}
 Quantifying or penalizing redundancy in hidden layers requires similarity metrics invariant to neuron permutations and orthogonal transformations. Kornblith et al. \cite{kornblith2019similarity} introduced Centered Kernel Alignment (CKA), which compares the geometric structures of two latent spaces via their centered pairwise Gram matrices. In computer vision, Larrazabal et al. \cite{larrazabal2021orthogonal} showed that applying orthogonality constraints to latent representations improves ensemble performance, though their formulation relied on symmetric pairwise repulsion.
@@ -157,7 +157,7 @@ We will evaluate and compare two formulations of $\Phi\big(\tilde{Z}_m, \text{sg
 Using the Tabular ResNet architecture, we will compare six configurations: (1) Single Tabular ResNet, (2) Single Tabular ResNet + TANGOS \cite{jeffares2023tangos}, (3) Tabular ResNet + BatchEnsemble \cite{wen2020batchensemble} (parameter-efficient shared-weight baseline), (4) Unregularized Tabular ResNet Ensemble ($\lambda = 0$), (5) Symmetric Orthogonal Tabular ResNet Ensemble (bidirectional repulsion without stop-gradient), and (6) Tabular ResNet Ensemble + SFOvTSGM (evaluated with both $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$).
 
 \subsection{Validation Procedure}
-All experiments will use $5$-fold cross-validation (stratified for classification, standard for regression). Within each fold, the remaining $80\%$ of data will be divided into $64\%$ training and $16\%$ validation for early stopping and hyperparameter tuning. Final configurations will be trained across $5$ fixed random seeds per fold to report the mean and standard deviation of all metrics.
+All experiments will use $5$-fold cross-validation (stratified for classification, standard for regression) for outer evaluation. In each outer iteration, one fold ($20\%$ of the data) will be held out exclusively for final evaluation. The remaining $80\%$ will be split once into an inner training partition ($64\%$ of the full dataset) and an inner validation partition ($16\%$ of the full dataset). The same split will be used for all methods in that outer iteration. Hyperparameters will be selected using this single validation partition; no inner cross-validation will be performed. After selection, the chosen model will be refit on the full outer training partition and evaluated on its untouched outer test fold. This process will be repeated independently for all five outer folds. Each outer-fold refit will use $5$ fixed random seeds; we will report metrics averaged across seeds and outer folds, along with their standard deviations.
 
 \subsection{Evaluation Metrics}
 \begin{itemize}
@@ -196,7 +196,7 @@ The hyperparameters are partitioned into three categories: (1) shared Tabular Re
         & Max epochs / Patience & $200$ / $16$ & Fixed \\
         \midrule
         \textbf{Ensemble \&} 
-        & Ensemble size ($M$) & $8$ (ablation: $\{2, 4, 8, 16\}$) & Fixed (Grid) \\
+        & Ensemble size ($M$) & $\{1,2, \dots, 8\}$ & Fixed (Grid) \\
         \textbf{SFOvTSGM} & Shrinkage coefficient ($\nu$) & $[0.05, 1.0]$ & Log-uniform \\
         & Orthogonality weight ($\lambda$) & $[10^{-3}, 10^{1}]$ & Log-uniform \\
         & Similarity metric ($\Phi$) & $\{\Phi_{\text{CKA}}, \Phi_{\text{Cos}}\}$ & Categorical \\
@@ -217,8 +217,8 @@ Because both $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$ estimate empirical cova
 Tuning both architectural dimensions ($L, d$) and method-specific regularization hyperparameters simultaneously for every ensemble configuration across $24$ datasets is computationally prohibitive and introduces confounding capacity differences between baselines. Following established tabular benchmarking protocols \cite{kadra2021well, grinsztajn2022why}, we will employ a controlled \textbf{Two-Stage Bayesian Optimization Protocol} implemented via \texttt{Optuna} using the Tree-structured Parzen Estimator (TPE) sampler:
 
 \begin{enumerate}
-    \item \textbf{Stage 1 (Backbone Architecture Calibration):} For each dataset, we first calibrate the single unregularized Tabular ResNet over $40$ TPE trials on the validation split (or load the validated reference configuration from the Inria Tabular Benchmark \cite{grinsztajn2022why}) to determine the optimal structural configuration $(L^*, d^*, p_{\text{drop}}^*)$. Freezing $(L^*, d^*, p_{\text{drop}}^*)$ across all subsequent ensemble methods on that dataset guarantees that all models share an identical per-learner parameter count and representational capacity, isolating the effect of the training objective.
-    \item \textbf{Stage 2 (Method-Specific Hyperparameter Tuning):} With the backbone architecture fixed to $(L^*, d^*, p_{\text{drop}}^*)$, each method tunes its specific regularization and optimization parameters over $30$ TPE trials per dataset:
+    \item \textbf{Stage 1 (Backbone Architecture Calibration):} Within each outer fold, we calibrate the single unregularized Tabular ResNet over $40$ TPE trials using that fold's single inner training/validation split to determine the optimal structural configuration $(L^*, d^*, p_{\text{drop}}^*)$. The selected architecture is then held fixed across all subsequent methods within that outer fold, so that they share an identical per-learner parameter count and representational capacity.
+    \item \textbf{Stage 2 (Method-Specific Hyperparameter Tuning):} With the backbone architecture fixed to $(L^*, d^*, p_{\text{drop}}^*)$, each method tunes its specific regularization and optimization parameters over $30$ TPE trials per outer fold. Each trial is evaluated on that same single inner validation partition, using its primary validation loss as the objective:
     \begin{itemize}
         \item \textit{SFOvTSGM Ensembles:} Tune $(\lambda, \nu, \eta, \gamma)$ separately for $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$.
         \item \textit{Symmetric Orthogonal Ensemble:} Tune $(\lambda_{\text{sym}}, \eta, \gamma)$.
@@ -228,7 +228,7 @@ Tuning both architectural dimensions ($L, d$) and method-specific regularization
 \end{enumerate}
 
 \paragraph{Pruning and Early Stopping.}
-During all tuning trials, training is monitored on the $16\%$ validation split using the primary task loss (Cross-Entropy for classification, MSE for regression) without the regularization penalty term, ensuring fair comparison across varying values of $\lambda$. Early stopping is triggered if validation loss does not improve for $16$ consecutive epochs, and \texttt{Optuna}'s \texttt{MedianPruner} (with a $10$-epoch warmup) will terminate unpromising trials early. To prevent data leakage, hyperparameter tuning will be performed on Fold 1's training/validation split, and the selected configuration will be evaluated across all $5$ cross-validation folds and $5$ random seeds.
+For each tuning trial, training will be monitored on the single inner validation partition using the primary task loss (Cross-Entropy for classification, MSE for regression), excluding the regularization penalty term to ensure fair comparison across values of $\lambda$. Early stopping will be triggered if validation loss does not improve for $16$ consecutive epochs, and \texttt{Optuna}'s \texttt{MedianPruner} (with a $10$-epoch warmup) will terminate unpromising trials early. After selecting hyperparameters, the chosen model will be refit on the full outer training partition. The refit epoch count will be set using the best epoch observed on the inner validation split for the selected configuration. The outer test fold will not be used for hyperparameter selection, pruning, early stopping, or any other model-selection decision. All selection and refitting steps will be repeated independently for each outer fold.
 
 
 \section{Datasets and Preprocessing}
@@ -237,8 +237,8 @@ To satisfy the requirement of evaluating at least $12$ classification and $12$ r
 
 This selection provides two practical advantages:
 \begin{enumerate}
-    \item \textbf{Reuse of Validated Baseline Artifacts:} Because Single Tabular ResNet and TANGOS have already been tuned and benchmarked on these OpenML tasks by Grinsztajn et al. \cite{grinsztajn2022why} and Jeffares et al. \cite{jeffares2023tangos}, we can utilize the published hyperparameter logs and baseline checkpoints from \texttt{LeoGrin/tabular-benchmark} to reduce Stage 1 tuning overhead.
-    \item \textbf{Controlled Sample Sizes:} We select datasets within $N \in [4{,}177, \, 98{,}049]$ so that $5$-fold cross-validation across $5$ seeds remains computationally tractable on a single GPU, while ensuring every training fold contains enough samples to support batch sizes $B \in \{256, 512\}$ required for low-variance batch-wise $\Phi_{\text{CKA}}$ estimation.
+    \item \textbf{Standardized Benchmark Context:} The published benchmark protocols and implementations from Grinsztajn et al. \cite{grinsztajn2022why} and Jeffares et al. \cite{jeffares2023tangos} provide reproducible reference points for our methods. Published hyperparameter logs or checkpoints will not be used to select or evaluate configurations; all tuning will use only the corresponding outer training partition and its single inner validation split.
+    \item \textbf{Controlled Sample Sizes:} We select datasets within $N \in [4{,}177, \, 98{,}049]$ to keep $5$-fold outer cross-validation and $5$ random seeds for each outer-fold refit computationally tractable on a single GPU, while ensuring every training fold contains enough samples to support batch sizes $B \in \{256, 512\}$ required for low-variance batch-wise $\Phi_{\text{CKA}}$ estimation.
 \end{enumerate}
 
 \subsection{Classification Datasets}
@@ -300,22 +300,22 @@ Table~\ref{tab:reg_datasets} summarizes the $12$ tabular regression datasets fro
 \end{table}
 
 \subsection{Preprocessing Procedures}
-To guarantee zero data leakage across cross-validation splits, all preprocessing statistics (imputation values, quantile parameters, and target normalization) are fitted strictly on the $64\%$ training partition of each fold and applied deterministically to the validation ($16\%$) and test ($20\%$) partitions. Following the standardized preprocessing protocol of the Inria Tabular Benchmark \cite{grinsztajn2022why}:
+To prevent data leakage, all preprocessing statistics (imputation values, quantile parameters, and target normalization) will be fitted exclusively on the training partition relevant to each step. During tuning, preprocessing will be fitted on the inner training partition and applied to the single inner validation partition. For final refitting, preprocessing will be fitted on the full outer training partition and applied unchanged to the outer test fold. Following the standardized preprocessing protocol of the Inria Tabular Benchmark \cite{grinsztajn2022why}:
 
 \begin{enumerate}
-    \item \textbf{Numerical Features:} Missing numerical values are imputed using the median of the respective feature on the training split. Continuous features are transformed using \texttt{scikit-learn}'s \texttt{QuantileTransformer} (mapping distributions to a standard normal distribution $\mathcal{N}(0, 1)$), which mitigates the impact of heavy-tailed outliers and skewed feature distributions common in tabular datasets.
-    \item \textbf{Categorical and Binary Features:} Missing categorical values are assigned to a dedicated \texttt{<UNK>} token. Binary features are mapped to $\{0, 1\}$, while multi-category features are ordinal-encoded and passed to learnable entity embedding lookup tables within the Tabular ResNet input stem. Categories appearing only in validation/test splits are routed to the \texttt{<UNK>} embedding.
-    \item \textbf{Regression Target Standardization:} For all regression tasks, target values $y$ are standardized to zero mean and unit variance ($\tilde{y} = (y - \mu_{\text{train}}) / \sigma_{\text{train}}$) during training so that MSE loss magnitudes and orthogonality regularization weights $\lambda$ remain on a consistent scale across datasets. Model predictions are inverse-transformed back to the original target scale prior to computing RMSE and MAE.
+    \item \textbf{Numerical Features:} Missing numerical values are imputed using the median of the relevant training partition. Continuous features are transformed using \texttt{scikit-learn}'s \texttt{QuantileTransformer} (mapping distributions to a standard normal distribution $\mathcal{N}(0, 1)$), which mitigates the impact of heavy-tailed outliers and skewed feature distributions common in tabular datasets.
+    \item \textbf{Categorical and Binary Features:} Missing categorical values are assigned to a dedicated \texttt{<UNK>} token. Binary features are mapped to $\{0, 1\}$, while multi-category features are ordinal-encoded and passed to learnable entity embedding lookup tables within the Tabular ResNet input stem. Categories absent from the relevant training partition are routed to the \texttt{<UNK>} embedding.
+    \item \textbf{Regression Target Standardization:} For all regression tasks, target values $y$ are standardized using the mean and standard deviation of the relevant training partition ($\tilde{y} = (y - \mu_{\text{train}}) / \sigma_{\text{train}}$) so that MSE loss magnitudes and orthogonality regularization weights $\lambda$ remain on a consistent scale across datasets. Model predictions are inverse-transformed using those same training statistics before computing RMSE and MAE.
 \end{enumerate}
 
 
 \section{Results Aggregation and Statistical Analysis}
 
 \subsection{Approach to Aggregating Results}
-Our experimental design evaluates $K$ model configurations across $N_{\text{clf}} = 12$ classification datasets and $N_{\text{reg}} = 12$ regression datasets ($N_{\text{total}} = 24$), with each dataset evaluated over $F = 5$ cross-validation folds and $S = 5$ fixed random seeds per fold. We aggregate results at two levels:
+Our experimental design evaluates $K$ model methods across $N_{\text{clf}} = 12$ classification datasets and $N_{\text{reg}} = 12$ regression datasets ($N_{\text{total}} = 24$), with each dataset evaluated using $F = 5$ outer folds and $S = 5$ fixed random seeds per outer-fold refit. Hyperparameters are selected independently within each outer training partition, so each method's selected hyperparameter values may differ across folds. We aggregate the untouched outer-test results at two levels:
 
 \paragraph{1. Within-Dataset Aggregation (Capturing Accuracy and Stability).}
-Let $m_{d,c}^{(f,s)}$ denote the test-set metric of model configuration $c \in \{1, \dots, K\}$ on dataset $d$, fold $f \in \{1, \dots, F\}$, and random seed $s \in \{1, \dots, S\}$. First, we compute the fold-level mean across seeds, $\bar{m}_{d,c}^{(f)} = \frac{1}{S}\sum_{s=1}^S m_{d,c}^{(f,s)}$, and the within-fold seed standard deviation, $s_{d,c}^{(f)} = \sqrt{\frac{1}{S-1}\sum_{s=1}^S \big(m_{d,c}^{(f,s)} - \bar{m}_{d,c}^{(f)}\big)^2}$. For every dataset--model pair, we report:
+Let $m_{d,c}^{(f,s)}$ denote the outer-test metric of method $c \in \{1, \dots, K\}$ on dataset $d$, outer fold $f \in \{1, \dots, F\}$, and random seed $s \in \{1, \dots, S\}$. First, we compute the fold-level mean across seeds, $\bar{m}_{d,c}^{(f)} = \frac{1}{S}\sum_{s=1}^S m_{d,c}^{(f,s)}$, and the within-fold seed standard deviation, $s_{d,c}^{(f)} = \sqrt{\frac{1}{S-1}\sum_{s=1}^S \big(m_{d,c}^{(f,s)} - \bar{m}_{d,c}^{(f)}\big)^2}$. For every dataset--method pair, we report:
 \begin{equation}
     \hat{\mu}_{d,c} = \frac{1}{F} \sum_{f=1}^{F} \bar{m}_{d,c}^{(f)}, \qquad 
     \sigma_{\text{fold}}(d,c) = \sqrt{\frac{1}{F-1} \sum_{f=1}^{F} \big(\bar{m}_{d,c}^{(f)} - \hat{\mu}_{d,c}\big)^2}, \qquad 
@@ -326,7 +326,7 @@ Reporting both $\sigma_{\text{fold}}$ (sensitivity to data partitioning) and $\b
 \paragraph{2. Cross-Dataset Aggregation.}
 Because raw metrics (such as RMSE, MAE, or NLL) vary in scale and baseline difficulty across datasets, direct arithmetic averaging of raw scores across datasets is dominated by high-variance tasks. We will aggregate performance across the $12$ classification datasets, the $12$ regression datasets, and all $24$ datasets combined using three scale-invariant summaries:
 \begin{itemize}
-    \item \textbf{Mean Rank ($\bar{R}_c$):} On each dataset $d$, the $K$ configurations are ranked from $1$ (best) to $K$ (worst) based on $\hat{\mu}_{d,c}$ (assigning average ranks in the event of ties). We report the mean rank $\bar{R}_c = \frac{1}{N_d} \sum_{d=1}^{N_d} R_{d,c}$ \cite{demsar2006statistical}.
+    \item \textbf{Mean Rank ($\bar{R}_c$):} On each dataset $d$, the $K$ methods are ranked from $1$ (best) to $K$ (worst) based on $\hat{\mu}_{d,c}$ (assigning average ranks in the event of ties). We report the mean rank $\bar{R}_c = \frac{1}{N_d} \sum_{d=1}^{N_d} R_{d,c}$ \cite{demsar2006statistical}.
     \item \textbf{Relative Error / Loss Ratio (Geometric Mean):} For strictly positive loss metrics (NLL for classification, RMSE and MAE for regression), we normalize each model's score on dataset $d$ by the Single Tabular ResNet baseline score, $r_{d,c} = \hat{\mu}_{d,c} / \hat{\mu}_{d,\text{Single}}$, and compute the geometric mean across datasets: $\text{GM}_c = \left(\prod_{d=1}^{N_d} r_{d,c}\right)^{1/N_d}$.
     \item \textbf{Pairwise Win / Tie / Loss Counts:} Summary tables tabulating how many datasets a given method improves upon, ties, or degrades relative to the Unregularized Ensemble and Single ResNet baselines.
 \end{itemize}
@@ -386,13 +386,8 @@ In accordance with course guidelines, any external code utilized for baselines o
 \paragraph{AI Usage Disclosure.}
 In compliance with the course policy on artificial intelligence disclosure, the authors declare that the text, mathematical typesetting, and LaTeX structure of this Project Plan (spanning Sections~1 through~7 and the accompanying BibTeX bibliography) were generated in their entirety by a Large Language Model (AI assistant). 
 
-This generation process was conducted under continuous, substantial human supervision and direction. Specifically, the human authors:
-\begin{enumerate}
-    \item Conceived the core research direction (investigating concept geometry in latent spaces and formulating Sequential Functional Orthogonality via a triangular stop-gradient mask for additive neural boosting).
-    \item Directed the literature audit, critically questioning initial AI claims regarding mathematical equivalence and domain novelty to ensure accurate attribution of prior work in spectral decomposition and representation similarity.
-    \item Audited and corrected the mathematical formulations of the training objective, inference-time additive expansion, batch centering, backbone selection (restricting experiments to Tabular ResNet), and boosting-appropriate diagnostic metrics.
-    \item Enforced institutional and logistical constraints on dataset selection, computational cost metrics, and bibliography sourcing, reviewing and approving every section of the final document.
-\end{enumerate}
+This generation process was conducted under continuous, substantial human supervision and direction. 
+
 
 
 % ==========================================
