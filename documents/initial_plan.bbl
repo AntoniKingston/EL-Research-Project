@@ -73,13 +73,6 @@ Simon Kornblith, Mohammad Norouzi, Honglak Lee, and Geoffrey Hinton.
 \newblock In {\em International Conference on Machine Learning (ICML)}, pages
   3519--3529. PMLR, 2019.
 
-\bibitem{kuncheva2016getting}
-Ludmila~I Kuncheva.
-\newblock Getting lost in the wealth of classifier ensembles?
-\newblock In {\em 5th International Conference on Pattern Recognition
-  Applications and Methods (ICPRAM 2016)}. Keynote presentation, Rome, Italy,
-  2016.
-
 \bibitem{larrazabal2021orthogonal}
 Agostina~J Larrazabal, Cesar Martinez, Jose Dolz, and Enzo Ferrante.
 \newblock Orthogonal ensemble networks for biomedical image segmentation.
