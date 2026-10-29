@@ -1,0 +1,55 @@
+[project]
+name = "project"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets",
+    "diffusers",
+    "ipykernel",
+    "ipython",
+    "ipywidgets",
+    "jupyter",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "plotly",
+    "python-dotenv",
+    "ruff",
+    "scikit-image",
+    "scipy",
+    "torch",
+    "torchvision",
+    "tqdm",
+    "transformers",
+    "wandb",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+extend-select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "N",    # pep8-naming
+    "I",    # isort (import sorting)
+    "UP",   # pyupgrade (modernize code)
+    "B",    # bugbear (catch bugs)
+    "SIM",  # flake8-simplify (simplify code)
+    "NPY",  # NumPy-specific rules
+    "RUF",  # Ruff-specific rules
+]
+ignore = [
+    "N803", # Argument name should be lowercase
+    "N806", # Variable should be lowercase
+    "N812", # Lowercase imported as non-lowercase
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
