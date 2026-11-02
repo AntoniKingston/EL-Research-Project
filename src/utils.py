@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
 from src.dataset_splits import DatasetSplits
 
@@ -38,3 +39,31 @@ def get_nested_splits(
             )
         )
     return splits
+
+
+def mean_score_by_folds(
+    model_fun,
+    X,
+    y,
+    folds: list[DatasetSplits],
+    epochs,
+    patience,
+    lr,
+    wd,
+    optimizer,
+    loss_fn,
+    batch_size,
+    device,
+):
+    scores = np.array([])
+    for fold in folds:
+        model = model_fun()
+        model.to(device)
+        X_train = X[fold.inner_train_idx]
+        y_train = y[fold.inner_train_idx]
+        X_val = X[fold.inner_val_idx]
+        y_val = y[fold.inner_val_idx]
+        model.fit(X_train, y_train, epochs, patience, lr, wd, optimizer, loss_fn, batch_size)
+        y_pred = model.predict(X_val)
+        scores = np.append(scores, accuracy_score(y_val, y_pred))
+    return np.mean(scores)
