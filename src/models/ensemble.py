@@ -1,11 +1,10 @@
 import torch
-from torch import nn
 
 
 class Ensemble:
     def __init__(
         self,
-        backbone: nn.Module,
+        backbone,
         ensemble_size: int,
         mask: str,
         orthogonality_weight: float,

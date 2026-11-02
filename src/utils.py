@@ -1,7 +1,17 @@
+from dataclasses import dataclass
+
 import numpy as np
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
-from src.dataset_splits import DatasetSplits
+
+
+@dataclass
+class DatasetSplits:
+    fold: int
+    outer_train_idx: np.ndarray
+    outer_test_idx: np.ndarray
+    inner_train_idx: np.ndarray
+    inner_val_idx: np.ndarray
 
 
 def get_nested_splits(

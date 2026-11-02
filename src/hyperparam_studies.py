@@ -1,10 +1,8 @@
-from src.dataset_splits import DatasetSplits
-
 from src.models.batchensemble import BatchEnsemble
 from src.models.ensemble import Ensemble
 from src.models.resnet import Resnet
 from src.models.tangos import Tangos
-from src.utils import mean_score_by_folds
+from src.utils import DatasetSplits, mean_score_by_folds
 
 
 def objective_single_resnet(

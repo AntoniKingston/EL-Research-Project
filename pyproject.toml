@@ -24,6 +24,8 @@ dependencies = [
     "tqdm",
     "transformers",
     "wandb",
+    "ty>=0.0.95",
+    "scikit-learn>=1.9.1",
 ]
 
 [build-system]
