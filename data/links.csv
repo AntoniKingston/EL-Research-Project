@@ -1,0 +1,13 @@
+dataset_name,link
+california,https://www.openml.org/d/44025
+house_16H,https://www.openml.org/d/44139
+diamonds,https://www.openml.org/d/44059
+elevators,https://www.openml.org/d/44134
+Ailerons,https://www.openml.org/d/44137
+Bike_Sharing_Demand,https://www.openml.org/d/44063
+electricity,https://www.openml.org/d/44156
+credit,https://www.openml.org/d/44089
+default-of-credit-card-clients,https://www.openml.org/d/45036
+covertype,https://www.openml.org/d/44159
+pol,https://www.openml.org/d/44122
+MiniBooNE,https://www.openml.org/d/44128
