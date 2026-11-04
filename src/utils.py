@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 import numpy as np
-from sklearn.metrics import accuracy_score
+import torch
 from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
 
 
@@ -65,6 +65,11 @@ def mean_score_by_folds(
     batch_size,
     device,
 ):
+    """Mean of `loss_fn(predictions, y_val)` over folds (lower is better).
+
+    Predictions are raw model outputs (logits for classification), targets are class labels
+    for classification (integer y) or values for regression, as in standard PyTorch losses.
+    """
     scores = np.array([])
     for fold in folds:
         model = model_fun()
@@ -74,6 +79,11 @@ def mean_score_by_folds(
         X_val = X[fold.inner_val_idx]
         y_val = y[fold.inner_val_idx]
         model.fit(X_train, y_train, epochs, patience, lr, wd, optimizer, loss_fn, batch_size)
-        y_pred = model.predict(X_val)
-        scores = np.append(scores, accuracy_score(y_val, y_pred))
+        y_pred = torch.as_tensor(model.predict(X_val))
+        y_true = torch.as_tensor(y_val)
+        if not np.issubdtype(y_val.dtype, np.integer):
+            y_true = y_true.to(y_pred.dtype)
+        with torch.no_grad():
+            score = loss_fn(y_pred, y_true).item()
+        scores = np.append(scores, score)
     return np.mean(scores)
