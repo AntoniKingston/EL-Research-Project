@@ -1,5 +1,5 @@
 [project]
-name = "project"
+name = "EL-Research-project"
 version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -26,6 +26,7 @@ dependencies = [
     "wandb",
     "ty>=0.0.95",
     "scikit-learn>=1.9.1",
+    "seaborn>=0.13.2",
 ]
 
 [build-system]
