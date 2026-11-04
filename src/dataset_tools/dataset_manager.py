@@ -10,9 +10,19 @@ from .domain import TaskType
 class IDatasetManager(ABC):
     """Serves as data normalizer for a dataset."""
 
-    def __init__(self, name: str, label_column: str, task_type: TaskType | str):
+    def __init__(
+        self,
+        name: str,
+        label_column: str,
+        task_type: TaskType | str,
+        dataset_path: str = "",
+        split_path: str = "",
+    ):
         self.name = name
         self.label_column = label_column
+        self.dataset_path = dataset_path
+        self.split_path = split_path
+
         if isinstance(task_type, str):
             try:
                 task_type = TaskType(task_type)
@@ -48,4 +58,3 @@ class CommonDatasetManager(IDatasetManager):
             Y = raw_y.astype(np.float32)
 
         return X, Y
-
