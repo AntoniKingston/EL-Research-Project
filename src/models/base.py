@@ -13,7 +13,9 @@ class TabularModel(nn.Module):
     always monitors the plain task loss. A single output column is squeezed to shape (B,).
     """
     def __init__(self, is_classification: bool):
+        super().__init__()
         self.is_classification = is_classification
+        self.loss_history: dict[str, list[float]] = {"train_loss": [], "val_loss": []}
 
     def _format_output(self, out: torch.Tensor) -> torch.Tensor:
         return out.squeeze(-1) if out.shape[-1] == 1 else out
@@ -72,6 +74,7 @@ class TabularModel(nn.Module):
         n_batches = max(n // batch_size, 1)
         best_loss, best_state, bad_epochs = math.inf, None, 0
         self.best_epoch = 0
+        self.loss_history = {"train_loss": [], "val_loss": []}
         for epoch in range(epochs):
             self.train()
             perm = torch.randperm(n, device=device)
@@ -84,10 +87,14 @@ class TabularModel(nn.Module):
                 opt.step()
                 train_loss += loss.item()
 
+            mean_train_loss = train_loss / n_batches
+            self.loss_history["train_loss"].append(mean_train_loss)
+
             if val is not None:
                 monitored = self.task_loss(self._predict_raw(val[0], batch_size), val[1]).item()
+                self.loss_history["val_loss"].append(monitored)
             else:
-                monitored = train_loss / n_batches
+                monitored = mean_train_loss
 
             if monitored < best_loss:
                 best_loss, bad_epochs, self.best_epoch = monitored, 0, epoch + 1

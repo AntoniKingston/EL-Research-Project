@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+from src.dataset_tools.dataset_service import DatasetService
 from src.dataset_tools.domain import DatasetSplits
 
 
@@ -27,7 +28,11 @@ def fold_score(
     y_train = y[fold.inner_train_idx]
     X_val = X[fold.inner_val_idx]
     y_val = y[fold.inner_val_idx]
-    model.fit(X_train, y_train, X_val, y_val, epochs, patience, lr, wd, optimizer, batch_size) 
+
+    # Normalize fold data strictly using statistics from X_train to prevent data leakage
+    X_train, X_val = DatasetService.normalize_data(X_train, X_val)
+
+    model.fit(X_train, y_train, X_val, y_val, epochs, patience, lr, wd, optimizer, batch_size)
     y_pred = torch.as_tensor(model.predict(X_val))
     y_true = torch.as_tensor(y_val)
     if not np.issubdtype(y_val.dtype, np.integer):
@@ -58,7 +63,10 @@ def train_model(
     Y_train = Y[fold.outer_train_idx]
     X_val = X[fold.outer_test_idx]
     Y_val = Y[fold.outer_test_idx]
-    model.fit(X_train, Y_train, X_val, Y_val, epochs, patience, lr, wd, optimizer, batch_size) 
+
+    # Normalize fold data strictly using statistics from X_train to prevent data leakage
+    X_train, X_val = DatasetService.normalize_data(X_train, X_val)
+
+    model.fit(X_train, Y_train, X_val, Y_val, epochs, patience, lr, wd, optimizer, batch_size)
 
     return model
-

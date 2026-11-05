@@ -2,13 +2,13 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder
 
 from .domain import TaskType
 
 
 class IDatasetManager(ABC):
-    """Serves as data normalizer for a dataset."""
+    """Serves as data loader and encoder for a dataset."""
 
     def __init__(
         self,
@@ -33,23 +33,25 @@ class IDatasetManager(ABC):
         self.task_type = task_type
 
     @abstractmethod
-    def get_normalized_labled_data(self, df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
-        """Provide normalized data as numpy arrays extracted from pandas DataFrame."""
+    def get_labled_data(self, df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
+        """Provide labeled data as numeric numpy arrays (features and encoded targets)."""
 
 
 class CommonDatasetManager(IDatasetManager):
-    """Data normalizer for datasets with all numeric columns."""
+    """Data loader and encoder for datasets with numeric features and optional categorical columns."""
 
-    def get_normalized_labled_data(self, df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
+    def get_labled_data(self, df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
         raw_y = df[self.label_column].to_numpy()
         features_df = df.drop(columns=[self.label_column])
 
-        # Impute missing values with column medians if any exist
+        # Impute missing values with column medians for numeric columns
         features_df = features_df.fillna(features_df.median(numeric_only=True))
 
-        # Standardize features (zero mean, unit variance)
-        scaler = StandardScaler()
-        X = scaler.fit_transform(features_df.to_numpy()).astype(np.float32)
+        # Encode categorical / non-numeric columns if any exist
+        for col in features_df.select_dtypes(include=["object", "category"]).columns:
+            features_df[col] = LabelEncoder().fit_transform(features_df[col].astype(str))
+
+        X = features_df.to_numpy().astype(np.float32)
 
         if self.task_type == TaskType.classification:
             encoder = LabelEncoder()

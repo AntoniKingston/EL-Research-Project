@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
+from sklearn.preprocessing import StandardScaler
 
 from .domain import DatasetSplits
 
@@ -14,6 +15,26 @@ VALID_SPLIT_EXTENSIONS = (".pkl", ".pickle", ".plk")
 class DatasetService:
     def __init__(self):
         pass
+
+    @staticmethod
+    def normalize_data(
+        X_train: np.ndarray, *other_Xs: np.ndarray
+    ) -> tuple[np.ndarray, ...] | np.ndarray:
+        """Standardizes features using statistics fitted strictly on X_train to prevent data leakage.
+
+        Args:
+            X_train: Training split used to fit the StandardScaler.
+            *other_Xs: Optional validation or test splits transformed using the X_train scaler.
+
+        Returns:
+            Normalized X_train (if no other splits provided) or a tuple of (X_train_norm, X_other1_norm, ...).
+        """
+        scaler = StandardScaler()
+        X_train_norm = scaler.fit_transform(X_train).astype(np.float32)
+        if not other_Xs:
+            return X_train_norm
+        norm_others = [scaler.transform(x).astype(np.float32) for x in other_Xs]
+        return (X_train_norm, *norm_others)
 
     def read_raw_csv(self, path: str) -> pd.DataFrame:
         return pd.read_csv(path)

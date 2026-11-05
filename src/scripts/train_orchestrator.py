@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 
@@ -13,7 +14,6 @@ from src.dataset_tools.domain import TaskType
 CONFIG_PATH = "configs/experiment_config.yaml"
 N_TRIALS = 30
 
-
 def get_dataset_and_split(
     dataset_manager: IDatasetManager, dataset_service: DatasetService, seed: int = 42
 ):
@@ -21,15 +21,14 @@ def get_dataset_and_split(
         dataset_df, splits = dataset_service.load_dataset_and_splits(
             dataset_path=dataset_manager.dataset_path, splits_path=dataset_manager.split_path
         )
-        X, Y = dataset_manager.get_normalized_labled_data(dataset_df)
+        X, Y = dataset_manager.get_labled_data(dataset_df)
     else:
         dataset_df = dataset_service.read_raw_csv(dataset_manager.dataset_path)
-        X, Y = dataset_manager.get_normalized_labled_data(dataset_df)
+        X, Y = dataset_manager.get_labled_data(dataset_df)
         splits = dataset_service.get_nested_splits(
             X, Y, is_classification=(dataset_manager.task_type == TaskType.classification), seed=seed
         )
         dataset_service.save_dataset_splits(dataset_manager.split_path, splits)
-    # convert to torch
     return X, Y, splits
 
 
@@ -95,15 +94,24 @@ def main():
                     torch.save(model.state_dict(), save_path)
                     print(f"Saved model checkpoint to: {save_path}")
 
+                    # Save loss history
+                    history_path = os.path.join(
+                        save_dir, f"{model_manager.name}_seed{seed}_fold{fold.fold}_history.json"
+                    )
+                    with open(history_path, "w", encoding="utf-8") as f:
+                        json.dump(model.loss_history, f, indent=2)
+
                     # Placeholder for evaluation methods
+                    X_train = X[fold.outer_train_idx]
                     X_test = X[fold.outer_test_idx]
                     Y_test = Y[fold.outer_test_idx]
-                    y_pred = torch.as_tensor(model.predict(X_test))
+                    _, X_test_norm = DatasetService.normalize_data(X_train, X_test)
+                    y_pred = torch.as_tensor(model.predict(X_test_norm))
                     y_true = torch.as_tensor(Y_test)
                     if not np.issubdtype(Y_test.dtype, np.integer):
                         y_true = y_true.to(y_pred.dtype)
                     with torch.no_grad():
-                        test_loss = model_manager.loss_fn(y_pred, y_true).item()
+                        test_loss = model.task_loss(y_pred, y_true).item()
 
                     print(
                         f"[{dataset_manager.name} | {model_manager.name} | Fold {fold.fold} | Seed {seed}] "
