@@ -62,7 +62,7 @@ class ConfigReader:
         return [int(s) for s in seeds]
 
     def get_dataset_managers(self, config_path: str | Path) -> list[IDatasetManager]:
-        """Parses the 'datasets' section and constructs IDatasetManager instances by dataset name."""
+        """Parses 'datasets' section and constructs IDatasetManager instances by dataset name."""
         config = self.load_raw_config(config_path)
         datasets_dict = config.get("datasets", {})
         managers: list[IDatasetManager] = []
@@ -113,7 +113,7 @@ class ConfigReader:
         return managers
 
     def read_experiment_config(self, config_path: str | Path) -> ExperimentConfig:
-        """Reads complete experiment config containing dataset managers, model managers, and seeds."""
+        """Reads experiment config containing dataset managers, model managers, and seeds."""
         raw_config = self.load_raw_config(config_path)
         datasets = self.get_dataset_managers(config_path)
         models = self.get_model_managers(config_path)

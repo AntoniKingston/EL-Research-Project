@@ -26,8 +26,10 @@ class IDatasetManager(ABC):
         if isinstance(task_type, str):
             try:
                 task_type = TaskType(task_type)
-            except ValueError:
-                raise ValueError(f"Unknown task type provided: {task_type}, for dataset: {name}")
+            except ValueError as err:
+                raise ValueError(
+                    f"Unknown task type provided: {task_type}, for dataset: {name}"
+                ) from err
         elif task_type not in (TaskType.classification, TaskType.regression):
             raise ValueError(f"Unknown task type provided: {task_type}, for dataset: {name}")
         self.task_type = task_type
@@ -38,7 +40,7 @@ class IDatasetManager(ABC):
 
 
 class CommonDatasetManager(IDatasetManager):
-    """Data loader and encoder for datasets with numeric features and optional categorical columns."""
+    """Data loader and encoder for datasets with numeric and optional categorical features."""
 
     def get_labled_data(self, df: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
         raw_y = df[self.label_column].to_numpy()

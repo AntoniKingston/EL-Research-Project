@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 import numpy as np
 
 
-class TaskType(str, Enum):
+class TaskType(StrEnum):
     classification = "classification"
     regression = "regression"
 

@@ -54,7 +54,8 @@ def main():
     for dataset_manager in dataset_managers:
         if not os.path.exists(dataset_manager.dataset_path):
             print(
-                f"Lack of dataset {dataset_manager.name} under the path {dataset_manager.dataset_path}"
+                f"Lack of dataset {dataset_manager.name} "
+                f"under the path {dataset_manager.dataset_path}"
             )
             continue
 
@@ -77,15 +78,22 @@ def main():
 
                 for seed in seeds:
                     torch.manual_seed(seed)
-                    np.random.seed(seed)
+                    np.random.seed(seed)  # noqa: NPY002
 
                     study = optuna.create_study(direction="minimize")
-                    study.optimize(
-                        lambda trial: model_manager.hyperparameters_study(
-                            trial, device, X, Y, is_classification, fold
-                        ),
-                        n_trials=N_TRIALS,
-                    )
+
+                    def objective(
+                        trial: optuna.Trial,
+                        mm=model_manager,
+                        d=device,
+                        x=X,
+                        y=Y,
+                        ic=is_classification,
+                        f=fold,
+                    ) -> float:
+                        return mm.hyperparameters_study(trial, d, x, y, ic, f)
+
+                    study.optimize(objective, n_trials=N_TRIALS)
                     best_params = study.best_params
                     print(f"Fold {fold.fold} Best Params: {best_params}")
 
@@ -124,8 +132,8 @@ def main():
                         test_loss = model.task_loss(y_pred, y_true).item()
 
                     print(
-                        f"[{dataset_manager.name} | {model_manager.name} | Fold {fold.fold} | Seed {seed}] "
-                        f"Test Loss: {test_loss:.4f}"
+                        f"[{dataset_manager.name} | {model_manager.name} | "
+                        f"Fold {fold.fold} | Seed {seed}] Test Loss: {test_loss:.4f}"
                     )
 
 

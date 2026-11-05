@@ -20,14 +20,14 @@ class DatasetService:
     def normalize_data(
         X_train: np.ndarray, *other_Xs: np.ndarray
     ) -> tuple[np.ndarray, ...] | np.ndarray:
-        """Standardizes features using statistics fitted strictly on X_train to prevent data leakage.
+        """Standardizes features using statistics fitted strictly on X_train to prevent leakage.
 
         Args:
             X_train: Training split used to fit the StandardScaler.
             *other_Xs: Optional validation or test splits transformed using the X_train scaler.
 
         Returns:
-            Normalized X_train (if no other splits provided) or a tuple of (X_train_norm, X_other1_norm, ...).
+            Normalized X_train or a tuple of (X_train_norm, X_other1_norm, ...).
         """
         scaler = StandardScaler()
         X_train_norm = scaler.fit_transform(X_train).astype(np.float32)
@@ -46,7 +46,8 @@ class DatasetService:
         ext = Path(saving_path).suffix.lower()
         if ext not in VALID_SPLIT_EXTENSIONS:
             raise ValueError(
-                f"Split only could be saved as a pickle file ({VALID_SPLIT_EXTENSIONS}), tried to save as {ext} instead"
+                f"Split only could be saved as a pickle file ({VALID_SPLIT_EXTENSIONS}), "
+                f"tried to save as {ext} instead"
             )
 
         if parent_dir:
@@ -64,7 +65,8 @@ class DatasetService:
         ext = Path(splits_path).suffix.lower()
         if ext not in VALID_SPLIT_EXTENSIONS:
             raise ValueError(
-                f"Split only could be read as a pickle file ({VALID_SPLIT_EXTENSIONS}), tried to read {ext} instead"
+                f"Split only could be read as a pickle file ({VALID_SPLIT_EXTENSIONS}), "
+                f"tried to read {ext} instead"
             )
 
         with open(splits_path, "rb") as f:
