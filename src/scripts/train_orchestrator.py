@@ -14,6 +14,7 @@ from src.dataset_tools.domain import TaskType
 CONFIG_PATH = "configs/experiment_config.yaml"
 N_TRIALS = 30
 
+
 def get_dataset_and_split(
     dataset_manager: IDatasetManager, dataset_service: DatasetService, seed: int = 42
 ):
@@ -26,7 +27,10 @@ def get_dataset_and_split(
         dataset_df = dataset_service.read_raw_csv(dataset_manager.dataset_path)
         X, Y = dataset_manager.get_labled_data(dataset_df)
         splits = dataset_service.get_nested_splits(
-            X, Y, is_classification=(dataset_manager.task_type == TaskType.classification), seed=seed
+            X,
+            Y,
+            is_classification=(dataset_manager.task_type == TaskType.classification),
+            seed=seed,
         )
         dataset_service.save_dataset_splits(dataset_manager.split_path, splits)
     return X, Y, splits
@@ -49,7 +53,9 @@ def main():
 
     for dataset_manager in dataset_managers:
         if not os.path.exists(dataset_manager.dataset_path):
-            print(f"Lack of dataset {dataset_manager.name} under the path {dataset_manager.dataset_path}")
+            print(
+                f"Lack of dataset {dataset_manager.name} under the path {dataset_manager.dataset_path}"
+            )
             continue
 
         print(f"\n=================== Dataset: {dataset_manager.name} ===================")
@@ -68,20 +74,24 @@ def main():
 
             for fold in folds:
                 print(f">> Tuning Fold {fold.fold} ({N_TRIALS} trials)...")
-                
+
                 for seed in seeds:
                     torch.manual_seed(seed)
                     np.random.seed(seed)
 
                     study = optuna.create_study(direction="minimize")
                     study.optimize(
-                        lambda trial: model_manager.hyperparameters_study(trial, device, X, Y, is_classification, fold),
+                        lambda trial: model_manager.hyperparameters_study(
+                            trial, device, X, Y, is_classification, fold
+                        ),
                         n_trials=N_TRIALS,
                     )
                     best_params = study.best_params
                     print(f"Fold {fold.fold} Best Params: {best_params}")
 
-                    model = model_manager.train_optimal_model(best_params, device, X, Y, is_classification, fold)
+                    model = model_manager.train_optimal_model(
+                        best_params, device, X, Y, is_classification, fold
+                    )
 
                     # Save model checkpoint
                     save_dir = os.path.join(

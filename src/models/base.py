@@ -12,6 +12,7 @@ class TabularModel(nn.Module):
     output. Models with additional regularization override `training_loss`; early stopping
     always monitors the plain task loss. A single output column is squeezed to shape (B,).
     """
+
     def __init__(self, is_classification: bool):
         super().__init__()
         self.is_classification = is_classification
@@ -30,7 +31,6 @@ class TabularModel(nn.Module):
 
     def training_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
         return self.task_loss(x, y)
-
 
     def _to_tensors(self, X, y, device) -> tuple[torch.Tensor, torch.Tensor]:
         X_t = torch.as_tensor(np.asarray(X), dtype=torch.float32, device=device)

@@ -6,9 +6,8 @@ from .config_reader import (
 )
 
 __all__ = [
+    "DATASET_REGISTRY",
+    "MODEL_REGISTRY",
     "ConfigReader",
     "ExperimentConfig",
-    "MODEL_REGISTRY",
-    "DATASET_REGISTRY",
 ]
-

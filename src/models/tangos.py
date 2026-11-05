@@ -9,7 +9,9 @@ class Tangos(TabularModel):
     """TANGOS (Jeffares et al., 2023): regularizes the input-gradient attributions of the
     penultimate latent units to be sparse and mutually orthogonal."""
 
-    def __init__(self, is_classification: bool, backbone: Resnet, sparsity: float, orthogonality: float):
+    def __init__(
+        self, is_classification: bool, backbone: Resnet, sparsity: float, orthogonality: float
+    ):
         super().__init__(is_classification)
         self.backbone = backbone
         self.output_dim = backbone.output_dim
