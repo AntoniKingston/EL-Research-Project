@@ -46,6 +46,7 @@ class Ensemble(TabularModel):
 
     def __init__(
         self,
+        is_classification: bool,
         backbone: Resnet,
         ensemble_size: int,
         mask: str,
@@ -53,7 +54,7 @@ class Ensemble(TabularModel):
         additive_coef: float,
         similarity_metric: str,
     ):
-        super().__init__()
+        super().__init__(is_classification)
         if mask not in ["none", "symmetric", "lower_triangular"]:
             raise ValueError(f"Invalid mask: {mask}")
         if similarity_metric not in SIMILARITY_METRICS:

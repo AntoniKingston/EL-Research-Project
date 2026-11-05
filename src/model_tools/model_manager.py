@@ -17,11 +17,11 @@ class IModelManager(ABC):
         self.name = name
 
     @abstractmethod
-    def hyperparameters_study(self, trial, device, X, Y, fold: DatasetSplits):
+    def hyperparameters_study(self, trial, device, X, Y, is_classification: bool, fold: DatasetSplits):
         pass
 
     @abstractmethod
-    def train_optimal_model(self, params: dict, device, X, Y, fold: DatasetSplits) -> TabularModel:
+    def train_optimal_model(self, params: dict, device, X, Y, is_classification: bool, fold: DatasetSplits) -> TabularModel:
         pass
 
 
@@ -41,19 +41,18 @@ class SingleResnetManager(IModelManager):
         self.lr: float = 0.01
         self.wd: float = 0.01
         self.batch_size: int = 64
-        self.loss_fn = nn.CrossEntropyLoss()
 
         self._hidden_dim_name = 'hidden_dim'
         self._n_blocks_name = 'n_blocks'
         self._dr_name = 'dr'
 
-    def hyperparameters_study(self, trial, device, X, Y, fold: DatasetSplits):
+    def hyperparameters_study(self, trial, device, X, Y, is_classification: bool, fold: DatasetSplits):
         hidden_dim = trial.suggest_categorical(self._hidden_dim_name, [64, 128, 256])
         n_blocks = trial.suggest_int(self._n_blocks_name, 2, 4)
         dr = trial.suggest_float(self._dr_name, 0.0, 0.5)
 
         def model_fun():
-            return Resnet(self.input_dim, self.output_dim, hidden_dim, n_blocks, dr)
+            return Resnet(is_classification, self.input_dim, self.output_dim, hidden_dim, n_blocks, dr)
 
         return mean_score_by_folds(
             model_fun,
@@ -65,17 +64,16 @@ class SingleResnetManager(IModelManager):
             self.lr,
             self.wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
 
-    def train_optimal_model(self, params: dict, device, X, Y, fold: DatasetSplits) -> TabularModel:
+    def train_optimal_model(self, params: dict, device, X, Y, is_classification: bool, fold: DatasetSplits) -> TabularModel:
         hidden_dim = params.get(self._hidden_dim_name, 128)
         n_blocks = params.get(self._n_blocks_name, 3)
         dr = params.get(self._dr_name, 0.2)
         def model_fun():
-            return Resnet(self.input_dim, self.output_dim, hidden_dim, n_blocks, dr)
+            return Resnet(is_classification, self.input_dim, self.output_dim, hidden_dim, n_blocks, dr)
         return train_model(
             model_fun,
             X,
@@ -86,7 +84,6 @@ class SingleResnetManager(IModelManager):
             self.lr,
             self.wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
@@ -109,14 +106,13 @@ class TangosManager(IModelManager):
         self.patience: int = 16
         self.optimizer = optim.AdamW
         self.batch_size: int = 64
-        self.loss_fn = nn.CrossEntropyLoss()
 
         self._lr_name = 'lr'
         self._wd_name = 'wd'
         self._sparsity_name = 'sparsity'
         self._othodonality_name = 'orthogonality'
 
-    def hyperparameters_study(self, trial, device, X, Y, fold: DatasetSplits):
+    def hyperparameters_study(self, trial, device, X, Y, is_classification: bool, fold: DatasetSplits):
         lr = trial.suggest_float(self._lr_name, 1e-4, 5 * 1e-2, log=True)
         wd = trial.suggest_float(self._wd_name, 2.5 * 1e-3, 1e-2, log=True)
         sparsity = trial.suggest_float(self._sparsity_name, 1e-4, 1e-1, log=True)
@@ -124,7 +120,8 @@ class TangosManager(IModelManager):
 
         def model_fun():
             return Tangos(
-                Resnet(self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
+                is_classification,
+                Resnet(is_classification, self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
                 sparsity,
                 orthogonality,
             )
@@ -139,19 +136,19 @@ class TangosManager(IModelManager):
             lr,
             wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
 
-    def train_optimal_model(self, params: dict, device, X, Y, fold: DatasetSplits) -> TabularModel:
+    def train_optimal_model(self, params: dict, device, X, Y, is_classification: bool, fold: DatasetSplits) -> TabularModel:
         lr = params.get(self._lr_name, 1e-3)
         wd = params.get(self._wd_name, 1e-2)
         sparsity = params.get(self._sparsity_name, 1e-3)
         orthogonality = params.get(self._othodonality_name, 1e-2)
         def model_fun():
             return Tangos(
-                Resnet(self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
+                is_classification,
+                Resnet(is_classification, self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
                 sparsity,
                 orthogonality,
             )
@@ -165,7 +162,6 @@ class TangosManager(IModelManager):
             lr,
             wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
@@ -189,13 +185,12 @@ class BatchEnsembleManager(IModelManager):
         self.patience: int = 16
         self.optimizer = optim.AdamW
         self.batch_size: int = 64
-        self.loss_fn = nn.CrossEntropyLoss()
 
         self._lr_name = 'lr'
         self._wd_name = 'wd'
         self._adapter_initialization_name = 'adapter_initialization'
 
-    def hyperparameters_study(self, trial, device, X, Y, fold: DatasetSplits):
+    def hyperparameters_study(self, trial, device, X, Y, is_classification: bool, fold: DatasetSplits):
         lr = trial.suggest_float(self._lr_name, 1e-4, 5 * 1e-2, log=True)
         wd = trial.suggest_float(self._wd_name, 2.5 * 1e-3, 1e-2, log=True)
         adapter_initialization = trial.suggest_categorical(
@@ -204,7 +199,8 @@ class BatchEnsembleManager(IModelManager):
 
         def model_fun():
             return BatchEnsemble(
-                Resnet(self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
+                is_classification,
+                Resnet(is_classification, self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
                 self.ensemble_size,
                 adapter_initialization,
             )
@@ -219,19 +215,19 @@ class BatchEnsembleManager(IModelManager):
             lr,
             wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
     
-    def train_optimal_model(self, params: dict, device, X, Y, fold: DatasetSplits) -> TabularModel:
+    def train_optimal_model(self, params: dict, device, X, Y, is_classification: bool, fold: DatasetSplits) -> TabularModel:
         lr = params.get(self._lr_name, 1e-3)
         wd = params.get(self._wd_name, 1e-2)
         adapter_initialization = params.get(self._adapter_initialization_name, 'random_sign')
 
         def model_fun():
             return BatchEnsemble(
-                Resnet(self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
+                is_classification,
+                Resnet(is_classification, self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
                 self.ensemble_size,
                 adapter_initialization,
             )
@@ -246,7 +242,6 @@ class BatchEnsembleManager(IModelManager):
             lr,
             wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
@@ -272,14 +267,13 @@ class EnsembleResnetManager(IModelManager):
         self.patience: int = 16
         self.optimizer = optim.AdamW
         self.batch_size: int = 64
-        self.loss_fn = nn.CrossEntropyLoss()
 
         self._lr_name = 'lr'
         self._wd_name = 'wd'
         self._additive_coef_name = 'additive_coef'
         self._similarity_metric = 'similarity_metric'
 
-    def hyperparameters_study(self, trial, device, X, Y, fold: DatasetSplits):
+    def hyperparameters_study(self, trial, device, X, Y, is_classification: bool, fold: DatasetSplits):
         lr = trial.suggest_float(self._lr_name, 1e-4, 5 * 1e-2, log=True)
         wd = trial.suggest_float(self._wd_name, 2.5 * 1e-3, 1e-2, log=True)
         additive_coef = trial.suggest_float(self._additive_coef_name, 0.0, 1.0)
@@ -287,7 +281,8 @@ class EnsembleResnetManager(IModelManager):
 
         def model_fun():
             return Ensemble(
-                Resnet(self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
+                is_classification,
+                Resnet(is_classification, self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
                 self.ensemble_size,
                 self.mask,
                 self.orthogonality_weight,
@@ -305,12 +300,11 @@ class EnsembleResnetManager(IModelManager):
             lr,
             wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )
 
-    def train_optimal_model(self, params: dict, device, X, Y, fold: DatasetSplits) -> TabularModel:
+    def train_optimal_model(self, params: dict, device, X, Y, is_classification: bool, fold: DatasetSplits) -> TabularModel:
         lr = params.get(self._lr_name, 1e-3)
         wd = params.get(self._wd_name, 1e-2)
         additive_coef = params.get(self._additive_coef_name, 0.5)
@@ -318,7 +312,8 @@ class EnsembleResnetManager(IModelManager):
 
         def model_fun():
             return Ensemble(
-                Resnet(self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
+                is_classification,
+                Resnet(is_classification, self.input_dim, self.output_dim, self.hidden_dim, self.n_blocks, self.dr),
                 self.ensemble_size,
                 self.mask,
                 self.orthogonality_weight,
@@ -336,7 +331,6 @@ class EnsembleResnetManager(IModelManager):
             lr,
             wd,
             self.optimizer,
-            self.loss_fn,
             self.batch_size,
             device,
         )

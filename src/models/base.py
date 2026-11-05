@@ -12,17 +12,23 @@ class TabularModel(nn.Module):
     output. Models with additional regularization override `training_loss`; early stopping
     always monitors the plain task loss. A single output column is squeezed to shape (B,).
     """
-
-    output_dim: int
+    def __init__(self, is_classification: bool):
+        self.is_classification = is_classification
 
     def _format_output(self, out: torch.Tensor) -> torch.Tensor:
         return out.squeeze(-1) if out.shape[-1] == 1 else out
 
-    def task_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn) -> torch.Tensor:
-        return loss_fn(self._format_output(self(x)), y)
+    def task_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
+        # TODO implement
+        # return loss_fn(self._format_output(self(x)), y)
+        if self.is_classification:
+            pass
+        else:
+            pass
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn) -> torch.Tensor:
-        return self.task_loss(x, y, loss_fn)
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
+        return self.task_loss(x, y)
+
 
     def _to_tensors(self, X, y, device) -> tuple[torch.Tensor, torch.Tensor]:
         X_t = torch.as_tensor(np.asarray(X), dtype=torch.float32, device=device)
@@ -39,17 +45,16 @@ class TabularModel(nn.Module):
 
     def fit(
         self,
-        X,
-        y,
+        X_train,
+        y_train,
+        X_val,
+        y_val,
         epochs,
         patience,
         lr,
         wd,
         optimizer,
-        loss_fn,
         batch_size,
-        X_val=None,
-        y_val=None,
     ):
         """Mini-batch training with early stopping.
 
@@ -57,7 +62,7 @@ class TabularModel(nn.Module):
         The best weights are restored at the end and the best epoch is stored in `best_epoch`.
         """
         device = next(self.parameters()).device
-        X_t, y_t = self._to_tensors(X, y, device)
+        X_t, y_t = self._to_tensors(X_train, y_train, device)
         val = self._to_tensors(X_val, y_val, device) if X_val is not None else None
         opt = optimizer(self.parameters(), lr=lr, weight_decay=wd)
 
@@ -74,13 +79,13 @@ class TabularModel(nn.Module):
             for i in range(n_batches):
                 idx = perm[i * batch_size : (i + 1) * batch_size]
                 opt.zero_grad()
-                loss = self.training_loss(X_t[idx], y_t[idx], loss_fn)
+                loss = self.training_loss(X_t[idx], y_t[idx])
                 loss.backward()
                 opt.step()
                 train_loss += loss.item()
 
             if val is not None:
-                monitored = loss_fn(self._predict_raw(val[0], batch_size), val[1]).item()
+                monitored = self.task_loss(self._predict_raw(val[0], batch_size), val[1]).item()
             else:
                 monitored = train_loss / n_batches
 

@@ -3,7 +3,7 @@ import torch
 from src.dataset_tools.domain import DatasetSplits
 
 
-def mean_score_by_folds(
+def fold_score(
     model_fun,
     X,
     y,
@@ -13,7 +13,6 @@ def mean_score_by_folds(
     lr: float,
     wd: float,
     optimizer,
-    loss_fn,
     batch_size: int,
     device,
 ):
@@ -28,13 +27,13 @@ def mean_score_by_folds(
     y_train = y[fold.inner_train_idx]
     X_val = X[fold.inner_val_idx]
     y_val = y[fold.inner_val_idx]
-    model.fit(X_train, y_train, epochs, patience, lr, wd, optimizer, loss_fn, batch_size)
+    model.fit(X_train, y_train, X_val, y_val, epochs, patience, lr, wd, optimizer, batch_size) 
     y_pred = torch.as_tensor(model.predict(X_val))
     y_true = torch.as_tensor(y_val)
     if not np.issubdtype(y_val.dtype, np.integer):
         y_true = y_true.to(y_pred.dtype)
     with torch.no_grad():
-        score = loss_fn(y_pred, y_true).item()
+        score = model.task_loss(y_pred, y_true).item()
     return score
 
 
@@ -48,7 +47,6 @@ def train_model(
     lr: float,
     wd: float,
     optimizer,
-    loss_fn,
     batch_size: int,
     device,
 ):
@@ -58,7 +56,9 @@ def train_model(
 
     X_train = X[fold.outer_train_idx]
     Y_train = Y[fold.outer_train_idx]
-    model.fit(X_train, Y_train, epochs, patience, lr, wd, optimizer, loss_fn, batch_size)
+    X_val = X[fold.outer_test_idx]
+    Y_val = Y[fold.outer_test_idx]
+    model.fit(X_train, Y_train, X_val, Y_val, epochs, patience, lr, wd, optimizer, batch_size) 
 
     return model
 

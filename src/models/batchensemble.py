@@ -40,8 +40,8 @@ class BatchEnsemble(TabularModel):
     """BatchEnsemble (Wen et al., 2020) over a Tabular ResNet: every nn.Linear of the backbone
     is replaced in place by a BatchEnsembleLinear. BatchNorm layers stay shared."""
 
-    def __init__(self, backbone: Resnet, ensemble_size: int, adapter_initialization: str):
-        super().__init__()
+    def __init__(self, is_classification: bool, backbone: Resnet, ensemble_size: int, adapter_initialization: str):
+        super().__init__(is_classification)
         self.backbone = backbone
         self.output_dim = backbone.output_dim
         self.ensemble_size = ensemble_size
