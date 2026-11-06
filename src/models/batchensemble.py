@@ -69,6 +69,7 @@ class BatchEnsemble(TabularModel):
     def forward(self, x: torch.Tensor) -> torch.Tensor:  # ty: ignore[invalid-mutable-override]
         return self.member_outputs(x).mean(dim=0)
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn) -> torch.Tensor:
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
+        loss_fn = loss_fn or self.task_loss
         out = self.member_outputs(x).flatten(0, 1)
         return loss_fn(self._format_output(out), y.repeat(self.ensemble_size))

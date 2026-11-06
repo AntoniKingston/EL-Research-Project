@@ -12,8 +12,13 @@ from src.models.tangos import Tangos
 
 
 class IModelManager(ABC):
+    input_dim: int
+    output_dim: int
+
     def __init__(self, name: str):
         self.name = name
+        self.input_dim = 10
+        self.output_dim = 2
 
     @abstractmethod
     def hyperparameters_study(

@@ -22,15 +22,13 @@ class TabularModel(nn.Module):
         return out.squeeze(-1) if out.shape[-1] == 1 else out
 
     def task_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
-        # TODO implement
-        # return loss_fn(self._format_output(self(x)), y)
         if self.is_classification:
-            pass
-        else:
-            pass
+            return torch.nn.functional.cross_entropy(x, y.long())
+        return torch.nn.functional.mse_loss(x.view_as(y), y.float())
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
-        return self.task_loss(x, y)
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
+        loss_fn = loss_fn or self.task_loss
+        return loss_fn(self._format_output(self(x)), y)
 
     def _to_tensors(self, X, y, device) -> tuple[torch.Tensor, torch.Tensor]:
         X_t = torch.as_tensor(np.asarray(X), dtype=torch.float32, device=device)

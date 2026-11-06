@@ -71,3 +71,9 @@ def train_model(
     model.fit(X_train, Y_train, X_val, Y_val, epochs, patience, lr, wd, optimizer, batch_size)
 
     return model
+
+
+mean_score_by_folds = fold_score
+train_optimal_model = train_model
+
+__all__ = ["fold_score", "mean_score_by_folds", "train_model", "train_optimal_model"]

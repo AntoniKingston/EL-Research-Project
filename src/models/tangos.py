@@ -21,7 +21,8 @@ class Tangos(TabularModel):
     def forward(self, x: torch.Tensor) -> torch.Tensor:  # ty: ignore[invalid-mutable-override]
         return self.backbone(x)
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn) -> torch.Tensor:
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
+        loss_fn = loss_fn or self.task_loss
         x = x.detach().requires_grad_(True)
         z = self.backbone.embed(x)
         task = loss_fn(self._format_output(self.backbone.head(z)), y)
