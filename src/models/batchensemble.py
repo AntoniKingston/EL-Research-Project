@@ -40,8 +40,14 @@ class BatchEnsemble(TabularModel):
     """BatchEnsemble (Wen et al., 2020) over a Tabular ResNet: every nn.Linear of the backbone
     is replaced in place by a BatchEnsembleLinear. BatchNorm layers stay shared."""
 
-    def __init__(self, backbone: Resnet, ensemble_size: int, adapter_initialization: str):
-        super().__init__()
+    def __init__(
+        self,
+        is_classification: bool,
+        backbone: Resnet,
+        ensemble_size: int,
+        adapter_initialization: str,
+    ):
+        super().__init__(is_classification)
         self.backbone = backbone
         self.output_dim = backbone.output_dim
         self.ensemble_size = ensemble_size
@@ -63,6 +69,7 @@ class BatchEnsemble(TabularModel):
     def forward(self, x: torch.Tensor) -> torch.Tensor:  # ty: ignore[invalid-mutable-override]
         return self.member_outputs(x).mean(dim=0)
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn) -> torch.Tensor:
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
+        loss_fn = loss_fn or self.task_loss
         out = self.member_outputs(x).flatten(0, 1)
         return loss_fn(self._format_output(out), y.repeat(self.ensemble_size))

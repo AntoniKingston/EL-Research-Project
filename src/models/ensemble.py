@@ -46,6 +46,7 @@ class Ensemble(TabularModel):
 
     def __init__(
         self,
+        is_classification: bool,
         backbone: Resnet,
         ensemble_size: int,
         mask: str,
@@ -53,7 +54,7 @@ class Ensemble(TabularModel):
         additive_coef: float,
         similarity_metric: str,
     ):
-        super().__init__()
+        super().__init__(is_classification)
         if mask not in ["none", "symmetric", "lower_triangular"]:
             raise ValueError(f"Invalid mask: {mask}")
         if similarity_metric not in SIMILARITY_METRICS:
@@ -106,7 +107,8 @@ class Ensemble(TabularModel):
         similarity = SIMILARITY_METRICS[self.similarity_metric](Z, Z_ref)
         return (self.mask * similarity).sum()
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn) -> torch.Tensor:
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
+        loss_fn = loss_fn or self.task_loss
         latents, outputs = self._members_forward(x)
         loss = loss_fn(self._format_output(self._combine(outputs)), y)
         if self.mask_type != "none" and self.orthogonality_weight > 0:

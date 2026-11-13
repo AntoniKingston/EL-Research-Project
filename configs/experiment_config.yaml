@@ -1,0 +1,32 @@
+seeds:
+  - 42
+  - 43
+  - 44
+
+datasets:
+  ds1:
+    dataset_path: "{main_porj_dir}/datasets/ds1/ds1.csv"
+    split_path: "{main_porj_dir}/datasets/ds1/split.pkl"
+    label_column: "target"
+    task_type: "classification"
+
+  ds2:
+    dataset_path: "{main_porj_dir}/datasets/ds2/ds2.csv"
+    split_path: "{main_porj_dir}/datasets/ds2/split.pkl"
+    label_column: "target"
+    task_type: "classification"
+
+  ds3:
+    dataset_path: "{main_porj_dir}/datasets/ds3/ds3.csv"
+    split_path: "{main_porj_dir}/datasets/ds3/split.pkl"
+    label_column: "target"
+    task_type: "regression"
+
+models:
+  - name: "single_resnet"
+
+  - name: "tangos"
+
+  - name: "batchensemble"
+
+  - name: "ensemble_resnet"

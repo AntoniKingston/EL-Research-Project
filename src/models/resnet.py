@@ -21,8 +21,8 @@ class ResBlock(nn.Module):
 
 
 class Resnet(TabularModel):
-    def __init__(self, input_dim, output_dim, hidden_dim, n_blocks, dr):
-        super().__init__()
+    def __init__(self, is_classification: bool, input_dim, output_dim, hidden_dim, n_blocks, dr):
+        super().__init__(is_classification)
         self.input_dim = input_dim
         self.output_dim = output_dim
         self.hidden_dim = hidden_dim
