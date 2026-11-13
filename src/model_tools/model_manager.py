@@ -1,3 +1,4 @@
+import logging
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from functools import partial
@@ -13,6 +14,9 @@ from src.models.batchensemble import BatchEnsemble
 from src.models.ensemble import Ensemble
 from src.models.resnet import Resnet
 from src.models.tangos import Tangos
+from src.run_tools.logging_setup import VERBOSE, set_stage
+
+log = logging.getLogger(__name__)
 
 STAGE1_MODEL = "single_resnet"
 BACKBONE_KEYS = ("hidden_dim", "n_blocks", "dr")
@@ -74,6 +78,8 @@ class IModelManager(ABC):
     ) -> float:
         """Optuna objective: inner validation task loss. Stores the best epoch on the trial."""
         params = self.suggest(trial, ctx)
+        set_stage(trial=trial.number, seed=seed)
+        log.log(VERBOSE, "    trial %d (seed %d): %s", trial.number, seed, params)
         lr, wd = self.optimization_params(params, ctx)
         set_seed(seed)
         score, best_epoch = fold_score(
