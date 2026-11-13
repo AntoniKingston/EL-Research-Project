@@ -215,3 +215,5 @@ __marimo__/
 data/raw/
 data/openml/
 results/
+saved_models/
+datasets/*/split.pkl

@@ -46,15 +46,15 @@ class Ensemble(TabularModel):
 
     def __init__(
         self,
-        is_classification: bool,
         backbone: Resnet,
         ensemble_size: int,
         mask: str,
         orthogonality_weight: float,
         additive_coef: float,
         similarity_metric: str,
+        seed: int | None = None,
     ):
-        super().__init__(is_classification)
+        super().__init__(backbone.is_classification)
         if mask not in ["none", "symmetric", "lower_triangular"]:
             raise ValueError(f"Invalid mask: {mask}")
         if similarity_metric not in SIMILARITY_METRICS:
@@ -67,12 +67,20 @@ class Ensemble(TabularModel):
         self.additive_coef = additive_coef
         self.similarity_metric = similarity_metric
 
-        self.members = nn.ModuleList([backbone])
-        for _ in range(ensemble_size - 1):
+        # With `seed`, member m is initialized from sub-seed 1000 * seed + m, so starting
+        # weights are distinct across members yet reproducible across runs.
+        self.members = nn.ModuleList()
+        for m in range(ensemble_size):
+            if m == 0 and seed is None:
+                self.members.append(backbone)
+                continue
             member = copy.deepcopy(backbone)
-            for module in member.modules():
-                if isinstance(module, nn.Linear | nn.BatchNorm1d):
-                    module.reset_parameters()
+            with torch.random.fork_rng(devices=[]):
+                if seed is not None:
+                    torch.manual_seed(1000 * seed + m)
+                for module in member.modules():
+                    if isinstance(module, nn.Linear | nn.BatchNorm1d):
+                        module.reset_parameters()
             self.members.append(member)
 
         # Row m holds the members j < m that member m is compared against; normalizing by the
@@ -107,10 +115,9 @@ class Ensemble(TabularModel):
         similarity = SIMILARITY_METRICS[self.similarity_metric](Z, Z_ref)
         return (self.mask * similarity).sum()
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
-        loss_fn = loss_fn or self.task_loss
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
         latents, outputs = self._members_forward(x)
-        loss = loss_fn(self._format_output(self._combine(outputs)), y)
+        loss = self.task_loss(self._format_output(self._combine(outputs)), y)
         if self.mask_type != "none" and self.orthogonality_weight > 0:
             loss = loss + self.orthogonality_weight * self.orthogonality_penalty(latents)
         return loss

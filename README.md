@@ -86,7 +86,49 @@ It serves two purposes:
 
 ## 🚀 How to use it
 
-> Usage example. What's the minimal meaningful example that demonstrates the core ideas from your project?
+### Running the experiment suite
+
+```sh
+uv run python -m src.scripts.train_orchestrator --config configs/experiment_config.yaml
+```
+
+For every dataset and outer fold the orchestrator runs Stage 1 HPO (`single_resnet` backbone),
+Stage 2 HPO for each configured method, and refits every method on the outer training
+partition with each of `refit_seeds`, evaluating on the untouched outer test fold.
+OpenML datasets listed in `data/links.csv` are downloaded on first use to `data/raw/`.
+
+Useful options:
+
+* `--datasets california pol` / `--models sfo_cka tangos` – restrict the run's scope.
+* `--stages hpo` or `--stages refit` – run only one phase (refits need finished studies).
+* `--fresh` – move the existing run directory aside and start from scratch.
+
+`configs/smoke_config.yaml` runs the whole pipeline on the toy CSVs in `datasets/` in about
+half a minute on CPU.
+
+### Resuming after a crash or time limit
+
+Re-run the same command. Everything under `results/<run_name>/` is resumable:
+
+* `optuna.db` – all studies (`<dataset>/fold<k>/<method>`); only missing trials are run and an
+  interrupted trial is re-run with the same parameters.
+* `progress.csv` – finished refits, which are skipped.
+* `checkpoints/` – training state of an interrupted refit (every `checkpoint.every_n_epochs`).
+
+On `SIGTERM`, `SIGUSR1` (e.g. SLURM `--signal=USR1@300`), the first `Ctrl+C`, or when
+`checkpoint.time_budget_hours` is exhausted, the run finishes the current epoch, saves a
+checkpoint and exits with code 3, so a job script can resubmit itself while the exit code is 3.
+A resumed run produces the same numbers as an uninterrupted one. The run refuses to start if
+result-affecting settings (`training`, `hpo`, seeds, dataset definitions) differ from those
+stored in the run directory; use a new `run_name` or `--fresh` in that case.
+
+### Outputs (`results/<run_name>/`)
+
+* `metrics.csv` – test metrics per dataset, fold, method and seed (accuracy, ROC-AUC, NLL or
+  RMSE, MAE, R²; plus `n_params`, `epochs`, `train_seconds`). Read it with
+  `src.run_tools.resume.load_results`, which drops rows duplicated by a crash.
+* `diagnostics.csv` – staged ensemble performance and member output norms.
+* `<dataset>/best_params/`, `<dataset>/similarity/`, `<dataset>/splits.npz`, `config.yaml`.
 
 ## 📚 Citation
 

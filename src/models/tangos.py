@@ -9,10 +9,8 @@ class Tangos(TabularModel):
     """TANGOS (Jeffares et al., 2023): regularizes the input-gradient attributions of the
     penultimate latent units to be sparse and mutually orthogonal."""
 
-    def __init__(
-        self, is_classification: bool, backbone: Resnet, sparsity: float, orthogonality: float
-    ):
-        super().__init__(is_classification)
+    def __init__(self, backbone: Resnet, sparsity: float, orthogonality: float):
+        super().__init__(backbone.is_classification)
         self.backbone = backbone
         self.output_dim = backbone.output_dim
         self.sparsity = sparsity
@@ -21,11 +19,10 @@ class Tangos(TabularModel):
     def forward(self, x: torch.Tensor) -> torch.Tensor:  # ty: ignore[invalid-mutable-override]
         return self.backbone(x)
 
-    def training_loss(self, x: torch.Tensor, y: torch.Tensor, loss_fn=None) -> torch.Tensor:
-        loss_fn = loss_fn or self.task_loss
+    def training_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
         x = x.detach().requires_grad_(True)
         z = self.backbone.embed(x)
-        task = loss_fn(self._format_output(self.backbone.head(z)), y)
+        task = self.task_loss(self._format_output(self.backbone.head(z)), y)
 
         n_units = z.shape[1]
         # One backward pass per latent unit (vectorized): attributions[k, b] = dz[b, k] / dx[b].

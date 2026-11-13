@@ -1,0 +1,49 @@
+# Tiny configuration on the toy CSV datasets for checking that the pipeline runs end to end.
+run_name: smoke
+results_dir: "{project_dir}/results"
+data_dir: "{project_dir}/data"
+device: cpu
+save_models: false
+
+master_seed: 42
+n_outer_folds: 2
+refit_seeds: [42, 67]
+
+training:
+  optimizer: AdamW
+  max_epochs: 8
+  patience: 3
+  batch_size: 32
+
+hpo:
+  stage1_trials: 3
+  stage2_trials: 2
+  stage1_lr: 1.0e-3
+  stage1_wd: 1.0e-4
+  hidden_dims: [16, 32]
+  ensemble_size: 3
+  pruner_warmup: 2
+
+checkpoint:
+  every_n_epochs: 2
+  time_budget_hours: null
+
+datasets:
+  ds1:
+    source: csv
+    dataset_path: "{project_dir}/datasets/ds1/ds1.csv"
+    label_column: target
+    task_type: classification
+  ds3:
+    source: csv
+    dataset_path: "{project_dir}/datasets/ds3/ds3.csv"
+    label_column: target
+    task_type: regression
+
+models:
+  - tangos
+  - batchensemble
+  - ensemble_none
+  - ensemble_symmetric
+  - sfo_cka
+  - sfo_cos

@@ -1,32 +1,69 @@
-seeds:
-  - 42
-  - 43
-  - 44
+# Full experiment suite. Run with:
+#   uv run python -m src.scripts.train_orchestrator --config configs/experiment_config.yaml
+# Re-running the same command resumes from where the previous run stopped.
 
+run_name: main
+results_dir: "{project_dir}/results"
+data_dir: "{project_dir}/data"
+device: auto            # auto | cpu | cuda | cuda:1 ...
+save_models: false      # also store final model weights per (dataset, fold, method, seed)
+
+master_seed: 42         # CV splits, max_samples subsampling, TPE sampler
+n_outer_folds: 5
+refit_seeds: [42, 67, 69, 228, 2137]
+
+training:
+  optimizer: AdamW
+  max_epochs: 200
+  patience: 16
+  # "auto": 256, or 512 for datasets with more than 50k samples. Must be >= max(hidden_dims).
+  batch_size: auto
+
+hpo:
+  stage1_trials: 40     # single_resnet backbone search
+  stage2_trials: 30     # per stage 2 method
+  stage1_lr: 1.0e-3     # Stage 1 tunes only the architecture
+  stage1_wd: 1.0e-4
+  hidden_dims: [64, 128, 256]
+  ensemble_size: 8
+  pruner_warmup: 10     # MedianPruner warmup epochs
+
+checkpoint:
+  every_n_epochs: 5     # refit training-state checkpoints
+  time_budget_hours: null   # stop gracefully (resumable) after this many hours
+
+# Known OpenML datasets (name -> link). Each is downloaded to data_dir/raw/ on first use only.
+openml_links: "{project_dir}/data/links.csv"
+
+# Per-dataset settings / extra datasets. OpenML entries from openml_links can be refined here;
+# local CSVs use: {source: csv, dataset_path, label_column, task_type, categorical_columns}.
 datasets:
-  ds1:
-    dataset_path: "{main_porj_dir}/datasets/ds1/ds1.csv"
-    split_path: "{main_porj_dir}/datasets/ds1/split.pkl"
-    label_column: "target"
-    task_type: "classification"
+  covertype:
+    max_samples: 50000
 
-  ds2:
-    dataset_path: "{main_porj_dir}/datasets/ds2/ds2.csv"
-    split_path: "{main_porj_dir}/datasets/ds2/split.pkl"
-    label_column: "target"
-    task_type: "classification"
+# Datasets to run, by name (from openml_links or `datasets`). Omit to run all known datasets.
+run_datasets:
+  # regression
+  - california
+  - house_16H
+  - diamonds
+  - elevators
+  - Ailerons
+  - Bike_Sharing_Demand
+  # classification
+  - electricity
+  - credit
+  - default-of-credit-card-clients
+  - covertype
+  - pol
+  - MiniBooNE
 
-  ds3:
-    dataset_path: "{main_porj_dir}/datasets/ds3/ds3.csv"
-    split_path: "{main_porj_dir}/datasets/ds3/split.pkl"
-    label_column: "target"
-    task_type: "regression"
-
+# Stage 2 methods (single_resnet always runs as Stage 1).
+# Available: tangos, batchensemble, ensemble_none, ensemble_symmetric, sfo_cka, sfo_cos
 models:
-  - name: "single_resnet"
-
-  - name: "tangos"
-
-  - name: "batchensemble"
-
-  - name: "ensemble_resnet"
+  - tangos
+  - batchensemble
+  - ensemble_none
+  - ensemble_symmetric
+  - sfo_cka
+  - sfo_cos
