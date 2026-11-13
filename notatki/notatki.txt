@@ -1,0 +1,14 @@
+Zbiory regresyjne:
+1. California Housing
+2. House 16H
+3. Diamonds 
+4. Elevators
+5. Ailerons
+6. Bike sharing demand
+Zbiory klasyfikacyjne
+1.Electricity
+2.Credit
+3.Default Credit Card
+4.Covertype
+5.Pol
+6.MiniBooNE

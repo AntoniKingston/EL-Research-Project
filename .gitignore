@@ -210,3 +210,10 @@ marimo/_lsp/
 __marimo__/
 
 .DS_Store
+
+# Downloaded datasets and experiment outputs
+data/raw/
+data/openml/
+results/
+saved_models/
+datasets/*/split.pkl
