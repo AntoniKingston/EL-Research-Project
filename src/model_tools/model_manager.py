@@ -136,6 +136,16 @@ class SingleResnetManager(IModelManager):
         return make_resnet(params, ctx)
 
 
+class ResnetManager(IModelManager):
+    """Stage 2 single-network baseline: the Stage 1 backbone with tuned optimization settings."""
+
+    def suggest(self, trial: optuna.Trial, ctx: RunContext) -> dict[str, Any]:
+        return suggest_optimization(trial)
+
+    def build(self, params, backbone, ctx, seed) -> TabularModel:
+        return make_resnet(backbone, ctx)
+
+
 class TangosManager(IModelManager):
     def suggest(self, trial: optuna.Trial, ctx: RunContext) -> dict[str, Any]:
         return {
@@ -196,10 +206,12 @@ class EnsembleResnetManager(IModelManager):
 
 MODEL_REGISTRY: dict[str, Callable[[str], IModelManager]] = {
     STAGE1_MODEL: SingleResnetManager,
+    "resnet": ResnetManager,
     "tangos": TangosManager,
     "batchensemble": BatchEnsembleManager,
     "ensemble_none": partial(EnsembleResnetManager, mask="none", similarity_metric="cosine"),
-    "ensemble_symmetric": partial(EnsembleResnetManager, mask="symmetric", similarity_metric="cka"),
+    "sym_cka": partial(EnsembleResnetManager, mask="symmetric", similarity_metric="cka"),
+    "sym_cos": partial(EnsembleResnetManager, mask="symmetric", similarity_metric="cosine"),
     "sfo_cka": partial(EnsembleResnetManager, mask="lower_triangular", similarity_metric="cka"),
     "sfo_cos": partial(EnsembleResnetManager, mask="lower_triangular", similarity_metric="cosine"),
 }

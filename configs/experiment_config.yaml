@@ -58,12 +58,17 @@ run_datasets:
   - pol
   - MiniBooNE
 
-# Stage 2 methods (single_resnet always runs as Stage 1).
-# Available: tangos, batchensemble, ensemble_none, ensemble_symmetric, sfo_cka, sfo_cos
+# Stage 2 methods. single_resnet (backbone search, fixed lr/wd) always runs as Stage 1;
+# `resnet` is the same single network with lr/wd tuned like the other Stage 2 methods.
+# Ensembles: ensemble_none has no diversity penalty; sym_* penalize all member pairs, sfo_* use
+# the stop-gradient (lower-triangular) mask; *_cka / *_cos select the similarity measure.
+# Available: resnet, tangos, batchensemble, ensemble_none, sym_cka, sym_cos, sfo_cka, sfo_cos
 models:
+  - resnet
   - tangos
   - batchensemble
   - ensemble_none
-  - ensemble_symmetric
+  - sym_cka
+  - sym_cos
   - sfo_cka
   - sfo_cos
