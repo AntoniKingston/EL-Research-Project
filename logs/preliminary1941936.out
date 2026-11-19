@@ -1,0 +1,120 @@
+--fresh: previous run moved to /mnt/evafs/faculty/home/akingston/EL-Research-Project/results/smoke.bak-20261113-204310
+Run directory: /mnt/evafs/faculty/home/akingston/EL-Research-Project/results/smoke | device: cpu | stages: ['hpo', 'refit']
+
+=== ds1 (classification, n=100) ===
+ fold 0
+  [hpo] single_resnet: trials 0/3
+  [hpo] resnet: trials 0/2
+  [hpo] tangos: trials 0/2
+  [hpo] batchensemble: trials 0/2
+  [hpo] ensemble_none: trials 0/2
+  [hpo] sym_cka: trials 0/2
+  [hpo] sym_cos: trials 0/2
+  [hpo] sfo_cka: trials 0/2
+  [hpo] sfo_cos: trials 0/2
+  [refit] single_resnet seed=42: accuracy=0.5600, roc_auc=0.8384, nll=0.6137, epochs=8.0000, train_seconds=0.2853
+  [refit] single_resnet seed=67: accuracy=0.6800, roc_auc=0.8752, nll=0.5855, epochs=8.0000, train_seconds=0.0466
+  [refit] resnet seed=42: accuracy=0.5000, roc_auc=0.7840, nll=0.6414, epochs=8.0000, train_seconds=0.0554
+  [refit] resnet seed=67: accuracy=0.6000, roc_auc=0.8096, nll=0.6190, epochs=8.0000, train_seconds=0.0392
+  [refit] tangos seed=42: accuracy=0.5000, roc_auc=0.7856, nll=0.6414, epochs=8.0000, train_seconds=0.1077
+  [refit] tangos seed=67: accuracy=0.6000, roc_auc=0.8096, nll=0.6190, epochs=8.0000, train_seconds=0.1091
+  [refit] batchensemble seed=42: accuracy=0.5000, roc_auc=0.7248, nll=0.6826, epochs=8.0000, train_seconds=0.0482
+  [refit] batchensemble seed=67: accuracy=0.6200, roc_auc=0.7488, nll=0.6535, epochs=8.0000, train_seconds=0.0486
+  [refit] ensemble_none seed=42: accuracy=0.6200, roc_auc=0.7488, nll=0.6402, epochs=8.0000, train_seconds=0.0658
+  [refit] ensemble_none seed=67: accuracy=0.2000, roc_auc=0.1280, nll=0.8192, epochs=8.0000, train_seconds=0.0736
+  [refit] sym_cka seed=42: accuracy=0.6200, roc_auc=0.7360, nll=0.6458, epochs=8.0000, train_seconds=0.0712
+  [refit] sym_cka seed=67: accuracy=0.2000, roc_auc=0.1232, nll=0.8225, epochs=8.0000, train_seconds=0.0706
+  [refit] sym_cos seed=42: accuracy=0.6200, roc_auc=0.7424, nll=0.6414, epochs=8.0000, train_seconds=0.0691
+  [refit] sym_cos seed=67: accuracy=0.2000, roc_auc=0.1264, nll=0.8206, epochs=8.0000, train_seconds=0.0817
+  [refit] sfo_cka seed=42: accuracy=0.6200, roc_auc=0.7376, nll=0.6436, epochs=8.0000, train_seconds=0.0688
+  [refit] sfo_cka seed=67: accuracy=0.2000, roc_auc=0.1264, nll=0.8217, epochs=8.0000, train_seconds=0.0694
+  [refit] sfo_cos seed=42: accuracy=0.6200, roc_auc=0.7456, nll=0.6410, epochs=8.0000, train_seconds=0.0690
+  [refit] sfo_cos seed=67: accuracy=0.2000, roc_auc=0.1264, nll=0.8199, epochs=8.0000, train_seconds=0.0998
+ fold 1
+  [hpo] single_resnet: trials 0/3
+  [hpo] resnet: trials 0/2
+  [hpo] tangos: trials 0/2
+  [hpo] batchensemble: trials 0/2
+  [hpo] ensemble_none: trials 0/2
+  [hpo] sym_cka: trials 0/2
+  [hpo] sym_cos: trials 0/2
+  [hpo] sfo_cka: trials 0/2
+  [hpo] sfo_cos: trials 0/2
+  [refit] single_resnet seed=42: accuracy=0.6800, roc_auc=0.8288, nll=0.6278, epochs=8.0000, train_seconds=0.0565
+  [refit] single_resnet seed=67: accuracy=0.6000, roc_auc=0.7632, nll=0.6363, epochs=8.0000, train_seconds=0.0549
+  [refit] resnet seed=42: accuracy=0.6600, roc_auc=0.8128, nll=0.6328, epochs=8.0000, train_seconds=0.0382
+  [refit] resnet seed=67: accuracy=0.6000, roc_auc=0.7568, nll=0.6402, epochs=8.0000, train_seconds=0.0388
+  [refit] tangos seed=42: accuracy=0.6600, roc_auc=0.8112, nll=0.6344, epochs=8.0000, train_seconds=0.1099
+  [refit] tangos seed=67: accuracy=0.6000, roc_auc=0.7488, nll=0.6407, epochs=8.0000, train_seconds=0.1248
+  [refit] batchensemble seed=42: accuracy=0.5000, roc_auc=0.5008, nll=0.7537, epochs=1.0000, train_seconds=0.0051
+  [refit] batchensemble seed=67: accuracy=0.5800, roc_auc=0.6464, nll=0.6692, epochs=1.0000, train_seconds=0.0049
+  [refit] ensemble_none seed=42: accuracy=0.6200, roc_auc=0.8320, nll=0.6320, epochs=8.0000, train_seconds=0.0717
+  [refit] ensemble_none seed=67: accuracy=0.3600, roc_auc=0.2224, nll=0.7867, epochs=8.0000, train_seconds=0.0676
+  [refit] sym_cka seed=42: accuracy=0.6200, roc_auc=0.8320, nll=0.6320, epochs=8.0000, train_seconds=0.1025
+  [refit] sym_cka seed=67: accuracy=0.3600, roc_auc=0.2224, nll=0.7867, epochs=8.0000, train_seconds=0.0716
+  [refit] sym_cos seed=42: accuracy=0.6200, roc_auc=0.8320, nll=0.6319, epochs=8.0000, train_seconds=0.0917
+  [refit] sym_cos seed=67: accuracy=0.3600, roc_auc=0.2224, nll=0.7867, epochs=8.0000, train_seconds=0.1071
+  [refit] sfo_cka seed=42: accuracy=0.6200, roc_auc=0.8320, nll=0.6320, epochs=8.0000, train_seconds=0.0691
+  [refit] sfo_cka seed=67: accuracy=0.3600, roc_auc=0.2224, nll=0.7867, epochs=8.0000, train_seconds=0.0814
+  [refit] sfo_cos seed=42: accuracy=0.6200, roc_auc=0.8320, nll=0.6320, epochs=8.0000, train_seconds=0.0695
+  [refit] sfo_cos seed=67: accuracy=0.3600, roc_auc=0.2224, nll=0.7867, epochs=8.0000, train_seconds=0.0693
+
+=== ds3 (regression, n=100) ===
+ fold 0
+  [hpo] single_resnet: trials 0/3
+  [hpo] resnet: trials 0/2
+  [hpo] tangos: trials 0/2
+  [hpo] batchensemble: trials 0/2
+  [hpo] ensemble_none: trials 0/2
+  [hpo] sym_cka: trials 0/2
+  [hpo] sym_cos: trials 0/2
+  [hpo] sfo_cka: trials 0/2
+  [hpo] sfo_cos: trials 0/2
+  [refit] single_resnet seed=42: rmse=2.3252, mae=1.8275, r2=0.1698, epochs=8.0000, train_seconds=0.0467
+  [refit] single_resnet seed=67: rmse=2.6422, mae=2.2173, r2=-0.0721, epochs=8.0000, train_seconds=0.0470
+  [refit] resnet seed=42: rmse=2.4555, mae=1.9317, r2=0.0741, epochs=8.0000, train_seconds=0.0575
+  [refit] resnet seed=67: rmse=2.7274, mae=2.2921, r2=-0.1423, epochs=8.0000, train_seconds=0.0453
+  [refit] tangos seed=42: rmse=2.4552, mae=1.9315, r2=0.0744, epochs=8.0000, train_seconds=0.0960
+  [refit] tangos seed=67: rmse=2.7264, mae=2.2914, r2=-0.1415, epochs=8.0000, train_seconds=0.1116
+  [refit] batchensemble seed=42: rmse=2.8494, mae=2.2227, r2=-0.2468, epochs=8.0000, train_seconds=0.0580
+  [refit] batchensemble seed=67: rmse=2.4576, mae=2.0654, r2=0.0725, epochs=8.0000, train_seconds=0.0602
+  [refit] ensemble_none seed=42: rmse=2.8226, mae=2.3454, r2=-0.2234, epochs=1.0000, train_seconds=0.0135
+  [refit] ensemble_none seed=67: rmse=2.4984, mae=1.9582, r2=0.0414, epochs=1.0000, train_seconds=0.0132
+  [refit] sym_cka seed=42: rmse=2.8222, mae=2.3453, r2=-0.2231, epochs=1.0000, train_seconds=0.0140
+  [refit] sym_cka seed=67: rmse=2.4989, mae=1.9585, r2=0.0411, epochs=1.0000, train_seconds=0.0138
+  [refit] sym_cos seed=42: rmse=2.8228, mae=2.3457, r2=-0.2236, epochs=1.0000, train_seconds=0.0139
+  [refit] sym_cos seed=67: rmse=2.4986, mae=1.9583, r2=0.0413, epochs=1.0000, train_seconds=0.0138
+  [refit] sfo_cka seed=42: rmse=2.8225, mae=2.3453, r2=-0.2234, epochs=1.0000, train_seconds=0.0140
+  [refit] sfo_cka seed=67: rmse=2.4984, mae=1.9582, r2=0.0414, epochs=1.0000, train_seconds=0.0141
+  [refit] sfo_cos seed=42: rmse=2.8226, mae=2.3455, r2=-0.2235, epochs=1.0000, train_seconds=0.0135
+  [refit] sfo_cos seed=67: rmse=2.4984, mae=1.9581, r2=0.0414, epochs=1.0000, train_seconds=0.0135
+ fold 1
+  [hpo] single_resnet: trials 0/3
+  [hpo] resnet: trials 0/2
+  [hpo] tangos: trials 0/2
+  [hpo] batchensemble: trials 0/2
+  [hpo] ensemble_none: trials 0/2
+  [hpo] sym_cka: trials 0/2
+  [hpo] sym_cos: trials 0/2
+  [hpo] sfo_cka: trials 0/2
+  [hpo] sfo_cos: trials 0/2
+  [refit] single_resnet seed=42: rmse=2.2208, mae=1.7929, r2=0.4517, epochs=8.0000, train_seconds=0.0690
+  [refit] single_resnet seed=67: rmse=3.3117, mae=2.7453, r2=-0.2192, epochs=8.0000, train_seconds=0.0461
+  [refit] resnet seed=42: rmse=2.2475, mae=1.8154, r2=0.4385, epochs=8.0000, train_seconds=0.0462
+  [refit] resnet seed=67: rmse=3.3367, mae=2.7644, r2=-0.2377, epochs=8.0000, train_seconds=0.0612
+  [refit] tangos seed=42: rmse=2.2454, mae=1.8133, r2=0.4395, epochs=8.0000, train_seconds=0.0971
+  [refit] tangos seed=67: rmse=3.3379, mae=2.7656, r2=-0.2386, epochs=8.0000, train_seconds=0.0966
+  [refit] batchensemble seed=42: rmse=2.4976, mae=1.9942, r2=0.3066, epochs=1.0000, train_seconds=0.0067
+  [refit] batchensemble seed=67: rmse=2.9992, mae=2.4586, r2=0.0000, epochs=1.0000, train_seconds=0.0065
+  [refit] ensemble_none seed=42: rmse=3.1242, mae=2.5738, r2=-0.0850, epochs=1.0000, train_seconds=0.0135
+  [refit] ensemble_none seed=67: rmse=3.0249, mae=2.5348, r2=-0.0172, epochs=1.0000, train_seconds=0.0139
+  [refit] sym_cka seed=42: rmse=3.1241, mae=2.5738, r2=-0.0850, epochs=1.0000, train_seconds=0.0142
+  [refit] sym_cka seed=67: rmse=3.0248, mae=2.5347, r2=-0.0171, epochs=1.0000, train_seconds=0.0142
+  [refit] sym_cos seed=42: rmse=3.1243, mae=2.5739, r2=-0.0851, epochs=1.0000, train_seconds=0.0139
+  [refit] sym_cos seed=67: rmse=3.0249, mae=2.5348, r2=-0.0172, epochs=1.0000, train_seconds=0.0139
+  [refit] sfo_cka seed=42: rmse=3.1242, mae=2.5739, r2=-0.0851, epochs=1.0000, train_seconds=0.0138
+  [refit] sfo_cka seed=67: rmse=3.0249, mae=2.5348, r2=-0.0172, epochs=1.0000, train_seconds=0.0137
+  [refit] sfo_cos seed=42: rmse=3.1241, mae=2.5738, r2=-0.0850, epochs=1.0000, train_seconds=0.0136
+  [refit] sfo_cos seed=67: rmse=3.0249, mae=2.5348, r2=-0.0172, epochs=1.0000, train_seconds=0.0138
+
+All requested units finished.

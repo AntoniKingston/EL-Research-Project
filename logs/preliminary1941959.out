@@ -1,0 +1,21 @@
+2026-11-13 22:25:36 V reading config configs/tangos_batchensemble_config.yaml ...
+2026-11-13 22:25:36 V reading config configs/tangos_batchensemble_config.yaml done in 0.0 s
+2026-11-13 22:25:36 V opening run directory /mnt/evafs/faculty/home/akingston/EL-Research-Project/results/main ...
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/evafs/faculty/home/akingston/EL-Research-Project/src/scripts/train_orchestrator.py", line 397, in <module>
+    main()
+  File "/mnt/evafs/faculty/home/akingston/EL-Research-Project/src/scripts/train_orchestrator.py", line 356, in main
+    run = RunDirectory(
+          ^^^^^^^^^^^^^
+  File "/mnt/evafs/faculty/home/akingston/EL-Research-Project/src/run_tools/resume.py", line 101, in __init__
+    self._guard(raw_config, dataset_specs)
+  File "/mnt/evafs/faculty/home/akingston/EL-Research-Project/src/run_tools/resume.py", line 124, in _guard
+    raise ConfigMismatchError(
+src.run_tools.resume.ConfigMismatchError: Config differs from the one stored in /mnt/evafs/faculty/home/akingston/EL-Research-Project/results/main in result-affecting settings:
+  master_seed: 42 -> None
+  n_outer_folds: 5 -> None
+  training: {'optimizer': 'AdamW', 'max_epochs': 200, 'patience': 16, 'batch_size': 1024} -> None
+  hpo: {'stage1_trials': 40, 'stage2_trials': 30, 'stage1_lr': 0.001, 'stage1_wd': 0.0001, 'hidden_dims': [64, 128, 256], 'ensemble_size': 8, 'pruner_warmup': 10} -> None
+Use a new run_name or --fresh.
