@@ -1,0 +1,1218 @@
+2026-11-17 13:45:59 V reading config configs/tangos_batchensemble_config.yaml ...
+2026-11-17 13:46:00 V reading config configs/tangos_batchensemble_config.yaml done in 1.3 s
+2026-11-17 13:46:00 V opening run directory /mnt/evafs/faculty/home/akingston/EL-Research-Project/results_tangos_batch/main ...
+2026-11-17 13:46:00 V opening run directory /mnt/evafs/faculty/home/akingston/EL-Research-Project/results_tangos_batch/main done in 0.2 s
+2026-11-17 13:46:00 I Run directory: /mnt/evafs/faculty/home/akingston/EL-Research-Project/results_tangos_batch/main | log file: /mnt/evafs/faculty/home/akingston/EL-Research-Project/results_tangos_batch/main/logs/20261117-134600_1943712.log
+2026-11-17 13:46:00 I host stud-3 | SLURM job 1943712 | pid 621882 | cwd /mnt/evafs/faculty/home/akingston/EL-Research-Project
+2026-11-17 13:46:00 I python 3.11.14 | torch 2.15.0+cu132 | optuna 5.0.0 | numpy 2.4.6
+2026-11-17 13:46:01 I device cuda (NVIDIA RTX PRO 6000 Blackwell Server Edition) | torch threads 1 | OMP_NUM_THREADS - | SLURM_CPUS_PER_TASK 1
+2026-11-17 13:46:01 I config configs/tangos_batchensemble_config.yaml | stages hpo,refit | verbosity 1 | heartbeat every 5 min
+2026-11-17 13:46:01 I datasets: california, house_16H, diamonds, elevators, Ailerons, Bike_Sharing_Demand, electricity, credit, default-of-credit-card-clients, covertype, pol, MiniBooNE
+2026-11-17 13:46:01 I models: single_resnet, tangos, batchensemble
+2026-11-17 13:46:01 I loading dataset california ...
+2026-11-17 13:46:01 I   california: using cached /mnt/evafs/faculty/home/akingston/EL-Research-Project/data/raw/california.parquet
+2026-11-17 13:46:07 I loading dataset california done in 6.4 s
+2026-11-17 13:46:07 V building splits ...
+2026-11-17 13:46:07 V building splits done in 0.4 s
+2026-11-17 13:46:07 I === california (regression, n=20640, 8 numerical + 0 categorical features) ===
+2026-11-17 13:46:07 I  fold 0
+2026-11-17 13:46:07 V   preprocessing inner split ...
+2026-11-17 13:46:08 V   preprocessing inner split done in 1.2 s
+2026-11-17 13:46:08 V   inner split: train (13209, 8), eval (3303, 8), input_dim 8
+2026-11-17 13:46:25 V   study california/fold0/single_resnet opened in 16.7 s
+2026-11-17 13:46:25 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:25 V   study california/fold0/tangos opened in 0.1 s
+2026-11-17 13:46:25 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:26 V   study california/fold0/batchensemble opened in 0.1 s
+2026-11-17 13:46:26 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:26 I   [refit] 0/15 units pending
+2026-11-17 13:46:26 I  fold 1
+2026-11-17 13:46:26 V   preprocessing inner split ...
+2026-11-17 13:46:26 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:26 V   inner split: train (13209, 8), eval (3303, 8), input_dim 8
+2026-11-17 13:46:26 V   study california/fold1/single_resnet opened in 0.1 s
+2026-11-17 13:46:26 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:26 V   study california/fold1/tangos opened in 0.2 s
+2026-11-17 13:46:26 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:26 V   study california/fold1/batchensemble opened in 0.1 s
+2026-11-17 13:46:26 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:26 I   [refit] 0/15 units pending
+2026-11-17 13:46:26 I  fold 2
+2026-11-17 13:46:26 V   preprocessing inner split ...
+2026-11-17 13:46:26 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:26 V   inner split: train (13209, 8), eval (3303, 8), input_dim 8
+2026-11-17 13:46:26 V   study california/fold2/single_resnet opened in 0.1 s
+2026-11-17 13:46:26 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:26 V   study california/fold2/tangos opened in 0.1 s
+2026-11-17 13:46:26 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:27 V   study california/fold2/batchensemble opened in 0.1 s
+2026-11-17 13:46:27 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:27 I   [refit] 0/15 units pending
+2026-11-17 13:46:27 I  fold 3
+2026-11-17 13:46:27 V   preprocessing inner split ...
+2026-11-17 13:46:27 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:27 V   inner split: train (13209, 8), eval (3303, 8), input_dim 8
+2026-11-17 13:46:27 V   study california/fold3/single_resnet opened in 0.2 s
+2026-11-17 13:46:27 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:27 V   study california/fold3/tangos opened in 0.1 s
+2026-11-17 13:46:27 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:27 V   study california/fold3/batchensemble opened in 0.1 s
+2026-11-17 13:46:27 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:27 I   [refit] 0/15 units pending
+2026-11-17 13:46:27 I  fold 4
+2026-11-17 13:46:27 V   preprocessing inner split ...
+2026-11-17 13:46:27 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:27 V   inner split: train (13209, 8), eval (3303, 8), input_dim 8
+2026-11-17 13:46:27 V   study california/fold4/single_resnet opened in 0.1 s
+2026-11-17 13:46:27 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:28 V   study california/fold4/tangos opened in 0.1 s
+2026-11-17 13:46:28 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:28 V   study california/fold4/batchensemble opened in 0.1 s
+2026-11-17 13:46:28 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:28 I   [refit] 0/15 units pending
+2026-11-17 13:46:28 I loading dataset house_16H ...
+2026-11-17 13:46:28 I   house_16H: using cached /mnt/evafs/faculty/home/akingston/EL-Research-Project/data/raw/house_16H.parquet
+2026-11-17 13:46:28 I loading dataset house_16H done in 0.1 s
+2026-11-17 13:46:28 V building splits ...
+2026-11-17 13:46:28 V building splits done in 0.2 s
+2026-11-17 13:46:28 I === house_16H (regression, n=22784, 16 numerical + 0 categorical features) ===
+2026-11-17 13:46:28 I  fold 0
+2026-11-17 13:46:28 V   preprocessing inner split ...
+2026-11-17 13:46:28 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:28 V   inner split: train (14581, 16), eval (3646, 16), input_dim 16
+2026-11-17 13:46:28 V   study house_16H/fold0/single_resnet opened in 0.2 s
+2026-11-17 13:46:28 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:29 V   study house_16H/fold0/tangos opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:29 V   study house_16H/fold0/batchensemble opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:29 I   [refit] 0/15 units pending
+2026-11-17 13:46:29 I  fold 1
+2026-11-17 13:46:29 V   preprocessing inner split ...
+2026-11-17 13:46:29 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:29 V   inner split: train (14581, 16), eval (3646, 16), input_dim 16
+2026-11-17 13:46:29 V   study house_16H/fold1/single_resnet opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:29 V   study house_16H/fold1/tangos opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:29 V   study house_16H/fold1/batchensemble opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:29 I   [refit] 0/15 units pending
+2026-11-17 13:46:29 I  fold 2
+2026-11-17 13:46:29 V   preprocessing inner split ...
+2026-11-17 13:46:29 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:29 V   inner split: train (14581, 16), eval (3646, 16), input_dim 16
+2026-11-17 13:46:29 V   study house_16H/fold2/single_resnet opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:29 V   study house_16H/fold2/tangos opened in 0.1 s
+2026-11-17 13:46:29 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:30 V   study house_16H/fold2/batchensemble opened in 0.3 s
+2026-11-17 13:46:30 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:30 I   [refit] 0/15 units pending
+2026-11-17 13:46:30 I  fold 3
+2026-11-17 13:46:30 V   preprocessing inner split ...
+2026-11-17 13:46:30 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:30 V   inner split: train (14581, 16), eval (3646, 16), input_dim 16
+2026-11-17 13:46:30 V   study house_16H/fold3/single_resnet opened in 0.1 s
+2026-11-17 13:46:30 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:30 V   study house_16H/fold3/tangos opened in 0.1 s
+2026-11-17 13:46:30 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:30 V   study house_16H/fold3/batchensemble opened in 0.1 s
+2026-11-17 13:46:30 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:30 I   [refit] 0/15 units pending
+2026-11-17 13:46:30 I  fold 4
+2026-11-17 13:46:30 V   preprocessing inner split ...
+2026-11-17 13:46:30 V   preprocessing inner split done in 0.0 s
+2026-11-17 13:46:30 V   inner split: train (14582, 16), eval (3646, 16), input_dim 16
+2026-11-17 13:46:31 V   study house_16H/fold4/single_resnet opened in 0.1 s
+2026-11-17 13:46:31 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:31 V   study house_16H/fold4/tangos opened in 0.2 s
+2026-11-17 13:46:31 I   [hpo] tangos: trials 30/30
+2026-11-17 13:46:31 V   study house_16H/fold4/batchensemble opened in 0.1 s
+2026-11-17 13:46:31 I   [hpo] batchensemble: trials 30/30
+2026-11-17 13:46:31 I   [refit] 0/15 units pending
+2026-11-17 13:46:31 I loading dataset diamonds ...
+2026-11-17 13:46:31 I   diamonds: using cached /mnt/evafs/faculty/home/akingston/EL-Research-Project/data/raw/diamonds.parquet
+2026-11-17 13:46:32 I loading dataset diamonds done in 0.5 s
+2026-11-17 13:46:32 V building splits ...
+2026-11-17 13:46:32 V building splits done in 0.4 s
+2026-11-17 13:46:32 I === diamonds (regression, n=53940, 6 numerical + 3 categorical features) ===
+2026-11-17 13:46:32 I  fold 0
+2026-11-17 13:46:32 V   preprocessing inner split ...
+2026-11-17 13:46:32 V   preprocessing inner split done in 0.1 s
+2026-11-17 13:46:32 V   inner split: train (34521, 26), eval (8631, 26), input_dim 26
+2026-11-17 13:46:32 V   study diamonds/fold0/single_resnet opened in 0.1 s
+2026-11-17 13:46:32 I   [hpo] single_resnet: trials 40/40
+2026-11-17 13:46:33 V   study diamonds/fold0/tangos opened in 0.3 s
+2026-11-17 13:46:33 I   [hpo] tangos: trials 11/30
+2026-11-17 13:46:33 V     trial 12 (seed 53): {'lr': 0.004518482877172389, 'wd': 1.0842977107915375e-05, 'sparsity': 0.017660687521485818, 'orthogonality': 0.009191662228844648}
+2026-11-17 13:49:54 V     trial 12 PRUNED: value -, best_epoch -, last epoch 11, 201.6 s | study best 0.008339 (trial 1)
+2026-11-17 13:49:56 V     trial 13 (seed 54): {'lr': 0.00022167986421333592, 'wd': 0.000405347714391569, 'sparsity': 0.00013203721896962867, 'orthogonality': 0.0013635747394338746}
+2026-11-17 13:50:59 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=13 seed=54 epoch=7/200 | last update 9 s ago | running 0.1 h | rss 2015 MB, cuda 22/1668 MB allocated/reserved
+2026-11-17 13:51:39 V     trial 13 PRUNED: value -, best_epoch -, last epoch 11, 103.7 s | study best 0.008339 (trial 1)
+2026-11-17 13:51:39 V     trial 14 (seed 55): {'lr': 0.0008930532991773821, 'wd': 0.0002675670223245454, 'sparsity': 0.00011817594217191289, 'orthogonality': 0.004326534354587605}
+2026-11-17 13:55:59 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=14 seed=55 epoch=29/200 | last update 1 s ago | running 0.2 h | rss 1924 MB, cuda 9/1668 MB allocated/reserved
+2026-11-17 14:01:00 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=14 seed=55 epoch=60/200 | last update 8 s ago | running 0.3 h | rss 1924 MB, cuda 1174/1668 MB allocated/reserved
+2026-11-17 14:06:00 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=14 seed=55 epoch=91/200 | last update 6 s ago | running 0.3 h | rss 1924 MB, cuda 22/1668 MB allocated/reserved
+2026-11-17 14:11:01 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=14 seed=55 epoch=124/200 | last update 8 s ago | running 0.4 h | rss 1924 MB, cuda 178/1668 MB allocated/reserved
+2026-11-17 14:14:23 V     trial 14 COMPLETE: value 0.007749, best_epoch 131, last epoch 147, 1364.4 s | study best 0.007749 (trial 14)
+2026-11-17 14:14:25 V     trial 15 (seed 56): {'lr': 0.0009653041944667853, 'wd': 0.0008057150023407215, 'sparsity': 0.00026325299160078825, 'orthogonality': 0.0021183565226532285}
+2026-11-17 14:16:01 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=15 seed=56 epoch=10/200 | last update 4 s ago | running 0.5 h | rss 1925 MB, cuda 534/1668 MB allocated/reserved
+2026-11-17 14:21:01 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=15 seed=56 epoch=41/200 | last update 9 s ago | running 0.6 h | rss 1925 MB, cuda 217/1668 MB allocated/reserved
+2026-11-17 14:25:04 V     trial 15 COMPLETE: value 0.008924, best_epoch 51, last epoch 67, 640.6 s | study best 0.007749 (trial 14)
+2026-11-17 14:25:05 V     trial 16 (seed 57): {'lr': 0.00011384466388248785, 'wd': 0.0002014627259343422, 'sparsity': 0.00012943400361736552, 'orthogonality': 0.014100021388536207}
+2026-11-17 14:26:01 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=16 seed=57 epoch=5/200 | last update 11 s ago | running 0.7 h | rss 1924 MB, cuda 793/1668 MB allocated/reserved
+2026-11-17 14:26:57 V     trial 16 PRUNED: value -, best_epoch -, last epoch 11, 111.6 s | study best 0.007749 (trial 14)
+2026-11-17 14:26:57 V     trial 17 (seed 58): {'lr': 0.001159829884970683, 'wd': 0.00027063188715783685, 'sparsity': 0.0001612562414816373, 'orthogonality': 0.015671951985229145}
+2026-11-17 14:31:01 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=17 seed=58 epoch=27/200 | last update 7 s ago | running 0.8 h | rss 1925 MB, cuda 1175/1668 MB allocated/reserved
+2026-11-17 14:36:01 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=17 seed=58 epoch=60/200 | last update 3 s ago | running 0.8 h | rss 1924 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 14:38:18 V     trial 17 COMPLETE: value 0.009159, best_epoch 56, last epoch 72, 680.6 s | study best 0.007749 (trial 14)
+2026-11-17 14:38:20 V     trial 18 (seed 59): {'lr': 0.000648599179342516, 'wd': 0.0010898277757691, 'sparsity': 0.000596437829154103, 'orthogonality': 0.011315723428811438}
+2026-11-17 14:39:58 V     trial 18 PRUNED: value -, best_epoch -, last epoch 11, 99.2 s | study best 0.007749 (trial 14)
+2026-11-17 14:39:58 V     trial 19 (seed 60): {'lr': 0.0004204924140489552, 'wd': 0.0004079311935780683, 'sparsity': 0.00010120396164111926, 'orthogonality': 0.013005144632187183}
+2026-11-17 14:41:02 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=19 seed=60 epoch=8/200 | last update 0 s ago | running 0.9 h | rss 1926 MB, cuda 1490/1668 MB allocated/reserved
+2026-11-17 14:41:37 V     trial 19 PRUNED: value -, best_epoch -, last epoch 11, 98.4 s | study best 0.007749 (trial 14)
+2026-11-17 14:41:37 V     trial 20 (seed 61): {'lr': 0.0006884243301050369, 'wd': 2.9275018326527094e-05, 'sparsity': 0.00016108128904777623, 'orthogonality': 0.0015556336773089171}
+2026-11-17 14:43:22 V     trial 20 PRUNED: value -, best_epoch -, last epoch 11, 105.0 s | study best 0.007749 (trial 14)
+2026-11-17 14:43:22 V     trial 21 (seed 62): {'lr': 0.0002099898241442625, 'wd': 1.2872797295519404e-05, 'sparsity': 0.00013688234834103078, 'orthogonality': 0.002220743092928856}
+2026-11-17 14:45:07 V     trial 21 PRUNED: value -, best_epoch -, last epoch 11, 104.0 s | study best 0.007749 (trial 14)
+2026-11-17 14:45:07 V     trial 22 (seed 63): {'lr': 0.0032839143333405103, 'wd': 0.0005696911105316592, 'sparsity': 0.0002406525739620813, 'orthogonality': 0.0053541610059280095}
+2026-11-17 14:46:02 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=22 seed=63 epoch=7/200 | last update 1 s ago | running 1.0 h | rss 1926 MB, cuda 1516/1668 MB allocated/reserved
+2026-11-17 14:50:19 V     trial 22 COMPLETE: value 0.01083, best_epoch 18, last epoch 34, 311.9 s | study best 0.007749 (trial 14)
+2026-11-17 14:50:19 V     trial 23 (seed 64): {'lr': 0.004191250401126034, 'wd': 3.998824810296781e-05, 'sparsity': 0.0001542398834006227, 'orthogonality': 0.0037881310036780263}
+2026-11-17 14:51:02 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=23 seed=64 epoch=5/200 | last update 7 s ago | running 1.1 h | rss 1926 MB, cuda 1490/1668 MB allocated/reserved
+2026-11-17 14:56:03 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=23 seed=64 epoch=38/200 | last update 7 s ago | running 1.2 h | rss 1924 MB, cuda 1172/1668 MB allocated/reserved
+2026-11-17 15:01:03 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=23 seed=64 epoch=71/200 | last update 5 s ago | running 1.3 h | rss 1924 MB, cuda 22/1668 MB allocated/reserved
+2026-11-17 15:04:58 V     trial 23 COMPLETE: value 0.008344, best_epoch 80, last epoch 96, 879.0 s | study best 0.007749 (trial 14)
+2026-11-17 15:04:59 V     trial 24 (seed 65): {'lr': 0.004331606195862645, 'wd': 1.2698476537262212e-05, 'sparsity': 0.00015167456115266166, 'orthogonality': 0.0027186025439791908}
+2026-11-17 15:06:03 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=24 seed=65 epoch=8/200 | last update 1 s ago | running 1.3 h | rss 1926 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 15:06:47 V     trial 24 PRUNED: value -, best_epoch -, last epoch 12, 108.1 s | study best 0.007749 (trial 14)
+2026-11-17 15:06:47 V     trial 25 (seed 66): {'lr': 0.00025674710814643364, 'wd': 0.0006515090559438603, 'sparsity': 0.0004538822131147556, 'orthogonality': 0.0031157752027072454}
+2026-11-17 15:08:25 V     trial 25 PRUNED: value -, best_epoch -, last epoch 11, 98.2 s | study best 0.007749 (trial 14)
+2026-11-17 15:08:25 V     trial 26 (seed 67): {'lr': 0.004628387564490778, 'wd': 9.456473096047316e-05, 'sparsity': 0.00013834911927901235, 'orthogonality': 0.004127929281209734}
+2026-11-17 15:11:03 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=26 seed=67 epoch=18/200 | last update 3 s ago | running 1.4 h | rss 1925 MB, cuda 22/1668 MB allocated/reserved
+2026-11-17 15:12:27 V     trial 26 COMPLETE: value 0.01135, best_epoch 10, last epoch 26, 241.6 s | study best 0.007749 (trial 14)
+2026-11-17 15:12:29 V     trial 27 (seed 68): {'lr': 0.003332167010131828, 'wd': 0.00012285656290038664, 'sparsity': 0.000419974326648986, 'orthogonality': 0.006229469594373891}
+2026-11-17 15:16:03 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=27 seed=68 epoch=24/200 | last update 1 s ago | running 1.5 h | rss 1924 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 15:21:03 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=27 seed=68 epoch=57/200 | last update 7 s ago | running 1.6 h | rss 1924 MB, cuda 1490/1668 MB allocated/reserved
+2026-11-17 15:22:57 V     trial 27 COMPLETE: value 0.0087, best_epoch 52, last epoch 68, 629.0 s | study best 0.007749 (trial 14)
+2026-11-17 15:22:58 V     trial 28 (seed 69): {'lr': 0.0006844227672163898, 'wd': 6.285008217708234e-05, 'sparsity': 0.00011351081147340208, 'orthogonality': 0.006584476236313976}
+2026-11-17 15:26:04 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=28 seed=69 epoch=21/200 | last update 7 s ago | running 1.7 h | rss 1926 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 15:30:15 V     trial 28 COMPLETE: value 0.01009, best_epoch 33, last epoch 49, 437.7 s | study best 0.007749 (trial 14)
+2026-11-17 15:30:15 V     trial 29 (seed 70): {'lr': 0.00019719225936283539, 'wd': 0.00024607264468284656, 'sparsity': 0.00012405752014592675, 'orthogonality': 0.004063401538601788}
+2026-11-17 15:31:04 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=29 seed=70 epoch=6/200 | last update 4 s ago | running 1.8 h | rss 1926 MB, cuda 855/1668 MB allocated/reserved
+2026-11-17 15:31:53 V     trial 29 PRUNED: value -, best_epoch -, last epoch 11, 98.2 s | study best 0.007749 (trial 14)
+2026-11-17 15:31:56 V     trial 30 (seed 71): {'lr': 0.0014839241502250138, 'wd': 3.489314434202723e-05, 'sparsity': 0.00013466894160978914, 'orthogonality': 0.0017003246527661918}
+2026-11-17 15:36:04 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=tangos trial=30 seed=71 epoch=27/200 | last update 4 s ago | running 1.8 h | rss 1924 MB, cuda 1172/1668 MB allocated/reserved
+2026-11-17 15:36:54 V     trial 30 COMPLETE: value 0.01121, best_epoch 16, last epoch 32, 300.3 s | study best 0.007749 (trial 14)
+2026-11-17 15:36:54 I   [hpo] tangos: done in 6621.6 s, best value 0.007749 (trial 14, best_epoch 131)
+2026-11-17 15:36:56 V   study diamonds/fold0/batchensemble opened in 2.2 s
+2026-11-17 15:36:56 I   [hpo] batchensemble: trials 0/30
+2026-11-17 15:36:56 V     trial 0 (seed 42): {'lr': 0.00043284502212938834, 'wd': 0.006351221010640704, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:37:39 V     trial 0 COMPLETE: value 0.007701, best_epoch 198, last epoch 200, 42.9 s | study best 0.007701 (trial 0)
+2026-11-17 15:37:39 V     trial 1 (seed 43): {'lr': 0.00015684629241532954, 'wd': 0.00027306507478234055, 'adapter_initialization': 'normal'}
+2026-11-17 15:38:21 V     trial 1 COMPLETE: value 0.00905, best_epoch 199, last epoch 200, 41.7 s | study best 0.007701 (trial 0)
+2026-11-17 15:38:21 V     trial 2 (seed 44): {'lr': 0.0026204252099715254, 'wd': 2.6253331201428122e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:38:52 V     trial 2 COMPLETE: value 0.007622, best_epoch 109, last epoch 125, 30.9 s | study best 0.007622 (trial 2)
+2026-11-17 15:38:52 V     trial 3 (seed 45): {'lr': 0.004789618199206087, 'wd': 0.00015782612996963698, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:39:20 V     trial 3 COMPLETE: value 0.007389, best_epoch 117, last epoch 133, 28.1 s | study best 0.007389 (trial 3)
+2026-11-17 15:39:20 V     trial 4 (seed 46): {'lr': 0.002146385137578536, 'wd': 0.0003462061865130846, 'adapter_initialization': 'normal'}
+2026-11-17 15:39:48 V     trial 4 COMPLETE: value 0.007719, best_epoch 116, last epoch 132, 27.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:39:48 V     trial 5 (seed 47): {'lr': 0.00015588829590749813, 'wd': 0.007905555241820407, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:39:50 V     trial 5 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:39:51 V     trial 6 (seed 48): {'lr': 0.0001070817464451155, 'wd': 0.0036837747667933336, 'adapter_initialization': 'normal'}
+2026-11-17 15:39:53 V     trial 6 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:39:53 V     trial 7 (seed 49): {'lr': 0.0003245858497064564, 'wd': 9.733013546865411e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:39:56 V     trial 7 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:39:56 V     trial 8 (seed 50): {'lr': 0.0006923303332154159, 'wd': 8.172076393193763e-06, 'adapter_initialization': 'normal'}
+2026-11-17 15:39:58 V     trial 8 PRUNED: value -, best_epoch -, last epoch 11, 2.4 s | study best 0.007389 (trial 3)
+2026-11-17 15:39:58 V     trial 9 (seed 51): {'lr': 0.0014062010112880106, 'wd': 1.5095542625161959e-06, 'adapter_initialization': 'normal'}
+2026-11-17 15:40:01 V     trial 9 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:40:01 V     trial 10 (seed 52): {'lr': 0.003769137754164496, 'wd': 0.0011960326773391636, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:40:23 V     trial 10 COMPLETE: value 0.00763, best_epoch 85, last epoch 101, 21.8 s | study best 0.007389 (trial 3)
+2026-11-17 15:40:23 V     trial 11 (seed 53): {'lr': 0.0033535914605639272, 'wd': 8.572280416104611e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:40:49 V     trial 11 COMPLETE: value 0.007404, best_epoch 109, last epoch 125, 26.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:40:49 V     trial 12 (seed 54): {'lr': 0.003918153034166489, 'wd': 6.871287364554752e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:40:53 V     trial 12 PRUNED: value -, best_epoch -, last epoch 14, 3.4 s | study best 0.007389 (trial 3)
+2026-11-17 15:40:53 V     trial 13 (seed 55): {'lr': 0.0016263254955313712, 'wd': 0.00012006664193383516, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:40:56 V     trial 13 PRUNED: value -, best_epoch -, last epoch 16, 3.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:40:57 V     trial 14 (seed 56): {'lr': 0.004358715473700715, 'wd': 2.2865718713220613e-05, 'adapter_initialization': 'normal'}
+2026-11-17 15:40:59 V     trial 14 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:40:59 V     trial 15 (seed 57): {'lr': 0.0011283480249196112, 'wd': 0.0017156988572862102, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:02 V     trial 15 PRUNED: value -, best_epoch -, last epoch 11, 2.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:02 V     trial 16 (seed 58): {'lr': 0.0010047248780952218, 'wd': 2.2693723218299607e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:04 I [heartbeat] dataset=diamonds fold=0 phase=hpo method=batchensemble trial=16 seed=58 epoch=11/200 | last update 0 s ago | running 1.9 h | rss 1930 MB, cuda 151/1668 MB allocated/reserved
+2026-11-17 15:41:04 V     trial 16 PRUNED: value -, best_epoch -, last epoch 11, 2.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:05 V     trial 17 (seed 59): {'lr': 0.0010063181356741277, 'wd': 8.510951889498178e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:07 V     trial 17 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:07 V     trial 18 (seed 60): {'lr': 0.0006363679168216854, 'wd': 0.0002910504092651082, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:10 V     trial 18 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:10 V     trial 19 (seed 61): {'lr': 0.0008662010203478506, 'wd': 4.05405093924231e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:12 V     trial 19 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:12 V     trial 20 (seed 62): {'lr': 0.004433709475882427, 'wd': 8.24457442079338e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:15 V     trial 20 PRUNED: value -, best_epoch -, last epoch 11, 2.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:15 V     trial 21 (seed 63): {'lr': 0.0031075902833597076, 'wd': 1.4011942825762082e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:20 V     trial 21 PRUNED: value -, best_epoch -, last epoch 21, 4.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:20 V     trial 22 (seed 64): {'lr': 0.0020220083595967196, 'wd': 6.548297413095343e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:22 V     trial 22 PRUNED: value -, best_epoch -, last epoch 11, 2.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:23 V     trial 23 (seed 65): {'lr': 0.002824075160686653, 'wd': 4.767167460792963e-06, 'adapter_initialization': 'normal'}
+2026-11-17 15:41:25 V     trial 23 PRUNED: value -, best_epoch -, last epoch 11, 2.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:25 V     trial 24 (seed 66): {'lr': 0.002402301309559118, 'wd': 0.0005315430413020214, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:28 V     trial 24 PRUNED: value -, best_epoch -, last epoch 14, 3.2 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:29 V     trial 25 (seed 67): {'lr': 0.0027873080247879287, 'wd': 2.2261219327948028e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:33 V     trial 25 PRUNED: value -, best_epoch -, last epoch 21, 4.7 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:33 V     trial 26 (seed 68): {'lr': 0.004978303880936952, 'wd': 1.4834580675615459e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:38 V     trial 26 PRUNED: value -, best_epoch -, last epoch 21, 4.8 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:38 V     trial 27 (seed 69): {'lr': 0.0015072322464348114, 'wd': 1.494745432366353e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:41 V     trial 27 PRUNED: value -, best_epoch -, last epoch 11, 2.6 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:41 V     trial 28 (seed 70): {'lr': 0.0026885120558921083, 'wd': 0.00842076915588756, 'adapter_initialization': 'normal'}
+2026-11-17 15:41:43 V     trial 28 PRUNED: value -, best_epoch -, last epoch 11, 2.5 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:43 V     trial 29 (seed 71): {'lr': 0.001969375416711869, 'wd': 1.8588767842522213e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 15:41:46 V     trial 29 PRUNED: value -, best_epoch -, last epoch 14, 3.1 s | study best 0.007389 (trial 3)
+2026-11-17 15:41:46 I   [hpo] batchensemble: done in 292.6 s, best value 0.007389 (trial 3, best_epoch 117)
+2026-11-17 15:41:47 I   [refit] 15/15 units pending
+2026-11-17 15:41:47 V   study diamonds/fold0/single_resnet opened in 0.2 s
+2026-11-17 15:41:47 V   study diamonds/fold0/tangos opened in 0.1 s
+2026-11-17 15:41:47 V   study diamonds/fold0/batchensemble opened in 0.1 s
+2026-11-17 15:41:47 V   preprocessing outer split ...
+2026-11-17 15:41:50 V   preprocessing outer split done in 3.3 s
+2026-11-17 15:41:50 V   outer split: train (43152, 26), eval (10788, 26), input_dim 26
+2026-11-17 15:41:50 V   [refit] single_resnet seed=42: training 93 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.06929873323563618}
+2026-11-17 15:42:02 I   [refit] single_resnet seed=42: rmse=0.0890, mae=0.0639, r2=0.9923, epochs=93.0000, train_seconds=10.8830
+2026-11-17 15:42:02 V   [refit] single_resnet seed=67: training 93 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.06929873323563618}
+2026-11-17 15:42:11 I   [refit] single_resnet seed=67: rmse=0.0902, mae=0.0658, r2=0.9921, epochs=93.0000, train_seconds=9.3899
+2026-11-17 15:42:11 V   [refit] single_resnet seed=69: training 93 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.06929873323563618}
+2026-11-17 15:42:20 I   [refit] single_resnet seed=69: rmse=0.0911, mae=0.0681, r2=0.9919, epochs=93.0000, train_seconds=9.4504
+2026-11-17 15:42:20 V   [refit] single_resnet seed=228: training 93 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.06929873323563618}
+2026-11-17 15:42:30 I   [refit] single_resnet seed=228: rmse=0.0901, mae=0.0658, r2=0.9921, epochs=93.0000, train_seconds=9.4324
+2026-11-17 15:42:30 V   [refit] single_resnet seed=2137: training 93 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.06929873323563618}
+2026-11-17 15:42:39 I   [refit] single_resnet seed=2137: rmse=0.0918, mae=0.0685, r2=0.9918, epochs=93.0000, train_seconds=9.4149
+2026-11-17 15:42:39 V   [refit] tangos seed=42: training 131 epochs, params {'lr': 0.0008930532991773821, 'wd': 0.0002675670223245454, 'sparsity': 0.00011817594217191289, 'orthogonality': 0.004326534354587605}
+2026-11-17 15:46:04 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=42 epoch=19/131 | last update 3 s ago | running 2.0 h | rss 1950 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 15:51:04 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=42 epoch=45/131 | last update 10 s ago | running 2.1 h | rss 1948 MB, cuda 1490/1668 MB allocated/reserved
+2026-11-17 15:56:07 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=42 epoch=70/131 | last update 12 s ago | running 2.2 h | rss 1941 MB, cuda 7/1668 MB allocated/reserved
+2026-11-17 16:01:07 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=42 epoch=96/131 | last update 10 s ago | running 2.3 h | rss 1947 MB, cuda 533/1668 MB allocated/reserved
+2026-11-17 16:06:08 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=42 epoch=121/131 | last update 6 s ago | running 2.3 h | rss 1947 MB, cuda 470/1668 MB allocated/reserved
+2026-11-17 16:08:06 I   [refit] tangos seed=42: rmse=0.0892, mae=0.0633, r2=0.9923, epochs=131.0000, train_seconds=1525.6249
+2026-11-17 16:08:06 V   [refit] tangos seed=67: training 131 epochs, params {'lr': 0.0008930532991773821, 'wd': 0.0002675670223245454, 'sparsity': 0.00011817594217191289, 'orthogonality': 0.004326534354587605}
+2026-11-17 16:11:08 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=67 epoch=17/131 | last update 0 s ago | running 2.4 h | rss 1948 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 16:16:08 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=67 epoch=43/131 | last update 3 s ago | running 2.5 h | rss 1947 MB, cuda 533/1668 MB allocated/reserved
+2026-11-17 16:21:08 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=67 epoch=69/131 | last update 5 s ago | running 2.6 h | rss 1947 MB, cuda 1171/1668 MB allocated/reserved
+2026-11-17 16:26:09 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=67 epoch=94/131 | last update 5 s ago | running 2.7 h | rss 1946 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 16:31:09 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=67 epoch=121/131 | last update 2 s ago | running 2.8 h | rss 1947 MB, cuda 689/1668 MB allocated/reserved
+2026-11-17 16:33:12 I   [refit] tangos seed=67: rmse=0.0915, mae=0.0677, r2=0.9919, epochs=131.0000, train_seconds=1504.7196
+2026-11-17 16:33:12 V   [refit] tangos seed=69: training 131 epochs, params {'lr': 0.0008930532991773821, 'wd': 0.0002675670223245454, 'sparsity': 0.00011817594217191289, 'orthogonality': 0.004326534354587605}
+2026-11-17 16:36:09 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=69 epoch=16/131 | last update 6 s ago | running 2.8 h | rss 1948 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 16:41:09 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=69 epoch=42/131 | last update 2 s ago | running 2.9 h | rss 1947 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 16:46:09 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=69 epoch=68/131 | last update 5 s ago | running 3.0 h | rss 1947 MB, cuda 7/1668 MB allocated/reserved
+2026-11-17 16:51:10 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=69 epoch=92/131 | last update 9 s ago | running 3.1 h | rss 1947 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 16:56:10 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=69 epoch=119/131 | last update 7 s ago | running 3.2 h | rss 1947 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 16:58:31 I   [refit] tangos seed=69: rmse=0.0904, mae=0.0660, r2=0.9921, epochs=131.0000, train_seconds=1517.6185
+2026-11-17 16:58:31 V   [refit] tangos seed=228: training 131 epochs, params {'lr': 0.0008930532991773821, 'wd': 0.0002675670223245454, 'sparsity': 0.00011817594217191289, 'orthogonality': 0.004326534354587605}
+2026-11-17 17:01:10 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=228 epoch=15/131 | last update 1 s ago | running 3.3 h | rss 1947 MB, cuda 494/1668 MB allocated/reserved
+2026-11-17 17:06:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=228 epoch=41/131 | last update 3 s ago | running 3.3 h | rss 1947 MB, cuda 536/1668 MB allocated/reserved
+2026-11-17 17:11:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=228 epoch=66/131 | last update 8 s ago | running 3.4 h | rss 1947 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 17:16:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=228 epoch=93/131 | last update 2 s ago | running 3.5 h | rss 1947 MB, cuda 1516/1668 MB allocated/reserved
+2026-11-17 17:21:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=228 epoch=118/131 | last update 9 s ago | running 3.6 h | rss 1947 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 17:23:40 I   [refit] tangos seed=228: rmse=0.0916, mae=0.0685, r2=0.9919, epochs=131.0000, train_seconds=1508.4211
+2026-11-17 17:23:40 V   [refit] tangos seed=2137: training 131 epochs, params {'lr': 0.0008930532991773821, 'wd': 0.0002675670223245454, 'sparsity': 0.00011817594217191289, 'orthogonality': 0.004326534354587605}
+2026-11-17 17:26:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=2137 epoch=14/131 | last update 4 s ago | running 3.7 h | rss 1948 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 17:31:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=2137 epoch=41/131 | last update 0 s ago | running 3.8 h | rss 1947 MB, cuda 1172/1668 MB allocated/reserved
+2026-11-17 17:36:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=2137 epoch=66/131 | last update 9 s ago | running 3.8 h | rss 1947 MB, cuda 1491/1668 MB allocated/reserved
+2026-11-17 17:41:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=2137 epoch=93/131 | last update 3 s ago | running 3.9 h | rss 1947 MB, cuda 1490/1668 MB allocated/reserved
+2026-11-17 17:46:11 I [heartbeat] dataset=diamonds fold=0 phase=refit method=tangos seed=2137 epoch=120/131 | last update 0 s ago | running 4.0 h | rss 1947 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 17:48:27 I   [refit] tangos seed=2137: rmse=0.0915, mae=0.0671, r2=0.9919, epochs=131.0000, train_seconds=1485.8787
+2026-11-17 17:48:27 V   [refit] batchensemble seed=42: training 117 epochs, params {'lr': 0.004789618199206087, 'wd': 0.00015782612996963698, 'adapter_initialization': 'random_sign'}
+2026-11-17 17:48:50 I   [refit] batchensemble seed=42: rmse=0.0857, mae=0.0604, r2=0.9929, epochs=117.0000, train_seconds=20.7730
+2026-11-17 17:48:50 V   [refit] batchensemble seed=67: training 117 epochs, params {'lr': 0.004789618199206087, 'wd': 0.00015782612996963698, 'adapter_initialization': 'random_sign'}
+2026-11-17 17:49:09 I   [refit] batchensemble seed=67: rmse=0.0882, mae=0.0637, r2=0.9925, epochs=117.0000, train_seconds=19.3852
+2026-11-17 17:49:09 V   [refit] batchensemble seed=69: training 117 epochs, params {'lr': 0.004789618199206087, 'wd': 0.00015782612996963698, 'adapter_initialization': 'random_sign'}
+2026-11-17 17:49:29 I   [refit] batchensemble seed=69: rmse=0.1174, mae=0.0889, r2=0.9866, epochs=117.0000, train_seconds=19.4350
+2026-11-17 17:49:29 V   [refit] batchensemble seed=228: training 117 epochs, params {'lr': 0.004789618199206087, 'wd': 0.00015782612996963698, 'adapter_initialization': 'random_sign'}
+2026-11-17 17:49:54 I   [refit] batchensemble seed=228: rmse=0.0848, mae=0.0599, r2=0.9930, epochs=117.0000, train_seconds=25.2577
+2026-11-17 17:49:54 V   [refit] batchensemble seed=2137: training 117 epochs, params {'lr': 0.004789618199206087, 'wd': 0.00015782612996963698, 'adapter_initialization': 'random_sign'}
+2026-11-17 17:50:21 I   [refit] batchensemble seed=2137: rmse=0.0851, mae=0.0610, r2=0.9930, epochs=117.0000, train_seconds=26.4323
+2026-11-17 17:50:21 I  fold 1
+2026-11-17 17:50:21 V   preprocessing inner split ...
+2026-11-17 17:50:24 V   preprocessing inner split done in 3.1 s
+2026-11-17 17:50:24 V   inner split: train (34521, 26), eval (8631, 26), input_dim 26
+2026-11-17 17:50:27 V   study diamonds/fold1/single_resnet opened in 3.6 s
+2026-11-17 17:50:27 I   [hpo] single_resnet: trials 0/40
+2026-11-17 17:50:28 V     trial 0 (seed 1042): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.4750465075440403}
+2026-11-17 17:50:49 V     trial 0 COMPLETE: value 0.009034, best_epoch 148, last epoch 164, 21.9 s | study best 0.009034 (trial 0)
+2026-11-17 17:50:50 V     trial 1 (seed 1043): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.02905945251335551}
+2026-11-17 17:51:07 V     trial 1 COMPLETE: value 0.007506, best_epoch 101, last epoch 117, 17.6 s | study best 0.007506 (trial 1)
+2026-11-17 17:51:07 V     trial 2 (seed 1044): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.06812097272246459}
+2026-11-17 17:51:11 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=single_resnet trial=2 seed=1044 epoch=28/200 | last update 0 s ago | running 4.1 h | rss 1954 MB, cuda 12/1668 MB allocated/reserved
+2026-11-17 17:51:25 V     trial 2 COMPLETE: value 0.007511, best_epoch 104, last epoch 120, 17.5 s | study best 0.007506 (trial 1)
+2026-11-17 17:51:25 V     trial 3 (seed 1045): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.45484595743796563}
+2026-11-17 17:51:49 V     trial 3 COMPLETE: value 0.009002, best_epoch 144, last epoch 160, 24.1 s | study best 0.007506 (trial 1)
+2026-11-17 17:51:49 V     trial 4 (seed 1046): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.474788834854335}
+2026-11-17 17:52:11 V     trial 4 COMPLETE: value 0.008644, best_epoch 126, last epoch 142, 22.2 s | study best 0.007506 (trial 1)
+2026-11-17 17:52:11 V     trial 5 (seed 1047): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.4985639140404243}
+2026-11-17 17:52:17 V     trial 5 PRUNED: value -, best_epoch -, last epoch 37, 5.4 s | study best 0.007506 (trial 1)
+2026-11-17 17:52:17 V     trial 6 (seed 1048): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.36848615408137947}
+2026-11-17 17:52:26 V     trial 6 PRUNED: value -, best_epoch -, last epoch 60, 8.8 s | study best 0.007506 (trial 1)
+2026-11-17 17:52:26 V     trial 7 (seed 1049): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.32160502080695885}
+2026-11-17 17:52:34 V     trial 7 PRUNED: value -, best_epoch -, last epoch 61, 8.6 s | study best 0.007506 (trial 1)
+2026-11-17 17:52:34 V     trial 8 (seed 1050): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.33937585579026275}
+2026-11-17 17:52:37 V     trial 8 PRUNED: value -, best_epoch -, last epoch 19, 2.5 s | study best 0.007506 (trial 1)
+2026-11-17 17:52:37 V     trial 9 (seed 1051): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.24477799020086044}
+2026-11-17 17:52:45 V     trial 9 PRUNED: value -, best_epoch -, last epoch 60, 8.3 s | study best 0.007506 (trial 1)
+2026-11-17 17:52:46 V     trial 10 (seed 1052): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.013023927602197855}
+2026-11-17 17:53:04 V     trial 10 COMPLETE: value 0.007485, best_epoch 107, last epoch 123, 19.1 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:05 V     trial 11 (seed 1053): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.009607692484311297}
+2026-11-17 17:53:17 V     trial 11 COMPLETE: value 0.007862, best_epoch 63, last epoch 79, 12.1 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:17 V     trial 12 (seed 1054): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.22010176918708368}
+2026-11-17 17:53:19 V     trial 12 PRUNED: value -, best_epoch -, last epoch 17, 2.8 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:20 V     trial 13 (seed 1055): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.030231648889991684}
+2026-11-17 17:53:25 V     trial 13 PRUNED: value -, best_epoch -, last epoch 41, 5.8 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:26 V     trial 14 (seed 1056): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.0849903351258249}
+2026-11-17 17:53:40 V     trial 14 COMPLETE: value 0.007599, best_epoch 83, last epoch 99, 14.9 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:41 V     trial 15 (seed 1057): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.1614734022797259}
+2026-11-17 17:53:46 V     trial 15 PRUNED: value -, best_epoch -, last epoch 39, 5.7 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:46 V     trial 16 (seed 1058): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.10360445543693554}
+2026-11-17 17:53:52 V     trial 16 PRUNED: value -, best_epoch -, last epoch 41, 6.3 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:53 V     trial 17 (seed 1059): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09153317929609953}
+2026-11-17 17:53:55 V     trial 17 PRUNED: value -, best_epoch -, last epoch 20, 2.8 s | study best 0.007485 (trial 10)
+2026-11-17 17:53:56 V     trial 18 (seed 1060): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.1774158243459544}
+2026-11-17 17:54:02 V     trial 18 PRUNED: value -, best_epoch -, last epoch 41, 6.4 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:02 V     trial 19 (seed 1061): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.011958440050641249}
+2026-11-17 17:54:05 V     trial 19 PRUNED: value -, best_epoch -, last epoch 20, 2.9 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:05 V     trial 20 (seed 1062): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.010065414119028955}
+2026-11-17 17:54:10 V     trial 20 PRUNED: value -, best_epoch -, last epoch 41, 5.4 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:10 V     trial 21 (seed 1063): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.14576998033587807}
+2026-11-17 17:54:16 V     trial 21 PRUNED: value -, best_epoch -, last epoch 41, 5.4 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:16 V     trial 22 (seed 1064): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.081587084655387}
+2026-11-17 17:54:22 V     trial 22 PRUNED: value -, best_epoch -, last epoch 41, 5.8 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:22 V     trial 23 (seed 1065): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.04726999235958007}
+2026-11-17 17:54:31 V     trial 23 COMPLETE: value 0.008299, best_epoch 51, last epoch 67, 8.7 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:31 V     trial 24 (seed 1066): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.07948856869491619}
+2026-11-17 17:54:34 V     trial 24 PRUNED: value -, best_epoch -, last epoch 23, 3.4 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:34 V     trial 25 (seed 1067): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.015157786324062915}
+2026-11-17 17:54:38 V     trial 25 PRUNED: value -, best_epoch -, last epoch 23, 3.6 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:38 V     trial 26 (seed 1068): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.16059273237138605}
+2026-11-17 17:54:41 V     trial 26 PRUNED: value -, best_epoch -, last epoch 20, 3.1 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:41 V     trial 27 (seed 1069): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.2212826958621963}
+2026-11-17 17:54:43 V     trial 27 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:43 V     trial 28 (seed 1070): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.12005996909080403}
+2026-11-17 17:54:45 V     trial 28 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:45 V     trial 29 (seed 1071): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.06243106627794426}
+2026-11-17 17:54:51 V     trial 29 PRUNED: value -, best_epoch -, last epoch 41, 6.5 s | study best 0.007485 (trial 10)
+2026-11-17 17:54:51 V     trial 30 (seed 1072): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.03670932384539401}
+2026-11-17 17:55:03 V     trial 30 PRUNED: value -, best_epoch -, last epoch 72, 11.4 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:03 V     trial 31 (seed 1073): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.1459486171785063}
+2026-11-17 17:55:06 V     trial 31 PRUNED: value -, best_epoch -, last epoch 20, 3.3 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:06 V     trial 32 (seed 1074): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.0887629067394581}
+2026-11-17 17:55:17 V     trial 32 COMPLETE: value 0.008002, best_epoch 58, last epoch 74, 11.4 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:18 V     trial 33 (seed 1075): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.2745807776286841}
+2026-11-17 17:55:21 V     trial 33 PRUNED: value -, best_epoch -, last epoch 20, 3.3 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:21 V     trial 34 (seed 1076): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.00029602446993596404}
+2026-11-17 17:55:24 V     trial 34 PRUNED: value -, best_epoch -, last epoch 20, 3.1 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:24 V     trial 35 (seed 1077): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.0387920599536684}
+2026-11-17 17:55:35 V     trial 35 COMPLETE: value 0.007807, best_epoch 61, last epoch 77, 10.9 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:35 V     trial 36 (seed 1078): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.11175043365271445}
+2026-11-17 17:55:37 V     trial 36 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:37 V     trial 37 (seed 1079): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.11718137559501393}
+2026-11-17 17:55:43 V     trial 37 PRUNED: value -, best_epoch -, last epoch 41, 6.3 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:43 V     trial 38 (seed 1080): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.061805408947651186}
+2026-11-17 17:55:45 V     trial 38 PRUNED: value -, best_epoch -, last epoch 11, 1.9 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:45 V     trial 39 (seed 1081): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.3629015243380504}
+2026-11-17 17:55:47 V     trial 39 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007485 (trial 10)
+2026-11-17 17:55:47 I   [hpo] single_resnet: done in 323.1 s, best value 0.007485 (trial 10, best_epoch 107)
+2026-11-17 17:55:47 V   study diamonds/fold1/tangos opened in 0.1 s
+2026-11-17 17:55:47 I   [hpo] tangos: trials 0/30
+2026-11-17 17:55:47 V     trial 0 (seed 1042): {'lr': 0.00035010862824622996, 'wd': 3.799609871016911e-06, 'sparsity': 0.028948499929838646, 'orthogonality': 0.003051568926723988}
+2026-11-17 17:56:11 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=0 seed=1042 epoch=3/200 | last update 6 s ago | running 4.2 h | rss 1954 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 18:01:11 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=0 seed=1042 epoch=35/200 | last update 6 s ago | running 4.3 h | rss 1947 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 18:06:11 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=0 seed=1042 epoch=69/200 | last update 3 s ago | running 4.3 h | rss 1947 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 18:11:11 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=0 seed=1042 epoch=102/200 | last update 6 s ago | running 4.4 h | rss 1947 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 18:16:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=0 seed=1042 epoch=136/200 | last update 1 s ago | running 4.5 h | rss 1947 MB, cuda 1492/1668 MB allocated/reserved
+2026-11-17 18:18:18 V     trial 0 COMPLETE: value 0.007974, best_epoch 133, last epoch 149, 1350.9 s | study best 0.007974 (trial 0)
+2026-11-17 18:18:19 V     trial 1 (seed 1043): {'lr': 0.0008642060846372655, 'wd': 0.006764415150360955, 'sparsity': 0.00012771076363990514, 'orthogonality': 0.6511122350887252}
+2026-11-17 18:21:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=1 seed=1043 epoch=20/200 | last update 2 s ago | running 4.6 h | rss 1949 MB, cuda 21/1668 MB allocated/reserved
+2026-11-17 18:25:15 V     trial 1 COMPLETE: value 0.01167, best_epoch 29, last epoch 45, 416.0 s | study best 0.007974 (trial 0)
+2026-11-17 18:25:17 V     trial 2 (seed 1044): {'lr': 0.0001572753266858972, 'wd': 3.35199130709279e-05, 'sparsity': 0.010671091210190194, 'orthogonality': 0.07346227657785613}
+2026-11-17 18:26:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=2 seed=1044 epoch=7/200 | last update 2 s ago | running 4.7 h | rss 1949 MB, cuda 481/1668 MB allocated/reserved
+2026-11-17 18:31:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=2 seed=1044 epoch=40/200 | last update 8 s ago | running 4.8 h | rss 1948 MB, cuda 1493/1668 MB allocated/reserved
+2026-11-17 18:36:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=2 seed=1044 epoch=73/200 | last update 5 s ago | running 4.8 h | rss 1947 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 18:41:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=2 seed=1044 epoch=107/200 | last update 0 s ago | running 4.9 h | rss 1947 MB, cuda 853/1668 MB allocated/reserved
+2026-11-17 18:46:12 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=2 seed=1044 epoch=139/200 | last update 6 s ago | running 5.0 h | rss 1947 MB, cuda 855/1668 MB allocated/reserved
+2026-11-17 18:51:13 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=2 seed=1044 epoch=173/200 | last update 1 s ago | running 5.1 h | rss 1947 MB, cuda 1491/1668 MB allocated/reserved
+2026-11-17 18:53:01 V     trial 2 COMPLETE: value 0.009157, best_epoch 168, last epoch 184, 1664.6 s | study best 0.007974 (trial 0)
+2026-11-17 18:53:02 V     trial 3 (seed 1045): {'lr': 0.0019141172414996828, 'wd': 0.0001381560110948047, 'sparsity': 0.00260924070652527, 'orthogonality': 0.19029642937225177}
+2026-11-17 18:56:13 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=3 seed=1045 epoch=22/200 | last update 2 s ago | running 5.2 h | rss 1949 MB, cuda 534/1668 MB allocated/reserved
+2026-11-17 19:01:13 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=3 seed=1045 epoch=55/200 | last update 8 s ago | running 5.3 h | rss 1948 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 19:02:46 V     trial 3 COMPLETE: value 0.01004, best_epoch 48, last epoch 64, 583.9 s | study best 0.007974 (trial 0)
+2026-11-17 19:02:47 V     trial 4 (seed 1046): {'lr': 0.00010069273493393077, 'wd': 3.753575885419303e-06, 'sparsity': 0.0005301466246433353, 'orthogonality': 0.5013447374877419}
+2026-11-17 19:06:13 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=4 seed=1046 epoch=23/200 | last update 6 s ago | running 5.3 h | rss 1948 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 19:11:13 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=4 seed=1046 epoch=57/200 | last update 2 s ago | running 5.4 h | rss 1948 MB, cuda 1493/1668 MB allocated/reserved
+2026-11-17 19:16:13 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=4 seed=1046 epoch=89/200 | last update 8 s ago | running 5.5 h | rss 1947 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 19:21:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=4 seed=1046 epoch=122/200 | last update 7 s ago | running 5.6 h | rss 1947 MB, cuda 278/1668 MB allocated/reserved
+2026-11-17 19:26:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=4 seed=1046 epoch=155/200 | last update 7 s ago | running 5.7 h | rss 1947 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 19:26:26 V     trial 4 COMPLETE: value 0.01067, best_epoch 140, last epoch 156, 1419.2 s | study best 0.007974 (trial 0)
+2026-11-17 19:26:28 V     trial 5 (seed 1047): {'lr': 0.0023071134828891865, 'wd': 0.004742685700333278, 'sparsity': 0.03196032634920818, 'orthogonality': 0.016347309486412637}
+2026-11-17 19:31:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=5 seed=1047 epoch=32/200 | last update 9 s ago | running 5.8 h | rss 1949 MB, cuda 8/1668 MB allocated/reserved
+2026-11-17 19:36:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=5 seed=1047 epoch=66/200 | last update 0 s ago | running 5.8 h | rss 1948 MB, cuda 534/1668 MB allocated/reserved
+2026-11-17 19:39:27 V     trial 5 COMPLETE: value 0.00832, best_epoch 70, last epoch 86, 779.4 s | study best 0.007974 (trial 0)
+2026-11-17 19:39:28 V     trial 6 (seed 1048): {'lr': 0.0009128318436354114, 'wd': 0.0001524643537740566, 'sparsity': 0.0007988490068243633, 'orthogonality': 0.31403388083362804}
+2026-11-17 19:41:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=6 seed=1048 epoch=12/200 | last update 7 s ago | running 5.9 h | rss 1949 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 19:41:42 V     trial 6 PRUNED: value -, best_epoch -, last epoch 15, 134.4 s | study best 0.007974 (trial 0)
+2026-11-17 19:41:42 V     trial 7 (seed 1049): {'lr': 0.0018821767582032642, 'wd': 0.002399881622872108, 'sparsity': 0.0016133002441840853, 'orthogonality': 0.011169498847542508}
+2026-11-17 19:46:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=7 seed=1049 epoch=31/200 | last update 4 s ago | running 6.0 h | rss 1948 MB, cuda 1491/1668 MB allocated/reserved
+2026-11-17 19:51:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=7 seed=1049 epoch=63/200 | last update 3 s ago | running 6.1 h | rss 1948 MB, cuda 1438/1668 MB allocated/reserved
+2026-11-17 19:53:35 V     trial 7 COMPLETE: value 0.008202, best_epoch 62, last epoch 78, 712.1 s | study best 0.007974 (trial 0)
+2026-11-17 19:53:35 V     trial 8 (seed 1050): {'lr': 0.0036087427469879097, 'wd': 3.422497812609718e-06, 'sparsity': 0.00017111144522463168, 'orthogonality': 0.008071730873098924}
+2026-11-17 19:56:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=8 seed=1050 epoch=18/200 | last update 7 s ago | running 6.2 h | rss 1949 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 20:01:14 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=8 seed=1050 epoch=52/200 | last update 2 s ago | running 6.3 h | rss 1948 MB, cuda 1492/1668 MB allocated/reserved
+2026-11-17 20:05:15 V     trial 8 COMPLETE: value 0.008801, best_epoch 61, last epoch 77, 700.0 s | study best 0.007974 (trial 0)
+2026-11-17 20:05:16 V     trial 9 (seed 1051): {'lr': 0.0007263366051729811, 'wd': 2.064442010362685e-06, 'sparsity': 0.00040180420100378313, 'orthogonality': 0.029460595547697914}
+2026-11-17 20:06:15 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=9 seed=1051 epoch=7/200 | last update 5 s ago | running 6.3 h | rss 1949 MB, cuda 1174/1668 MB allocated/reserved
+2026-11-17 20:11:15 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=9 seed=1051 epoch=40/200 | last update 2 s ago | running 6.4 h | rss 1948 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 20:16:15 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=9 seed=1051 epoch=72/200 | last update 3 s ago | running 6.5 h | rss 1948 MB, cuda 214/1668 MB allocated/reserved
+2026-11-17 20:21:04 V     trial 9 COMPLETE: value 0.008528, best_epoch 87, last epoch 103, 948.4 s | study best 0.007974 (trial 0)
+2026-11-17 20:21:06 V     trial 10 (seed 1052): {'lr': 0.0006122586762687096, 'wd': 1.7809215428456654e-05, 'sparsity': 0.036206704148704284, 'orthogonality': 0.0012038255087988647}
+2026-11-17 20:21:15 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=10 seed=1052 epoch=2/200 | last update 0 s ago | running 6.6 h | rss 1950 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 20:26:15 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=10 seed=1052 epoch=35/200 | last update 6 s ago | running 6.7 h | rss 1949 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 20:31:16 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=10 seed=1052 epoch=68/200 | last update 6 s ago | running 6.8 h | rss 1943 MB, cuda 9/1668 MB allocated/reserved
+2026-11-17 20:33:48 V     trial 10 COMPLETE: value 0.007935, best_epoch 67, last epoch 83, 763.1 s | study best 0.007935 (trial 10)
+2026-11-17 20:33:49 V     trial 11 (seed 1053): {'lr': 0.0008002965482919693, 'wd': 7.998169703495124e-06, 'sparsity': 0.06348430716653214, 'orthogonality': 0.003077108887765836}
+2026-11-17 20:36:16 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=11 seed=1053 epoch=17/200 | last update 4 s ago | running 6.8 h | rss 1949 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 20:41:16 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=11 seed=1053 epoch=50/200 | last update 7 s ago | running 6.9 h | rss 1948 MB, cuda 534/1668 MB allocated/reserved
+2026-11-17 20:45:51 V     trial 11 COMPLETE: value 0.008169, best_epoch 63, last epoch 79, 722.8 s | study best 0.007935 (trial 10)
+2026-11-17 20:45:52 V     trial 12 (seed 1054): {'lr': 0.00025549865178674795, 'wd': 2.2381738210780005e-06, 'sparsity': 0.06465575851064168, 'orthogonality': 0.0033831276664935315}
+2026-11-17 20:46:16 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=12 seed=1054 epoch=3/200 | last update 4 s ago | running 7.0 h | rss 1949 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 20:47:32 V     trial 12 PRUNED: value -, best_epoch -, last epoch 11, 100.8 s | study best 0.007935 (trial 10)
+2026-11-17 20:47:32 V     trial 13 (seed 1055): {'lr': 0.00018458440387926419, 'wd': 2.121123447469654e-05, 'sparsity': 0.007214807541066262, 'orthogonality': 0.002518729240426754}
+2026-11-17 20:49:11 V     trial 13 PRUNED: value -, best_epoch -, last epoch 11, 98.8 s | study best 0.007935 (trial 10)
+2026-11-17 20:49:11 V     trial 14 (seed 1056): {'lr': 0.0004854193932699258, 'wd': 6.330060847878623e-05, 'sparsity': 0.014056207978487268, 'orthogonality': 0.001432599503242504}
+2026-11-17 20:51:07 V     trial 14 PRUNED: value -, best_epoch -, last epoch 13, 116.0 s | study best 0.007935 (trial 10)
+2026-11-17 20:51:07 V     trial 15 (seed 1057): {'lr': 0.0003850129290647148, 'wd': 1.0755531753583394e-06, 'sparsity': 0.004972953961857364, 'orthogonality': 0.006187846231374046}
+2026-11-17 20:51:16 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=15 seed=1057 epoch=1/200 | last update 9 s ago | running 7.1 h | rss 1949 MB, cuda 852/1668 MB allocated/reserved
+2026-11-17 20:56:16 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=15 seed=1057 epoch=33/200 | last update 6 s ago | running 7.2 h | rss 1948 MB, cuda 217/1668 MB allocated/reserved
+2026-11-17 21:01:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=15 seed=1057 epoch=67/200 | last update 2 s ago | running 7.3 h | rss 1948 MB, cuda 1172/1668 MB allocated/reserved
+2026-11-17 21:06:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=15 seed=1057 epoch=100/200 | last update 4 s ago | running 7.3 h | rss 1948 MB, cuda 534/1668 MB allocated/reserved
+2026-11-17 21:07:01 V     trial 15 COMPLETE: value 0.008495, best_epoch 88, last epoch 104, 954.0 s | study best 0.007935 (trial 10)
+2026-11-17 21:07:02 V     trial 16 (seed 1058): {'lr': 0.00011073385752151274, 'wd': 9.112770631634432e-06, 'sparsity': 0.05274138152133104, 'orthogonality': 0.03204943794277886}
+2026-11-17 21:08:42 V     trial 16 PRUNED: value -, best_epoch -, last epoch 11, 100.9 s | study best 0.007935 (trial 10)
+2026-11-17 21:08:43 V     trial 17 (seed 1059): {'lr': 0.0021079497300771862, 'wd': 2.6037553305808345e-05, 'sparsity': 0.008866694650155962, 'orthogonality': 0.002211426061295756}
+2026-11-17 21:11:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=17 seed=1059 epoch=18/200 | last update 2 s ago | running 7.4 h | rss 1949 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 21:16:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=17 seed=1059 epoch=51/200 | last update 7 s ago | running 7.5 h | rss 1948 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 21:21:14 V     trial 17 COMPLETE: value 0.008173, best_epoch 68, last epoch 84, 751.6 s | study best 0.007935 (trial 10)
+2026-11-17 21:21:15 V     trial 18 (seed 1060): {'lr': 0.001428421973277553, 'wd': 1.6909653909552565e-06, 'sparsity': 0.08979141463286552, 'orthogonality': 0.0010311053942089656}
+2026-11-17 21:21:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=18 seed=1060 epoch=1/200 | last update 2 s ago | running 7.6 h | rss 1949 MB, cuda 1171/1668 MB allocated/reserved
+2026-11-17 21:26:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=18 seed=1060 epoch=34/200 | last update 7 s ago | running 7.7 h | rss 1948 MB, cuda 1491/1668 MB allocated/reserved
+2026-11-17 21:30:49 V     trial 18 COMPLETE: value 0.008482, best_epoch 48, last epoch 64, 574.4 s | study best 0.007935 (trial 10)
+2026-11-17 21:30:50 V     trial 19 (seed 1061): {'lr': 0.0006187842772546128, 'wd': 4.895455748269472e-05, 'sparsity': 0.049779457877774526, 'orthogonality': 0.01827076037000392}
+2026-11-17 21:31:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=19 seed=1061 epoch=4/200 | last update 0 s ago | running 7.8 h | rss 1949 MB, cuda 854/1668 MB allocated/reserved
+2026-11-17 21:32:46 V     trial 19 PRUNED: value -, best_epoch -, last epoch 13, 116.6 s | study best 0.007935 (trial 10)
+2026-11-17 21:32:46 V     trial 20 (seed 1062): {'lr': 0.0002602595836468616, 'wd': 8.660663515571462e-06, 'sparsity': 0.013939666365500982, 'orthogonality': 0.006776806052507204}
+2026-11-17 21:34:24 V     trial 20 PRUNED: value -, best_epoch -, last epoch 11, 98.4 s | study best 0.007935 (trial 10)
+2026-11-17 21:34:25 V     trial 21 (seed 1063): {'lr': 0.0013084050288813915, 'wd': 4.854944120427119e-05, 'sparsity': 0.08980580030176347, 'orthogonality': 0.002424518045711605}
+2026-11-17 21:36:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=21 seed=1063 epoch=13/200 | last update 4 s ago | running 7.8 h | rss 1948 MB, cuda 501/1668 MB allocated/reserved
+2026-11-17 21:41:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=21 seed=1063 epoch=46/200 | last update 8 s ago | running 7.9 h | rss 1948 MB, cuda 853/1668 MB allocated/reserved
+2026-11-17 21:44:44 V     trial 21 COMPLETE: value 0.00805, best_epoch 53, last epoch 69, 619.0 s | study best 0.007935 (trial 10)
+2026-11-17 21:44:44 V     trial 22 (seed 1064): {'lr': 0.0012897935307239867, 'wd': 0.0001473425806339936, 'sparsity': 0.045354075471242525, 'orthogonality': 0.0016811760150333291}
+2026-11-17 21:46:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=22 seed=1064 epoch=11/200 | last update 4 s ago | running 8.0 h | rss 1949 MB, cuda 17/1668 MB allocated/reserved
+2026-11-17 21:51:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=22 seed=1064 epoch=45/200 | last update 1 s ago | running 8.1 h | rss 1948 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 21:56:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=22 seed=1064 epoch=78/200 | last update 5 s ago | running 8.2 h | rss 1948 MB, cuda 1491/1668 MB allocated/reserved
+2026-11-17 21:56:56 V     trial 22 COMPLETE: value 0.007958, best_epoch 66, last epoch 82, 732.7 s | study best 0.007935 (trial 10)
+2026-11-17 21:56:57 V     trial 23 (seed 1065): {'lr': 0.001237414680861898, 'wd': 0.0002751371901271641, 'sparsity': 0.015456358795624722, 'orthogonality': 0.006018964166438009}
+2026-11-17 22:00:59 V     trial 23 PRUNED: value -, best_epoch -, last epoch 27, 242.0 s | study best 0.007935 (trial 10)
+2026-11-17 22:00:59 V     trial 24 (seed 1066): {'lr': 0.0003061906892808332, 'wd': 1.934579334783563e-05, 'sparsity': 0.07123447589641593, 'orthogonality': 0.0018755327737336107}
+2026-11-17 22:01:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=24 seed=1066 epoch=3/200 | last update 0 s ago | running 8.3 h | rss 1949 MB, cuda 853/1668 MB allocated/reserved
+2026-11-17 22:02:37 V     trial 24 PRUNED: value -, best_epoch -, last epoch 11, 98.7 s | study best 0.007935 (trial 10)
+2026-11-17 22:02:38 V     trial 25 (seed 1067): {'lr': 0.002405399635506776, 'wd': 0.0028646627540790393, 'sparsity': 0.04573969590669844, 'orthogonality': 0.001504581448687024}
+2026-11-17 22:06:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=25 seed=1067 epoch=25/200 | last update 6 s ago | running 8.3 h | rss 1948 MB, cuda 217/1668 MB allocated/reserved
+2026-11-17 22:11:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=25 seed=1067 epoch=58/200 | last update 9 s ago | running 8.4 h | rss 1948 MB, cuda 8/1668 MB allocated/reserved
+2026-11-17 22:15:27 V     trial 25 COMPLETE: value 0.008026, best_epoch 70, last epoch 86, 769.4 s | study best 0.007935 (trial 10)
+2026-11-17 22:15:27 V     trial 26 (seed 1068): {'lr': 0.00014515793631985778, 'wd': 1.52484298275317e-06, 'sparsity': 0.01956201568738588, 'orthogonality': 0.0035172271110854108}
+2026-11-17 22:16:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=26 seed=1068 epoch=6/200 | last update 5 s ago | running 8.5 h | rss 1949 MB, cuda 17/1668 MB allocated/reserved
+2026-11-17 22:17:06 V     trial 26 PRUNED: value -, best_epoch -, last epoch 11, 98.6 s | study best 0.007935 (trial 10)
+2026-11-17 22:17:06 V     trial 27 (seed 1069): {'lr': 0.0003519448839428212, 'wd': 6.102483991765454e-06, 'sparsity': 0.022308830102772476, 'orthogonality': 0.002291647842374137}
+2026-11-17 22:18:44 V     trial 27 PRUNED: value -, best_epoch -, last epoch 11, 98.1 s | study best 0.007935 (trial 10)
+2026-11-17 22:18:44 V     trial 28 (seed 1070): {'lr': 0.0008632294794936144, 'wd': 2.1727831957814452e-05, 'sparsity': 0.05469836140286634, 'orthogonality': 0.001283752730098896}
+2026-11-17 22:21:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=28 seed=1070 epoch=18/200 | last update 1 s ago | running 8.6 h | rss 1949 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 22:26:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=28 seed=1070 epoch=51/200 | last update 6 s ago | running 8.7 h | rss 1948 MB, cuda 855/1668 MB allocated/reserved
+2026-11-17 22:31:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=28 seed=1070 epoch=85/200 | last update 2 s ago | running 8.8 h | rss 1948 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-17 22:33:56 V     trial 28 COMPLETE: value 0.007734, best_epoch 86, last epoch 102, 911.9 s | study best 0.007734 (trial 28)
+2026-11-17 22:33:56 V     trial 29 (seed 1071): {'lr': 0.0017061545316883013, 'wd': 0.00021158267960715086, 'sparsity': 0.04285834326251684, 'orthogonality': 0.004084727618989178}
+2026-11-17 22:36:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=tangos trial=29 seed=1071 epoch=16/200 | last update 7 s ago | running 8.8 h | rss 1949 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 22:40:57 V     trial 29 COMPLETE: value 0.00937, best_epoch 31, last epoch 47, 420.8 s | study best 0.007734 (trial 28)
+2026-11-17 22:40:57 I   [hpo] tangos: done in 17109.9 s, best value 0.007734 (trial 28, best_epoch 86)
+2026-11-17 22:41:00 V   study diamonds/fold1/batchensemble opened in 3.0 s
+2026-11-17 22:41:00 I   [hpo] batchensemble: trials 0/30
+2026-11-17 22:41:01 V     trial 0 (seed 1042): {'lr': 0.00035010862824622996, 'wd': 3.799609871016911e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:41:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=batchensemble trial=0 seed=1042 epoch=78/200 | last update 0 s ago | running 8.9 h | rss 1950 MB, cuda 8/1668 MB allocated/reserved
+2026-11-17 22:41:42 V     trial 0 COMPLETE: value 0.007793, best_epoch 200, last epoch 200, 41.8 s | study best 0.007793 (trial 0)
+2026-11-17 22:41:42 V     trial 1 (seed 1043): {'lr': 0.0008642060846372655, 'wd': 0.006764415150360955, 'adapter_initialization': 'normal'}
+2026-11-17 22:42:23 V     trial 1 COMPLETE: value 0.007071, best_epoch 167, last epoch 183, 41.2 s | study best 0.007071 (trial 1)
+2026-11-17 22:42:23 V     trial 2 (seed 1044): {'lr': 0.0001572753266858972, 'wd': 3.35199130709279e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:43:03 V     trial 2 COMPLETE: value 0.009215, best_epoch 198, last epoch 200, 39.8 s | study best 0.007071 (trial 1)
+2026-11-17 22:43:03 V     trial 3 (seed 1045): {'lr': 0.0019141172414996828, 'wd': 0.0001381560110948047, 'adapter_initialization': 'normal'}
+2026-11-17 22:43:30 V     trial 3 COMPLETE: value 0.007262, best_epoch 117, last epoch 133, 26.3 s | study best 0.007071 (trial 1)
+2026-11-17 22:43:30 V     trial 4 (seed 1046): {'lr': 0.00010069273493393077, 'wd': 3.753575885419303e-06, 'adapter_initialization': 'normal'}
+2026-11-17 22:44:09 V     trial 4 COMPLETE: value 0.01001, best_epoch 196, last epoch 200, 39.4 s | study best 0.007071 (trial 1)
+2026-11-17 22:44:09 V     trial 5 (seed 1047): {'lr': 0.0023071134828891865, 'wd': 0.004742685700333278, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:44:45 V     trial 5 COMPLETE: value 0.00695, best_epoch 167, last epoch 183, 36.2 s | study best 0.00695 (trial 5)
+2026-11-17 22:44:46 V     trial 6 (seed 1048): {'lr': 0.0009128318436354114, 'wd': 0.0001524643537740566, 'adapter_initialization': 'normal'}
+2026-11-17 22:44:53 V     trial 6 PRUNED: value -, best_epoch -, last epoch 35, 7.1 s | study best 0.00695 (trial 5)
+2026-11-17 22:44:53 V     trial 7 (seed 1049): {'lr': 0.0018821767582032642, 'wd': 0.002399881622872108, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:45:19 V     trial 7 COMPLETE: value 0.007417, best_epoch 117, last epoch 133, 26.6 s | study best 0.00695 (trial 5)
+2026-11-17 22:45:19 V     trial 8 (seed 1050): {'lr': 0.0036087427469879097, 'wd': 3.422497812609718e-06, 'adapter_initialization': 'normal'}
+2026-11-17 22:45:37 V     trial 8 COMPLETE: value 0.007616, best_epoch 74, last epoch 90, 18.2 s | study best 0.00695 (trial 5)
+2026-11-17 22:45:38 V     trial 9 (seed 1051): {'lr': 0.0007263366051729811, 'wd': 2.064442010362685e-06, 'adapter_initialization': 'normal'}
+2026-11-17 22:45:40 V     trial 9 PRUNED: value -, best_epoch -, last epoch 12, 2.6 s | study best 0.00695 (trial 5)
+2026-11-17 22:45:41 V     trial 10 (seed 1052): {'lr': 0.00016812313400530417, 'wd': 0.006032084636141726, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:45:43 V     trial 10 PRUNED: value -, best_epoch -, last epoch 11, 2.7 s | study best 0.00695 (trial 5)
+2026-11-17 22:45:43 V     trial 11 (seed 1053): {'lr': 0.0029209135811158774, 'wd': 0.008280044010921889, 'adapter_initialization': 'normal'}
+2026-11-17 22:45:46 V     trial 11 PRUNED: value -, best_epoch -, last epoch 12, 2.6 s | study best 0.00695 (trial 5)
+2026-11-17 22:45:46 V     trial 12 (seed 1054): {'lr': 0.0005971201342662024, 'wd': 0.00694775975692669, 'adapter_initialization': 'normal'}
+2026-11-17 22:45:48 V     trial 12 PRUNED: value -, best_epoch -, last epoch 11, 2.4 s | study best 0.00695 (trial 5)
+2026-11-17 22:45:48 V     trial 13 (seed 1055): {'lr': 0.0036113522597874337, 'wd': 0.003434408248164982, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:46:17 I [heartbeat] dataset=diamonds fold=1 phase=hpo method=batchensemble trial=13 seed=1055 epoch=143/200 | last update 0 s ago | running 9.0 h | rss 1949 MB, cuda 162/1668 MB allocated/reserved
+2026-11-17 22:46:25 V     trial 13 COMPLETE: value 0.006883, best_epoch 163, last epoch 179, 37.2 s | study best 0.006883 (trial 13)
+2026-11-17 22:46:26 V     trial 14 (seed 1056): {'lr': 0.002592137480260895, 'wd': 0.002250174181608041, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:46:38 V     trial 14 PRUNED: value -, best_epoch -, last epoch 62, 12.6 s | study best 0.006883 (trial 13)
+2026-11-17 22:46:38 V     trial 15 (seed 1057): {'lr': 0.004377651036420155, 'wd': 3.801946156402122e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:47:10 V     trial 15 COMPLETE: value 0.006926, best_epoch 142, last epoch 158, 31.5 s | study best 0.006883 (trial 13)
+2026-11-17 22:47:10 V     trial 16 (seed 1058): {'lr': 0.004321787991357333, 'wd': 0.00011361481671349197, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:47:25 V     trial 16 PRUNED: value -, best_epoch -, last epoch 75, 15.0 s | study best 0.006883 (trial 13)
+2026-11-17 22:47:25 V     trial 17 (seed 1059): {'lr': 0.002173269666183853, 'wd': 1.4391337417720561e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:48:04 V     trial 17 COMPLETE: value 0.006819, best_epoch 191, last epoch 200, 39.5 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:05 V     trial 18 (seed 1060): {'lr': 0.001918665576393275, 'wd': 1.49986242081242e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:48:07 V     trial 18 PRUNED: value -, best_epoch -, last epoch 12, 2.6 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:07 V     trial 19 (seed 1061): {'lr': 0.0013905806729278022, 'wd': 0.0002437091100479015, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:48:09 V     trial 19 PRUNED: value -, best_epoch -, last epoch 11, 2.4 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:10 V     trial 20 (seed 1062): {'lr': 0.001722959549789358, 'wd': 1.7582288498020878e-05, 'adapter_initialization': 'normal'}
+2026-11-17 22:48:12 V     trial 20 PRUNED: value -, best_epoch -, last epoch 12, 2.6 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:12 V     trial 21 (seed 1063): {'lr': 0.0031638823520984357, 'wd': 3.0317304202044673e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:48:20 V     trial 21 PRUNED: value -, best_epoch -, last epoch 36, 7.3 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:20 V     trial 22 (seed 1064): {'lr': 0.0041051141390612495, 'wd': 1.0025736071254124e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:48:53 V     trial 22 COMPLETE: value 0.006924, best_epoch 153, last epoch 169, 33.3 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:53 V     trial 23 (seed 1065): {'lr': 0.004523310373566277, 'wd': 1.8590786380419221e-06, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:48:56 V     trial 23 PRUNED: value -, best_epoch -, last epoch 12, 2.6 s | study best 0.006819 (trial 17)
+2026-11-17 22:48:56 V     trial 24 (seed 1066): {'lr': 0.0016745429556114541, 'wd': 1.1223321797544182e-05, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:49:01 V     trial 24 PRUNED: value -, best_epoch -, last epoch 24, 5.1 s | study best 0.006819 (trial 17)
+2026-11-17 22:49:01 V     trial 25 (seed 1067): {'lr': 0.0012382828310048407, 'wd': 0.0017387109739927305, 'adapter_initialization': 'normal'}
+2026-11-17 22:49:03 V     trial 25 PRUNED: value -, best_epoch -, last epoch 11, 2.4 s | study best 0.006819 (trial 17)
+2026-11-17 22:49:04 V     trial 26 (seed 1068): {'lr': 0.002755053902421792, 'wd': 0.00033777677914444826, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:49:17 V     trial 26 PRUNED: value -, best_epoch -, last epoch 67, 13.4 s | study best 0.006819 (trial 17)
+2026-11-17 22:49:17 V     trial 27 (seed 1069): {'lr': 0.004359639476326516, 'wd': 0.002477373742992672, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:49:38 V     trial 27 COMPLETE: value 0.007495, best_epoch 89, last epoch 105, 21.0 s | study best 0.006819 (trial 17)
+2026-11-17 22:49:38 V     trial 28 (seed 1070): {'lr': 0.0007854891257407103, 'wd': 0.0015790259677539843, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:49:41 V     trial 28 PRUNED: value -, best_epoch -, last epoch 12, 2.6 s | study best 0.006819 (trial 17)
+2026-11-17 22:49:41 V     trial 29 (seed 1071): {'lr': 0.0003979334213185927, 'wd': 0.0007668392598611196, 'adapter_initialization': 'random_sign'}
+2026-11-17 22:49:43 V     trial 29 PRUNED: value -, best_epoch -, last epoch 11, 2.4 s | study best 0.006819 (trial 17)
+2026-11-17 22:49:43 I   [hpo] batchensemble: done in 526.1 s, best value 0.006819 (trial 17, best_epoch 191)
+2026-11-17 22:49:43 I   [refit] 15/15 units pending
+2026-11-17 22:49:43 V   study diamonds/fold1/single_resnet opened in 0.2 s
+2026-11-17 22:49:44 V   study diamonds/fold1/tangos opened in 0.1 s
+2026-11-17 22:49:44 V   study diamonds/fold1/batchensemble opened in 0.1 s
+2026-11-17 22:49:44 V   preprocessing outer split ...
+2026-11-17 22:49:47 V   preprocessing outer split done in 3.4 s
+2026-11-17 22:49:47 V   outer split: train (43152, 26), eval (10788, 26), input_dim 26
+2026-11-17 22:49:47 V   [refit] single_resnet seed=42: training 107 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.013023927602197855}
+2026-11-17 22:49:59 I   [refit] single_resnet seed=42: rmse=0.0884, mae=0.0638, r2=0.9924, epochs=107.0000, train_seconds=11.1994
+2026-11-17 22:49:59 V   [refit] single_resnet seed=67: training 107 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.013023927602197855}
+2026-11-17 22:50:10 I   [refit] single_resnet seed=67: rmse=0.0910, mae=0.0655, r2=0.9919, epochs=107.0000, train_seconds=11.4794
+2026-11-17 22:50:10 V   [refit] single_resnet seed=69: training 107 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.013023927602197855}
+2026-11-17 22:50:21 I   [refit] single_resnet seed=69: rmse=0.0922, mae=0.0680, r2=0.9917, epochs=107.0000, train_seconds=10.5619
+2026-11-17 22:50:21 V   [refit] single_resnet seed=228: training 107 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.013023927602197855}
+2026-11-17 22:50:31 I   [refit] single_resnet seed=228: rmse=0.0896, mae=0.0655, r2=0.9922, epochs=107.0000, train_seconds=10.5788
+2026-11-17 22:50:31 V   [refit] single_resnet seed=2137: training 107 epochs, params {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.013023927602197855}
+2026-11-17 22:50:42 I   [refit] single_resnet seed=2137: rmse=0.0881, mae=0.0638, r2=0.9924, epochs=107.0000, train_seconds=10.5892
+2026-11-17 22:50:42 V   [refit] tangos seed=42: training 86 epochs, params {'lr': 0.0008632294794936144, 'wd': 2.1727831957814452e-05, 'sparsity': 0.05469836140286634, 'orthogonality': 0.001283752730098896}
+2026-11-17 22:51:17 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=42 epoch=4/86 | last update 1 s ago | running 9.1 h | rss 1954 MB, cuda 1172/1668 MB allocated/reserved
+2026-11-17 22:56:17 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=42 epoch=30/86 | last update 9 s ago | running 9.2 h | rss 1952 MB, cuda 216/1668 MB allocated/reserved
+2026-11-17 23:01:17 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=42 epoch=56/86 | last update 3 s ago | running 9.3 h | rss 1949 MB, cuda 1172/1668 MB allocated/reserved
+2026-11-17 23:06:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=42 epoch=83/86 | last update 1 s ago | running 9.3 h | rss 1949 MB, cuda 1202/1668 MB allocated/reserved
+2026-11-17 23:07:03 I   [refit] tangos seed=42: rmse=0.0927, mae=0.0664, r2=0.9916, epochs=86.0000, train_seconds=980.0776
+2026-11-17 23:07:03 V   [refit] tangos seed=67: training 86 epochs, params {'lr': 0.0008632294794936144, 'wd': 2.1727831957814452e-05, 'sparsity': 0.05469836140286634, 'orthogonality': 0.001283752730098896}
+2026-11-17 23:11:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=67 epoch=23/86 | last update 7 s ago | running 9.4 h | rss 1949 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 23:16:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=67 epoch=49/86 | last update 5 s ago | running 9.5 h | rss 1949 MB, cuda 113/1668 MB allocated/reserved
+2026-11-17 23:21:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=67 epoch=76/86 | last update 2 s ago | running 9.6 h | rss 1949 MB, cuda 214/1668 MB allocated/reserved
+2026-11-17 23:23:21 I   [refit] tangos seed=67: rmse=0.0903, mae=0.0653, r2=0.9920, epochs=86.0000, train_seconds=976.8800
+2026-11-17 23:23:21 V   [refit] tangos seed=69: training 86 epochs, params {'lr': 0.0008632294794936144, 'wd': 2.1727831957814452e-05, 'sparsity': 0.05469836140286634, 'orthogonality': 0.001283752730098896}
+2026-11-17 23:26:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=69 epoch=16/86 | last update 9 s ago | running 9.7 h | rss 1950 MB, cuda 536/1668 MB allocated/reserved
+2026-11-17 23:31:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=69 epoch=43/86 | last update 4 s ago | running 9.8 h | rss 1949 MB, cuda 215/1668 MB allocated/reserved
+2026-11-17 23:36:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=69 epoch=69/86 | last update 10 s ago | running 9.8 h | rss 1949 MB, cuda 535/1668 MB allocated/reserved
+2026-11-17 23:39:30 I   [refit] tangos seed=69: rmse=0.0916, mae=0.0687, r2=0.9918, epochs=86.0000, train_seconds=969.2461
+2026-11-17 23:39:30 V   [refit] tangos seed=228: training 86 epochs, params {'lr': 0.0008632294794936144, 'wd': 2.1727831957814452e-05, 'sparsity': 0.05469836140286634, 'orthogonality': 0.001283752730098896}
+2026-11-17 23:41:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=228 epoch=10/86 | last update 7 s ago | running 9.9 h | rss 1950 MB, cuda 534/1668 MB allocated/reserved
+2026-11-17 23:46:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=228 epoch=37/86 | last update 3 s ago | running 10.0 h | rss 1950 MB, cuda 536/1668 MB allocated/reserved
+2026-11-17 23:51:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=228 epoch=63/86 | last update 10 s ago | running 10.1 h | rss 1949 MB, cuda 214/1668 MB allocated/reserved
+2026-11-17 23:55:39 I   [refit] tangos seed=228: rmse=0.0978, mae=0.0742, r2=0.9907, epochs=86.0000, train_seconds=968.5362
+2026-11-17 23:55:39 V   [refit] tangos seed=2137: training 86 epochs, params {'lr': 0.0008632294794936144, 'wd': 2.1727831957814452e-05, 'sparsity': 0.05469836140286634, 'orthogonality': 0.001283752730098896}
+2026-11-17 23:56:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=2137 epoch=4/86 | last update 6 s ago | running 10.2 h | rss 1950 MB, cuda 204/1668 MB allocated/reserved
+2026-11-18 00:01:18 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=2137 epoch=31/86 | last update 2 s ago | running 10.3 h | rss 1949 MB, cuda 1173/1668 MB allocated/reserved
+2026-11-18 00:06:19 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=2137 epoch=57/86 | last update 6 s ago | running 10.3 h | rss 1949 MB, cuda 535/1668 MB allocated/reserved
+2026-11-18 00:11:19 I [heartbeat] dataset=diamonds fold=1 phase=refit method=tangos seed=2137 epoch=84/86 | last update 1 s ago | running 10.4 h | rss 1949 MB, cuda 1234/1668 MB allocated/reserved
+2026-11-18 00:11:52 I   [refit] tangos seed=2137: rmse=0.0887, mae=0.0638, r2=0.9923, epochs=86.0000, train_seconds=972.8867
+2026-11-18 00:11:52 V   [refit] batchensemble seed=42: training 191 epochs, params {'lr': 0.002173269666183853, 'wd': 1.4391337417720561e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 00:12:25 I   [refit] batchensemble seed=42: rmse=0.0843, mae=0.0597, r2=0.9931, epochs=191.0000, train_seconds=32.7356
+2026-11-18 00:12:25 V   [refit] batchensemble seed=67: training 191 epochs, params {'lr': 0.002173269666183853, 'wd': 1.4391337417720561e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 00:12:57 I   [refit] batchensemble seed=67: rmse=0.0839, mae=0.0592, r2=0.9931, epochs=191.0000, train_seconds=32.0141
+2026-11-18 00:12:57 V   [refit] batchensemble seed=69: training 191 epochs, params {'lr': 0.002173269666183853, 'wd': 1.4391337417720561e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 00:13:29 I   [refit] batchensemble seed=69: rmse=0.0842, mae=0.0598, r2=0.9931, epochs=191.0000, train_seconds=31.8408
+2026-11-18 00:13:29 V   [refit] batchensemble seed=228: training 191 epochs, params {'lr': 0.002173269666183853, 'wd': 1.4391337417720561e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 00:14:01 I   [refit] batchensemble seed=228: rmse=0.0862, mae=0.0602, r2=0.9927, epochs=191.0000, train_seconds=31.9548
+2026-11-18 00:14:01 V   [refit] batchensemble seed=2137: training 191 epochs, params {'lr': 0.002173269666183853, 'wd': 1.4391337417720561e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 00:14:33 I   [refit] batchensemble seed=2137: rmse=0.0851, mae=0.0614, r2=0.9929, epochs=191.0000, train_seconds=31.6484
+2026-11-18 00:14:33 I  fold 2
+2026-11-18 00:14:33 V   preprocessing inner split ...
+2026-11-18 00:14:37 V   preprocessing inner split done in 3.7 s
+2026-11-18 00:14:37 V   inner split: train (34521, 26), eval (8631, 26), input_dim 26
+2026-11-18 00:14:41 V   study diamonds/fold2/single_resnet opened in 3.8 s
+2026-11-18 00:14:41 I   [hpo] single_resnet: trials 0/40
+2026-11-18 00:14:41 V     trial 0 (seed 2042): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.4570354038329969}
+2026-11-18 00:15:01 V     trial 0 COMPLETE: value 0.009446, best_epoch 126, last epoch 142, 19.8 s | study best 0.009446 (trial 0)
+2026-11-18 00:15:01 V     trial 1 (seed 2043): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.20028787606803405}
+2026-11-18 00:15:16 V     trial 1 COMPLETE: value 0.008129, best_epoch 106, last epoch 122, 15.1 s | study best 0.008129 (trial 1)
+2026-11-18 00:15:16 V     trial 2 (seed 2044): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.16999681021025526}
+2026-11-18 00:15:28 V     trial 2 COMPLETE: value 0.007778, best_epoch 76, last epoch 92, 12.7 s | study best 0.007778 (trial 2)
+2026-11-18 00:15:29 V     trial 3 (seed 2045): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09622356696756784}
+2026-11-18 00:15:54 V     trial 3 COMPLETE: value 0.007311, best_epoch 161, last epoch 177, 25.1 s | study best 0.007311 (trial 3)
+2026-11-18 00:15:54 V     trial 4 (seed 2046): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.17039653244306602}
+2026-11-18 00:16:14 V     trial 4 COMPLETE: value 0.008281, best_epoch 149, last epoch 165, 20.6 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:15 V     trial 5 (seed 2047): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.28112320202712415}
+2026-11-18 00:16:17 V     trial 5 PRUNED: value -, best_epoch -, last epoch 19, 3.0 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:18 V     trial 6 (seed 2048): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.44872992335965733}
+2026-11-18 00:16:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=single_resnet trial=6 seed=2048 epoch=10/200 | last update 0 s ago | running 10.5 h | rss 1955 MB, cuda 15/1668 MB allocated/reserved
+2026-11-18 00:16:19 V     trial 6 PRUNED: value -, best_epoch -, last epoch 11, 1.9 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:20 V     trial 7 (seed 2049): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.3104800894002058}
+2026-11-18 00:16:27 V     trial 7 PRUNED: value -, best_epoch -, last epoch 52, 7.6 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:27 V     trial 8 (seed 2050): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.11519753055577875}
+2026-11-18 00:16:47 V     trial 8 COMPLETE: value 0.007478, best_epoch 110, last epoch 126, 19.8 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:47 V     trial 9 (seed 2051): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.027790508462436414}
+2026-11-18 00:16:57 V     trial 9 PRUNED: value -, best_epoch -, last epoch 75, 9.8 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:57 V     trial 10 (seed 2052): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.36955605862960406}
+2026-11-18 00:16:59 V     trial 10 PRUNED: value -, best_epoch -, last epoch 12, 2.3 s | study best 0.007311 (trial 3)
+2026-11-18 00:16:59 V     trial 11 (seed 2053): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.07982364174901964}
+2026-11-18 00:17:15 V     trial 11 COMPLETE: value 0.007555, best_epoch 94, last epoch 110, 15.6 s | study best 0.007311 (trial 3)
+2026-11-18 00:17:15 V     trial 12 (seed 2054): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.15442457831810635}
+2026-11-18 00:17:17 V     trial 12 PRUNED: value -, best_epoch -, last epoch 12, 2.0 s | study best 0.007311 (trial 3)
+2026-11-18 00:17:17 V     trial 13 (seed 2055): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.027264051512322737}
+2026-11-18 00:17:35 V     trial 13 COMPLETE: value 0.0075, best_epoch 107, last epoch 123, 17.6 s | study best 0.007311 (trial 3)
+2026-11-18 00:17:35 V     trial 14 (seed 2056): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.11328526039078718}
+2026-11-18 00:17:49 V     trial 14 COMPLETE: value 0.007682, best_epoch 74, last epoch 90, 14.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:17:49 V     trial 15 (seed 2057): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.09069903505746074}
+2026-11-18 00:17:55 V     trial 15 PRUNED: value -, best_epoch -, last epoch 41, 6.0 s | study best 0.007311 (trial 3)
+2026-11-18 00:17:55 V     trial 16 (seed 2058): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.010225730243455536}
+2026-11-18 00:18:02 V     trial 16 PRUNED: value -, best_epoch -, last epoch 40, 6.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:02 V     trial 17 (seed 2059): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.03863745105346769}
+2026-11-18 00:18:11 V     trial 17 COMPLETE: value 0.008323, best_epoch 53, last epoch 69, 9.3 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:11 V     trial 18 (seed 2060): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.2524417162282999}
+2026-11-18 00:18:14 V     trial 18 PRUNED: value -, best_epoch -, last epoch 19, 3.3 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:15 V     trial 19 (seed 2061): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.23885256310774114}
+2026-11-18 00:18:16 V     trial 19 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:16 V     trial 20 (seed 2062): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.07118330183152906}
+2026-11-18 00:18:26 V     trial 20 COMPLETE: value 0.008108, best_epoch 48, last epoch 64, 9.8 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:26 V     trial 21 (seed 2063): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.0035245959686352746}
+2026-11-18 00:18:29 V     trial 21 PRUNED: value -, best_epoch -, last epoch 19, 2.9 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:29 V     trial 22 (seed 2064): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.08502767896762803}
+2026-11-18 00:18:34 V     trial 22 PRUNED: value -, best_epoch -, last epoch 39, 5.3 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:35 V     trial 23 (seed 2065): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.05153029065937467}
+2026-11-18 00:18:46 V     trial 23 COMPLETE: value 0.007943, best_epoch 64, last epoch 80, 11.8 s | study best 0.007311 (trial 3)
+2026-11-18 00:18:47 V     trial 24 (seed 2066): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.022559240202801242}
+2026-11-18 00:19:00 V     trial 24 COMPLETE: value 0.007609, best_epoch 70, last epoch 86, 13.5 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:00 V     trial 25 (seed 2067): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.1219473323669106}
+2026-11-18 00:19:06 V     trial 25 PRUNED: value -, best_epoch -, last epoch 41, 5.7 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:06 V     trial 26 (seed 2068): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.13715569225317112}
+2026-11-18 00:19:09 V     trial 26 PRUNED: value -, best_epoch -, last epoch 19, 2.9 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:09 V     trial 27 (seed 2069): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.4612480972857823}
+2026-11-18 00:19:11 V     trial 27 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:11 V     trial 28 (seed 2070): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.17026687436900448}
+2026-11-18 00:19:20 V     trial 28 COMPLETE: value 0.008598, best_epoch 41, last epoch 57, 9.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:20 V     trial 29 (seed 2071): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.10560987975433479}
+2026-11-18 00:19:33 V     trial 29 COMPLETE: value 0.007752, best_epoch 72, last epoch 88, 12.8 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:33 V     trial 30 (seed 2072): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.07379491133534438}
+2026-11-18 00:19:43 V     trial 30 COMPLETE: value 0.008469, best_epoch 49, last epoch 65, 10.1 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:43 V     trial 31 (seed 2073): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.02166051575485692}
+2026-11-18 00:19:57 V     trial 31 COMPLETE: value 0.007766, best_epoch 80, last epoch 96, 14.0 s | study best 0.007311 (trial 3)
+2026-11-18 00:19:57 V     trial 32 (seed 2074): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.04256112181121974}
+2026-11-18 00:19:59 V     trial 32 PRUNED: value -, best_epoch -, last epoch 15, 2.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:00 V     trial 33 (seed 2075): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.0817012554682298}
+2026-11-18 00:20:02 V     trial 33 PRUNED: value -, best_epoch -, last epoch 15, 2.4 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:02 V     trial 34 (seed 2076): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.20424346199015903}
+2026-11-18 00:20:04 V     trial 34 PRUNED: value -, best_epoch -, last epoch 13, 2.1 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:04 V     trial 35 (seed 2077): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.1334108924276003}
+2026-11-18 00:20:06 V     trial 35 PRUNED: value -, best_epoch -, last epoch 15, 2.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:07 V     trial 36 (seed 2078): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.17143780967789093}
+2026-11-18 00:20:09 V     trial 36 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:09 V     trial 37 (seed 2079): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.13281424104242445}
+2026-11-18 00:20:11 V     trial 37 PRUNED: value -, best_epoch -, last epoch 15, 2.5 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:11 V     trial 38 (seed 2080): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.16734256869679473}
+2026-11-18 00:20:13 V     trial 38 PRUNED: value -, best_epoch -, last epoch 15, 2.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:14 V     trial 39 (seed 2081): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.00747870024823509}
+2026-11-18 00:20:16 V     trial 39 PRUNED: value -, best_epoch -, last epoch 15, 2.2 s | study best 0.007311 (trial 3)
+2026-11-18 00:20:16 I   [hpo] single_resnet: done in 338.9 s, best value 0.007311 (trial 3, best_epoch 161)
+2026-11-18 00:20:16 V   study diamonds/fold2/tangos opened in 0.1 s
+2026-11-18 00:20:16 I   [hpo] tangos: trials 0/30
+2026-11-18 00:20:16 V     trial 0 (seed 2042): {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'sparsity': 0.004031453061493286, 'orthogonality': 0.07098172199521151}
+2026-11-18 00:21:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=0 seed=2042 epoch=12/200 | last update 4 s ago | running 10.6 h | rss 1955 MB, cuda 847/1668 MB allocated/reserved
+2026-11-18 00:26:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=0 seed=2042 epoch=67/200 | last update 4 s ago | running 10.7 h | rss 1949 MB, cuda 210/1668 MB allocated/reserved
+2026-11-18 00:29:35 V     trial 0 COMPLETE: value 0.009003, best_epoch 87, last epoch 103, 558.7 s | study best 0.009003 (trial 0)
+2026-11-18 00:29:35 V     trial 1 (seed 2043): {'lr': 0.00010221182596530615, 'wd': 1.0861995743454169e-05, 'sparsity': 0.00026883552853542933, 'orthogonality': 0.0034227504573585443}
+2026-11-18 00:31:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=1 seed=2043 epoch=20/200 | last update 1 s ago | running 10.8 h | rss 1951 MB, cuda 845/1668 MB allocated/reserved
+2026-11-18 00:36:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=1 seed=2043 epoch=75/200 | last update 3 s ago | running 10.8 h | rss 1949 MB, cuda 793/1668 MB allocated/reserved
+2026-11-18 00:41:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=1 seed=2043 epoch=130/200 | last update 5 s ago | running 10.9 h | rss 1949 MB, cuda 15/1668 MB allocated/reserved
+2026-11-18 00:46:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=1 seed=2043 epoch=186/200 | last update 3 s ago | running 11.0 h | rss 1949 MB, cuda 271/1668 MB allocated/reserved
+2026-11-18 00:47:40 V     trial 1 COMPLETE: value 0.009187, best_epoch 199, last epoch 200, 1084.7 s | study best 0.009003 (trial 0)
+2026-11-18 00:47:40 V     trial 2 (seed 2044): {'lr': 0.0004749917500192622, 'wd': 1.0263998530793311e-05, 'sparsity': 0.006592662056451763, 'orthogonality': 0.03059256136031962}
+2026-11-18 00:51:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=2 seed=2044 epoch=41/200 | last update 3 s ago | running 11.1 h | rss 1951 MB, cuda 845/1668 MB allocated/reserved
+2026-11-18 00:56:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=2 seed=2044 epoch=97/200 | last update 2 s ago | running 11.2 h | rss 1950 MB, cuda 527/1668 MB allocated/reserved
+2026-11-18 01:01:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=2 seed=2044 epoch=152/200 | last update 2 s ago | running 11.3 h | rss 1949 MB, cuda 15/1668 MB allocated/reserved
+2026-11-18 01:02:44 V     trial 2 COMPLETE: value 0.008689, best_epoch 151, last epoch 167, 903.5 s | study best 0.008689 (trial 2)
+2026-11-18 01:02:44 V     trial 3 (seed 2045): {'lr': 0.0027178259383604272, 'wd': 0.003485371641623909, 'sparsity': 0.0002621022009980997, 'orthogonality': 0.0015192454409785575}
+2026-11-18 01:06:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=3 seed=2045 epoch=40/200 | last update 5 s ago | running 11.3 h | rss 1951 MB, cuda 12/1668 MB allocated/reserved
+2026-11-18 01:09:17 V     trial 3 COMPLETE: value 0.00845, best_epoch 57, last epoch 73, 392.9 s | study best 0.00845 (trial 3)
+2026-11-18 01:09:17 V     trial 4 (seed 2046): {'lr': 0.003315620385141466, 'wd': 0.00024227798525237117, 'sparsity': 0.0020262417249351664, 'orthogonality': 0.00287885021539317}
+2026-11-18 01:11:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=4 seed=2046 epoch=23/200 | last update 4 s ago | running 11.4 h | rss 1951 MB, cuda 846/1668 MB allocated/reserved
+2026-11-18 01:16:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=4 seed=2046 epoch=78/200 | last update 3 s ago | running 11.5 h | rss 1949 MB, cuda 209/1668 MB allocated/reserved
+2026-11-18 01:18:42 V     trial 4 COMPLETE: value 0.008105, best_epoch 88, last epoch 104, 565.5 s | study best 0.008105 (trial 4)
+2026-11-18 01:18:43 V     trial 5 (seed 2047): {'lr': 0.0017955976288266022, 'wd': 0.004105051240408082, 'sparsity': 0.0047649371548991095, 'orthogonality': 0.0013095291694733113}
+2026-11-18 01:21:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=5 seed=2047 epoch=28/200 | last update 4 s ago | running 11.6 h | rss 1951 MB, cuda 845/1668 MB allocated/reserved
+2026-11-18 01:25:48 V     trial 5 COMPLETE: value 0.008287, best_epoch 61, last epoch 77, 425.5 s | study best 0.008105 (trial 4)
+2026-11-18 01:25:48 V     trial 6 (seed 2048): {'lr': 0.0010040003322220562, 'wd': 3.5255440803910922e-06, 'sparsity': 0.00968470985186436, 'orthogonality': 0.9149234724404655}
+2026-11-18 01:26:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=6 seed=2048 epoch=6/200 | last update 4 s ago | running 11.7 h | rss 1951 MB, cuda 208/1668 MB allocated/reserved
+2026-11-18 01:26:48 V     trial 6 PRUNED: value -, best_epoch -, last epoch 11, 59.4 s | study best 0.008105 (trial 4)
+2026-11-18 01:26:48 V     trial 7 (seed 2049): {'lr': 0.00015193235323590198, 'wd': 9.820281117266354e-05, 'sparsity': 0.007790340909985294, 'orthogonality': 0.03541239801729973}
+2026-11-18 01:27:48 V     trial 7 PRUNED: value -, best_epoch -, last epoch 11, 60.1 s | study best 0.008105 (trial 4)
+2026-11-18 01:27:48 V     trial 8 (seed 2050): {'lr': 0.000346024599016324, 'wd': 0.0011716381651822906, 'sparsity': 0.06551779075662163, 'orthogonality': 0.9664838202051375}
+2026-11-18 01:28:49 V     trial 8 PRUNED: value -, best_epoch -, last epoch 11, 60.6 s | study best 0.008105 (trial 4)
+2026-11-18 01:28:49 V     trial 9 (seed 2051): {'lr': 0.001716198398858101, 'wd': 1.1898967857364566e-05, 'sparsity': 0.00010921304538899394, 'orthogonality': 0.0028375334392803995}
+2026-11-18 01:31:19 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=9 seed=2051 epoch=28/200 | last update 4 s ago | running 11.8 h | rss 1951 MB, cuda 209/1668 MB allocated/reserved
+2026-11-18 01:36:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=9 seed=2051 epoch=83/200 | last update 5 s ago | running 11.8 h | rss 1950 MB, cuda 793/1668 MB allocated/reserved
+2026-11-18 01:39:07 V     trial 9 COMPLETE: value 0.007887, best_epoch 98, last epoch 114, 617.9 s | study best 0.007887 (trial 9)
+2026-11-18 01:39:08 V     trial 10 (seed 2052): {'lr': 0.004156412911992211, 'wd': 2.3497592363915557e-06, 'sparsity': 0.08962562957249567, 'orthogonality': 0.001099905355640288}
+2026-11-18 01:40:07 V     trial 10 PRUNED: value -, best_epoch -, last epoch 11, 60.3 s | study best 0.007887 (trial 9)
+2026-11-18 01:40:08 V     trial 11 (seed 2053): {'lr': 0.00220576551784527, 'wd': 1.6416942015530324e-06, 'sparsity': 0.0003274086618755876, 'orthogonality': 0.0038833960709775614}
+2026-11-18 01:41:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=11 seed=2053 epoch=14/200 | last update 1 s ago | running 11.9 h | rss 1952 MB, cuda 528/1668 MB allocated/reserved
+2026-11-18 01:46:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=11 seed=2053 epoch=69/200 | last update 3 s ago | running 12.0 h | rss 1951 MB, cuda 207/1668 MB allocated/reserved
+2026-11-18 01:51:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=11 seed=2053 epoch=124/200 | last update 4 s ago | running 12.1 h | rss 1950 MB, cuda 846/1668 MB allocated/reserved
+2026-11-18 01:52:10 V     trial 11 COMPLETE: value 0.00781, best_epoch 117, last epoch 133, 722.9 s | study best 0.00781 (trial 11)
+2026-11-18 01:52:11 V     trial 12 (seed 2054): {'lr': 0.0034272734248273393, 'wd': 2.679182095276213e-06, 'sparsity': 0.00012175978590656568, 'orthogonality': 0.003926668354285996}
+2026-11-18 01:56:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=12 seed=2054 epoch=47/200 | last update 1 s ago | running 12.2 h | rss 1951 MB, cuda 845/1668 MB allocated/reserved
+2026-11-18 01:57:45 V     trial 12 PRUNED: value -, best_epoch -, last epoch 62, 334.8 s | study best 0.00781 (trial 11)
+2026-11-18 01:57:46 V     trial 13 (seed 2055): {'lr': 0.0010911536899223583, 'wd': 4.818776635464053e-06, 'sparsity': 0.0002382245062822403, 'orthogonality': 0.00515594336390045}
+2026-11-18 01:59:46 V     trial 13 PRUNED: value -, best_epoch -, last epoch 22, 120.3 s | study best 0.00781 (trial 11)
+2026-11-18 01:59:46 V     trial 14 (seed 2056): {'lr': 0.0037659982372601456, 'wd': 2.9594526671436584e-05, 'sparsity': 0.00013682621221490862, 'orthogonality': 0.015265767693012232}
+2026-11-18 02:01:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=14 seed=2056 epoch=18/200 | last update 2 s ago | running 12.3 h | rss 1952 MB, cuda 846/1668 MB allocated/reserved
+2026-11-18 02:01:46 V     trial 14 PRUNED: value -, best_epoch -, last epoch 22, 119.6 s | study best 0.00781 (trial 11)
+2026-11-18 02:01:46 V     trial 15 (seed 2057): {'lr': 0.004539590386214572, 'wd': 3.1938957550038108e-06, 'sparsity': 0.001089326012353729, 'orthogonality': 0.0038757789812177783}
+2026-11-18 02:03:01 V     trial 15 PRUNED: value -, best_epoch -, last epoch 14, 75.5 s | study best 0.00781 (trial 11)
+2026-11-18 02:03:01 V     trial 16 (seed 2058): {'lr': 0.0009364659551766908, 'wd': 4.6845810024433545e-05, 'sparsity': 0.00048070942166803443, 'orthogonality': 0.003457569697021978}
+2026-11-18 02:05:11 V     trial 16 PRUNED: value -, best_epoch -, last epoch 24, 129.5 s | study best 0.00781 (trial 11)
+2026-11-18 02:05:11 V     trial 17 (seed 2059): {'lr': 0.0017941054444672287, 'wd': 8.647433090627585e-06, 'sparsity': 0.0030489637549621132, 'orthogonality': 0.006201987076627906}
+2026-11-18 02:06:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=17 seed=2059 epoch=13/200 | last update 4 s ago | running 12.3 h | rss 1951 MB, cuda 12/1668 MB allocated/reserved
+2026-11-18 02:07:37 V     trial 17 PRUNED: value -, best_epoch -, last epoch 27, 145.7 s | study best 0.00781 (trial 11)
+2026-11-18 02:07:37 V     trial 18 (seed 2060): {'lr': 0.0012317365699143136, 'wd': 3.2869865929970205e-05, 'sparsity': 0.00013799564851568275, 'orthogonality': 0.02826609930360994}
+2026-11-18 02:08:52 V     trial 18 PRUNED: value -, best_epoch -, last epoch 14, 75.6 s | study best 0.00781 (trial 11)
+2026-11-18 02:08:53 V     trial 19 (seed 2061): {'lr': 0.0020276148236759413, 'wd': 1.9042531853722977e-06, 'sparsity': 0.0001812725699481655, 'orthogonality': 0.00102013861592271}
+2026-11-18 02:11:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=19 seed=2061 epoch=28/200 | last update 0 s ago | running 12.4 h | rss 1951 MB, cuda 846/1668 MB allocated/reserved
+2026-11-18 02:16:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=19 seed=2061 epoch=83/200 | last update 4 s ago | running 12.5 h | rss 1950 MB, cuda 209/1668 MB allocated/reserved
+2026-11-18 02:16:26 V     trial 19 COMPLETE: value 0.008236, best_epoch 68, last epoch 84, 454.2 s | study best 0.00781 (trial 11)
+2026-11-18 02:16:27 V     trial 20 (seed 2062): {'lr': 0.0017351318148616025, 'wd': 6.68747558435517e-06, 'sparsity': 0.0002768581059317515, 'orthogonality': 0.017044122149060294}
+2026-11-18 02:20:08 V     trial 20 PRUNED: value -, best_epoch -, last epoch 41, 221.4 s | study best 0.00781 (trial 11)
+2026-11-18 02:20:08 V     trial 21 (seed 2063): {'lr': 0.004332103068508767, 'wd': 2.767544802652505e-05, 'sparsity': 0.0068981794990244285, 'orthogonality': 0.0026912126836023988}
+2026-11-18 02:21:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=21 seed=2063 epoch=14/200 | last update 1 s ago | running 12.6 h | rss 1952 MB, cuda 524/1668 MB allocated/reserved
+2026-11-18 02:22:07 V     trial 21 PRUNED: value -, best_epoch -, last epoch 22, 118.9 s | study best 0.00781 (trial 11)
+2026-11-18 02:22:07 V     trial 22 (seed 2064): {'lr': 0.0011738119588544376, 'wd': 1.2666663301919217e-06, 'sparsity': 0.0005064650439672197, 'orthogonality': 0.003092909393888875}
+2026-11-18 02:23:34 V     trial 22 PRUNED: value -, best_epoch -, last epoch 16, 87.4 s | study best 0.00781 (trial 11)
+2026-11-18 02:23:35 V     trial 23 (seed 2065): {'lr': 0.0035750525999967207, 'wd': 1.3348204412889628e-05, 'sparsity': 0.0002906544535739159, 'orthogonality': 0.0014938098036838092}
+2026-11-18 02:26:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=23 seed=2065 epoch=30/200 | last update 2 s ago | running 12.7 h | rss 1951 MB, cuda 526/1668 MB allocated/reserved
+2026-11-18 02:29:23 V     trial 23 PRUNED: value -, best_epoch -, last epoch 62, 348.7 s | study best 0.00781 (trial 11)
+2026-11-18 02:29:24 V     trial 24 (seed 2066): {'lr': 0.002548416044011207, 'wd': 0.0003271889165406318, 'sparsity': 0.0010125230276992019, 'orthogonality': 0.00755223877073703}
+2026-11-18 02:30:53 V     trial 24 PRUNED: value -, best_epoch -, last epoch 16, 89.5 s | study best 0.00781 (trial 11)
+2026-11-18 02:30:53 V     trial 25 (seed 2067): {'lr': 0.0012723210444081678, 'wd': 5.957658742672287e-05, 'sparsity': 0.00013569029817144123, 'orthogonality': 0.0010177708146511789}
+2026-11-18 02:31:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=25 seed=2067 epoch=5/200 | last update 4 s ago | running 12.8 h | rss 1952 MB, cuda 529/1668 MB allocated/reserved
+2026-11-18 02:32:23 V     trial 25 PRUNED: value -, best_epoch -, last epoch 16, 89.9 s | study best 0.00781 (trial 11)
+2026-11-18 02:32:23 V     trial 26 (seed 2068): {'lr': 0.002259129920921334, 'wd': 1.2784399624613778e-06, 'sparsity': 0.0006549418846984633, 'orthogonality': 0.009725963870872954}
+2026-11-18 02:33:51 V     trial 26 PRUNED: value -, best_epoch -, last epoch 16, 87.8 s | study best 0.00781 (trial 11)
+2026-11-18 02:33:51 V     trial 27 (seed 2069): {'lr': 0.001225612105486856, 'wd': 0.00010356129517113888, 'sparsity': 0.0008721100250655992, 'orthogonality': 0.007625919268338654}
+2026-11-18 02:35:18 V     trial 27 PRUNED: value -, best_epoch -, last epoch 16, 86.4 s | study best 0.00781 (trial 11)
+2026-11-18 02:35:18 V     trial 28 (seed 2070): {'lr': 0.0021372403746174875, 'wd': 4.690681178706406e-06, 'sparsity': 0.001079940548480833, 'orthogonality': 0.0012972544198648045}
+2026-11-18 02:36:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=28 seed=2070 epoch=12/200 | last update 2 s ago | running 12.8 h | rss 1951 MB, cuda 846/1668 MB allocated/reserved
+2026-11-18 02:41:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=tangos trial=28 seed=2070 epoch=67/200 | last update 3 s ago | running 12.9 h | rss 1951 MB, cuda 526/1668 MB allocated/reserved
+2026-11-18 02:43:28 V     trial 28 COMPLETE: value 0.008261, best_epoch 73, last epoch 89, 490.0 s | study best 0.00781 (trial 11)
+2026-11-18 02:43:28 V     trial 29 (seed 2071): {'lr': 0.0026139123754568695, 'wd': 4.082735040502283e-06, 'sparsity': 0.0019818949858513147, 'orthogonality': 0.013399585904408874}
+2026-11-18 02:45:13 V     trial 29 PRUNED: value -, best_epoch -, last epoch 16, 104.0 s | study best 0.00781 (trial 11)
+2026-11-18 02:45:13 I   [hpo] tangos: done in 8697.2 s, best value 0.00781 (trial 11, best_epoch 117)
+2026-11-18 02:45:15 V   study diamonds/fold2/batchensemble opened in 2.2 s
+2026-11-18 02:45:15 I   [hpo] batchensemble: trials 0/30
+2026-11-18 02:45:16 V     trial 0 (seed 2042): {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'adapter_initialization': 'normal'}
+2026-11-18 02:45:49 V     trial 0 COMPLETE: value 0.007039, best_epoch 184, last epoch 200, 33.3 s | study best 0.007039 (trial 0)
+2026-11-18 02:45:49 V     trial 1 (seed 2043): {'lr': 0.00010221182596530615, 'wd': 1.0861995743454169e-05, 'adapter_initialization': 'normal'}
+2026-11-18 02:46:20 I [heartbeat] dataset=diamonds fold=2 phase=hpo method=batchensemble trial=1 seed=2043 epoch=191/200 | last update 0 s ago | running 13.0 h | rss 1952 MB, cuda 6/1668 MB allocated/reserved
+2026-11-18 02:46:22 V     trial 1 COMPLETE: value 0.01078, best_epoch 200, last epoch 200, 32.7 s | study best 0.007039 (trial 0)
+2026-11-18 02:46:22 V     trial 2 (seed 2044): {'lr': 0.0004749917500192622, 'wd': 1.0263998530793311e-05, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:46:54 V     trial 2 COMPLETE: value 0.007991, best_epoch 199, last epoch 200, 32.7 s | study best 0.007039 (trial 0)
+2026-11-18 02:46:55 V     trial 3 (seed 2045): {'lr': 0.0027178259383604272, 'wd': 0.003485371641623909, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:47:25 V     trial 3 COMPLETE: value 0.007239, best_epoch 176, last epoch 192, 30.9 s | study best 0.007039 (trial 0)
+2026-11-18 02:47:26 V     trial 4 (seed 2046): {'lr': 0.003315620385141466, 'wd': 0.00024227798525237117, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:47:57 V     trial 4 COMPLETE: value 0.007168, best_epoch 173, last epoch 189, 31.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:47:57 V     trial 5 (seed 2047): {'lr': 0.0017955976288266022, 'wd': 0.004105051240408082, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:48:02 V     trial 5 PRUNED: value -, best_epoch -, last epoch 33, 5.5 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:02 V     trial 6 (seed 2048): {'lr': 0.0010040003322220562, 'wd': 3.5255440803910922e-06, 'adapter_initialization': 'normal'}
+2026-11-18 02:48:04 V     trial 6 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:04 V     trial 7 (seed 2049): {'lr': 0.00015193235323590198, 'wd': 9.820281117266354e-05, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:48:06 V     trial 7 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:07 V     trial 8 (seed 2050): {'lr': 0.000346024599016324, 'wd': 0.0011716381651822906, 'adapter_initialization': 'normal'}
+2026-11-18 02:48:08 V     trial 8 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:09 V     trial 9 (seed 2051): {'lr': 0.001716198398858101, 'wd': 1.1898967857364566e-05, 'adapter_initialization': 'normal'}
+2026-11-18 02:48:11 V     trial 9 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:11 V     trial 10 (seed 2052): {'lr': 0.00465311086061436, 'wd': 0.007231758388227208, 'adapter_initialization': 'normal'}
+2026-11-18 02:48:13 V     trial 10 PRUNED: value -, best_epoch -, last epoch 11, 2.3 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:13 V     trial 11 (seed 2053): {'lr': 0.0038726320045682516, 'wd': 0.00017550344093141538, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:48:45 V     trial 11 COMPLETE: value 0.007103, best_epoch 183, last epoch 199, 32.4 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:46 V     trial 12 (seed 2054): {'lr': 0.004831152570746184, 'wd': 0.00014361684291648602, 'adapter_initialization': 'normal'}
+2026-11-18 02:48:48 V     trial 12 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:48 V     trial 13 (seed 2055): {'lr': 0.001274078295958732, 'wd': 0.000112606077455346, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:48:50 V     trial 13 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:50 V     trial 14 (seed 2056): {'lr': 0.001264394500046214, 'wd': 0.0016665794174715808, 'adapter_initialization': 'normal'}
+2026-11-18 02:48:52 V     trial 14 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:48:52 V     trial 15 (seed 2057): {'lr': 0.0042194079664922965, 'wd': 2.990144197668807e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:49:24 V     trial 15 COMPLETE: value 0.007042, best_epoch 197, last epoch 200, 32.3 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:25 V     trial 16 (seed 2058): {'lr': 0.004262262512957104, 'wd': 5.887569473248016e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:49:40 V     trial 16 PRUNED: value -, best_epoch -, last epoch 89, 14.9 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:40 V     trial 17 (seed 2059): {'lr': 0.0005771057459213189, 'wd': 1.0436122558133892e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:49:42 V     trial 17 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:42 V     trial 18 (seed 2060): {'lr': 0.0035825674514669416, 'wd': 2.0644903964958702e-06, 'adapter_initialization': 'normal'}
+2026-11-18 02:49:45 V     trial 18 PRUNED: value -, best_epoch -, last epoch 16, 2.9 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:45 V     trial 19 (seed 2061): {'lr': 0.001752590379084269, 'wd': 4.0226906852845036e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:49:48 V     trial 19 PRUNED: value -, best_epoch -, last epoch 16, 3.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:48 V     trial 20 (seed 2062): {'lr': 0.004660365399939815, 'wd': 0.0007961762124497942, 'adapter_initialization': 'normal'}
+2026-11-18 02:49:50 V     trial 20 PRUNED: value -, best_epoch -, last epoch 11, 2.2 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:50 V     trial 21 (seed 2063): {'lr': 0.0013842205596759243, 'wd': 2.5219536309559388e-05, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:49:53 V     trial 21 PRUNED: value -, best_epoch -, last epoch 18, 3.2 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:53 V     trial 22 (seed 2064): {'lr': 0.0022159881259167023, 'wd': 3.1663641409554665e-05, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:49:56 V     trial 22 PRUNED: value -, best_epoch -, last epoch 16, 2.8 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:56 V     trial 23 (seed 2065): {'lr': 0.0017558374247615492, 'wd': 0.0001552539657297753, 'adapter_initialization': 'normal'}
+2026-11-18 02:49:58 V     trial 23 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:49:58 V     trial 24 (seed 2066): {'lr': 0.000656665827584816, 'wd': 0.00012624285266517676, 'adapter_initialization': 'normal'}
+2026-11-18 02:50:00 V     trial 24 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:50:01 V     trial 25 (seed 2067): {'lr': 0.002102189167354552, 'wd': 0.0005468106867240105, 'adapter_initialization': 'normal'}
+2026-11-18 02:50:02 V     trial 25 PRUNED: value -, best_epoch -, last epoch 11, 2.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:50:03 V     trial 26 (seed 2068): {'lr': 0.004217520194084444, 'wd': 1.1672297577645411e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:50:06 V     trial 26 PRUNED: value -, best_epoch -, last epoch 16, 3.0 s | study best 0.007039 (trial 0)
+2026-11-18 02:50:06 V     trial 27 (seed 2069): {'lr': 0.003646005064192949, 'wd': 4.136295583714017e-05, 'adapter_initialization': 'normal'}
+2026-11-18 02:50:08 V     trial 27 PRUNED: value -, best_epoch -, last epoch 12, 2.2 s | study best 0.007039 (trial 0)
+2026-11-18 02:50:08 V     trial 28 (seed 2070): {'lr': 0.0022250661211855828, 'wd': 1.0153501946727096e-06, 'adapter_initialization': 'random_sign'}
+2026-11-18 02:50:10 V     trial 28 PRUNED: value -, best_epoch -, last epoch 12, 2.2 s | study best 0.007039 (trial 0)
+2026-11-18 02:50:10 V     trial 29 (seed 2071): {'lr': 0.00089036792158246, 'wd': 4.237351978381469e-05, 'adapter_initialization': 'normal'}
+2026-11-18 02:50:12 V     trial 29 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007039 (trial 0)
+2026-11-18 02:50:12 I   [hpo] batchensemble: done in 299.2 s, best value 0.007039 (trial 0, best_epoch 184)
+2026-11-18 02:50:12 I   [refit] 15/15 units pending
+2026-11-18 02:50:13 V   study diamonds/fold2/single_resnet opened in 0.2 s
+2026-11-18 02:50:13 V   study diamonds/fold2/tangos opened in 0.1 s
+2026-11-18 02:50:13 V   study diamonds/fold2/batchensemble opened in 0.3 s
+2026-11-18 02:50:13 V   preprocessing outer split ...
+2026-11-18 02:50:16 V   preprocessing outer split done in 2.8 s
+2026-11-18 02:50:16 V   outer split: train (43152, 26), eval (10788, 26), input_dim 26
+2026-11-18 02:50:16 V   [refit] single_resnet seed=42: training 161 epochs, params {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09622356696756784}
+2026-11-18 02:50:29 I   [refit] single_resnet seed=42: rmse=0.0961, mae=0.0683, r2=0.9910, epochs=161.0000, train_seconds=12.6669
+2026-11-18 02:50:29 V   [refit] single_resnet seed=67: training 161 epochs, params {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09622356696756784}
+2026-11-18 02:50:41 I   [refit] single_resnet seed=67: rmse=0.0983, mae=0.0713, r2=0.9906, epochs=161.0000, train_seconds=11.8409
+2026-11-18 02:50:41 V   [refit] single_resnet seed=69: training 161 epochs, params {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09622356696756784}
+2026-11-18 02:50:52 I   [refit] single_resnet seed=69: rmse=0.0919, mae=0.0659, r2=0.9917, epochs=161.0000, train_seconds=11.8921
+2026-11-18 02:50:52 V   [refit] single_resnet seed=228: training 161 epochs, params {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09622356696756784}
+2026-11-18 02:51:05 I   [refit] single_resnet seed=228: rmse=0.0999, mae=0.0709, r2=0.9903, epochs=161.0000, train_seconds=12.0501
+2026-11-18 02:51:05 V   [refit] single_resnet seed=2137: training 161 epochs, params {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.09622356696756784}
+2026-11-18 02:51:17 I   [refit] single_resnet seed=2137: rmse=0.0925, mae=0.0652, r2=0.9917, epochs=161.0000, train_seconds=11.9535
+2026-11-18 02:51:17 V   [refit] tangos seed=42: training 117 epochs, params {'lr': 0.00220576551784527, 'wd': 1.6416942015530324e-06, 'sparsity': 0.0003274086618755876, 'orthogonality': 0.0038833960709775614}
+2026-11-18 02:51:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=42 epoch=1/117 | last update 3 s ago | running 13.1 h | rss 1956 MB, cuda 209/1668 MB allocated/reserved
+2026-11-18 02:56:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=42 epoch=45/117 | last update 4 s ago | running 13.2 h | rss 1951 MB, cuda 846/1668 MB allocated/reserved
+2026-11-18 03:01:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=42 epoch=88/117 | last update 7 s ago | running 13.3 h | rss 1949 MB, cuda 207/1668 MB allocated/reserved
+2026-11-18 03:04:37 I   [refit] tangos seed=42: rmse=0.0981, mae=0.0725, r2=0.9906, epochs=117.0000, train_seconds=799.8975
+2026-11-18 03:04:37 V   [refit] tangos seed=67: training 117 epochs, params {'lr': 0.00220576551784527, 'wd': 1.6416942015530324e-06, 'sparsity': 0.0003274086618755876, 'orthogonality': 0.0038833960709775614}
+2026-11-18 03:06:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=67 epoch=16/117 | last update 2 s ago | running 13.3 h | rss 1950 MB, cuda 847/1668 MB allocated/reserved
+2026-11-18 03:11:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=67 epoch=60/117 | last update 5 s ago | running 13.4 h | rss 1949 MB, cuda 528/1668 MB allocated/reserved
+2026-11-18 03:16:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=67 epoch=104/117 | last update 4 s ago | running 13.5 h | rss 1949 MB, cuda 208/1668 MB allocated/reserved
+2026-11-18 03:17:51 I   [refit] tangos seed=67: rmse=0.0996, mae=0.0727, r2=0.9903, epochs=117.0000, train_seconds=793.4132
+2026-11-18 03:17:51 V   [refit] tangos seed=69: training 117 epochs, params {'lr': 0.00220576551784527, 'wd': 1.6416942015530324e-06, 'sparsity': 0.0003274086618755876, 'orthogonality': 0.0038833960709775614}
+2026-11-18 03:21:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=69 epoch=31/117 | last update 6 s ago | running 13.6 h | rss 1950 MB, cuda 207/1668 MB allocated/reserved
+2026-11-18 03:26:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=69 epoch=76/117 | last update 1 s ago | running 13.7 h | rss 1949 MB, cuda 270/1668 MB allocated/reserved
+2026-11-18 03:31:04 I   [refit] tangos seed=69: rmse=0.1017, mae=0.0705, r2=0.9899, epochs=117.0000, train_seconds=793.1631
+2026-11-18 03:31:04 V   [refit] tangos seed=228: training 117 epochs, params {'lr': 0.00220576551784527, 'wd': 1.6416942015530324e-06, 'sparsity': 0.0003274086618755876, 'orthogonality': 0.0038833960709775614}
+2026-11-18 03:31:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=228 epoch=3/117 | last update 2 s ago | running 13.8 h | rss 1950 MB, cuda 528/1668 MB allocated/reserved
+2026-11-18 03:36:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=228 epoch=47/117 | last update 5 s ago | running 13.8 h | rss 1949 MB, cuda 527/1668 MB allocated/reserved
+2026-11-18 03:41:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=228 epoch=91/117 | last update 4 s ago | running 13.9 h | rss 1949 MB, cuda 11/1668 MB allocated/reserved
+2026-11-18 03:44:27 I   [refit] tangos seed=228: rmse=0.1094, mae=0.0773, r2=0.9883, epochs=117.0000, train_seconds=802.0476
+2026-11-18 03:44:27 V   [refit] tangos seed=2137: training 117 epochs, params {'lr': 0.00220576551784527, 'wd': 1.6416942015530324e-06, 'sparsity': 0.0003274086618755876, 'orthogonality': 0.0038833960709775614}
+2026-11-18 03:46:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=2137 epoch=16/117 | last update 6 s ago | running 14.0 h | rss 1950 MB, cuda 824/1668 MB allocated/reserved
+2026-11-18 03:51:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=2137 epoch=60/117 | last update 3 s ago | running 14.1 h | rss 1950 MB, cuda 481/1668 MB allocated/reserved
+2026-11-18 03:56:20 I [heartbeat] dataset=diamonds fold=2 phase=refit method=tangos seed=2137 epoch=104/117 | last update 4 s ago | running 14.2 h | rss 1949 MB, cuda 144/1668 MB allocated/reserved
+2026-11-18 03:57:51 I   [refit] tangos seed=2137: rmse=0.0996, mae=0.0691, r2=0.9903, epochs=117.0000, train_seconds=804.7564
+2026-11-18 03:57:51 V   [refit] batchensemble seed=42: training 184 epochs, params {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'adapter_initialization': 'normal'}
+2026-11-18 03:58:15 I   [refit] batchensemble seed=42: rmse=0.0987, mae=0.0709, r2=0.9905, epochs=184.0000, train_seconds=22.6950
+2026-11-18 03:58:15 V   [refit] batchensemble seed=67: training 184 epochs, params {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'adapter_initialization': 'normal'}
+2026-11-18 03:58:36 I   [refit] batchensemble seed=67: rmse=0.0887, mae=0.0619, r2=0.9923, epochs=184.0000, train_seconds=21.8375
+2026-11-18 03:58:36 V   [refit] batchensemble seed=69: training 184 epochs, params {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'adapter_initialization': 'normal'}
+2026-11-18 03:59:00 I   [refit] batchensemble seed=69: rmse=0.0905, mae=0.0644, r2=0.9920, epochs=184.0000, train_seconds=23.5359
+2026-11-18 03:59:00 V   [refit] batchensemble seed=228: training 184 epochs, params {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'adapter_initialization': 'normal'}
+2026-11-18 03:59:22 I   [refit] batchensemble seed=228: rmse=0.0911, mae=0.0648, r2=0.9919, epochs=184.0000, train_seconds=22.2981
+2026-11-18 03:59:22 V   [refit] batchensemble seed=2137: training 184 epochs, params {'lr': 0.002111463228585472, 'wd': 0.00030509215992217546, 'adapter_initialization': 'normal'}
+2026-11-18 03:59:58 I   [refit] batchensemble seed=2137: rmse=0.0889, mae=0.0622, r2=0.9923, epochs=184.0000, train_seconds=34.8321
+2026-11-18 03:59:58 I  fold 3
+2026-11-18 03:59:58 V   preprocessing inner split ...
+2026-11-18 04:00:01 V   preprocessing inner split done in 3.4 s
+2026-11-18 04:00:01 V   inner split: train (34521, 26), eval (8631, 26), input_dim 26
+2026-11-18 04:00:03 V   study diamonds/fold3/single_resnet opened in 2.3 s
+2026-11-18 04:00:03 I   [hpo] single_resnet: trials 0/40
+2026-11-18 04:00:04 V     trial 0 (seed 3042): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.39141618498968994}
+2026-11-18 04:00:11 V     trial 0 COMPLETE: value 0.01244, best_epoch 35, last epoch 51, 7.4 s | study best 0.01244 (trial 0)
+2026-11-18 04:00:11 V     trial 1 (seed 3043): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.3303998677703035}
+2026-11-18 04:00:24 V     trial 1 COMPLETE: value 0.01069, best_epoch 71, last epoch 87, 13.1 s | study best 0.01069 (trial 1)
+2026-11-18 04:00:24 V     trial 2 (seed 3044): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.3657982516962191}
+2026-11-18 04:00:37 V     trial 2 COMPLETE: value 0.01229, best_epoch 75, last epoch 91, 12.8 s | study best 0.01069 (trial 1)
+2026-11-18 04:00:37 V     trial 3 (seed 3045): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.48351618361054033}
+2026-11-18 04:00:43 V     trial 3 COMPLETE: value 0.01412, best_epoch 24, last epoch 40, 5.5 s | study best 0.01069 (trial 1)
+2026-11-18 04:00:43 V     trial 4 (seed 3046): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.0421264121134427}
+2026-11-18 04:01:06 V     trial 4 COMPLETE: value 0.008193, best_epoch 137, last epoch 153, 23.3 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:06 V     trial 5 (seed 3047): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.034127920440794546}
+2026-11-18 04:01:19 V     trial 5 COMPLETE: value 0.008712, best_epoch 86, last epoch 102, 13.2 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:20 V     trial 6 (seed 3048): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.3433928251515753}
+2026-11-18 04:01:20 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=single_resnet trial=6 seed=3048 epoch=7/200 | last update 0 s ago | running 14.3 h | rss 1953 MB, cuda 5/1668 MB allocated/reserved
+2026-11-18 04:01:21 V     trial 6 PRUNED: value -, best_epoch -, last epoch 11, 1.6 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:21 V     trial 7 (seed 3049): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.4323954641341858}
+2026-11-18 04:01:28 V     trial 7 COMPLETE: value 0.01238, best_epoch 34, last epoch 50, 6.5 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:28 V     trial 8 (seed 3050): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.17950915126463374}
+2026-11-18 04:01:32 V     trial 8 PRUNED: value -, best_epoch -, last epoch 28, 4.0 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:32 V     trial 9 (seed 3051): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.4750293018582879}
+2026-11-18 04:01:34 V     trial 9 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:34 V     trial 10 (seed 3052): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.03523709728944252}
+2026-11-18 04:01:44 V     trial 10 COMPLETE: value 0.008595, best_epoch 45, last epoch 61, 9.9 s | study best 0.008193 (trial 4)
+2026-11-18 04:01:44 V     trial 11 (seed 3053): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.014271378510379712}
+2026-11-18 04:02:05 V     trial 11 COMPLETE: value 0.007899, best_epoch 120, last epoch 136, 21.1 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:05 V     trial 12 (seed 3054): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.01935304105408775}
+2026-11-18 04:02:07 V     trial 12 PRUNED: value -, best_epoch -, last epoch 12, 1.9 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:07 V     trial 13 (seed 3055): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.12949113805013485}
+2026-11-18 04:02:10 V     trial 13 PRUNED: value -, best_epoch -, last epoch 17, 2.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:10 V     trial 14 (seed 3056): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.1302609350606304}
+2026-11-18 04:02:13 V     trial 14 PRUNED: value -, best_epoch -, last epoch 18, 2.9 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:13 V     trial 15 (seed 3057): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.22264998982975215}
+2026-11-18 04:02:15 V     trial 15 PRUNED: value -, best_epoch -, last epoch 12, 2.1 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:15 V     trial 16 (seed 3058): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.12497856680700767}
+2026-11-18 04:02:17 V     trial 16 PRUNED: value -, best_epoch -, last epoch 12, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:17 V     trial 17 (seed 3059): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.010098946862243108}
+2026-11-18 04:02:19 V     trial 17 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:19 V     trial 18 (seed 3060): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.13321707204099353}
+2026-11-18 04:02:21 V     trial 18 PRUNED: value -, best_epoch -, last epoch 11, 1.9 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:21 V     trial 19 (seed 3061): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.009216799664545059}
+2026-11-18 04:02:26 V     trial 19 COMPLETE: value 0.01108, best_epoch 23, last epoch 39, 5.7 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:27 V     trial 20 (seed 3062): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.26477934715637697}
+2026-11-18 04:02:28 V     trial 20 PRUNED: value -, best_epoch -, last epoch 11, 1.6 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:28 V     trial 21 (seed 3063): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.06545775233551562}
+2026-11-18 04:02:30 V     trial 21 PRUNED: value -, best_epoch -, last epoch 12, 2.2 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:31 V     trial 22 (seed 3064): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.05444969123614153}
+2026-11-18 04:02:33 V     trial 22 PRUNED: value -, best_epoch -, last epoch 11, 2.1 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:33 V     trial 23 (seed 3065): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.061366159925231034}
+2026-11-18 04:02:35 V     trial 23 PRUNED: value -, best_epoch -, last epoch 11, 1.9 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:35 V     trial 24 (seed 3066): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.007010670283316069}
+2026-11-18 04:02:37 V     trial 24 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:37 V     trial 25 (seed 3067): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.006924746775257482}
+2026-11-18 04:02:38 V     trial 25 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:39 V     trial 26 (seed 3068): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.10232028626967626}
+2026-11-18 04:02:50 V     trial 26 COMPLETE: value 0.009544, best_epoch 58, last epoch 74, 11.6 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:50 V     trial 27 (seed 3069): {'hidden_dim': 64, 'n_blocks': 4, 'dr': 0.1682830488120964}
+2026-11-18 04:02:52 V     trial 27 PRUNED: value -, best_epoch -, last epoch 11, 1.9 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:52 V     trial 28 (seed 3070): {'hidden_dim': 128, 'n_blocks': 4, 'dr': 0.05228153484757511}
+2026-11-18 04:02:54 V     trial 28 PRUNED: value -, best_epoch -, last epoch 11, 1.9 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:54 V     trial 29 (seed 3071): {'hidden_dim': 256, 'n_blocks': 4, 'dr': 0.49780316972588123}
+2026-11-18 04:02:56 V     trial 29 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:56 V     trial 30 (seed 3072): {'hidden_dim': 128, 'n_blocks': 3, 'dr': 0.08145466158018375}
+2026-11-18 04:02:59 V     trial 30 PRUNED: value -, best_epoch -, last epoch 18, 2.6 s | study best 0.007899 (trial 11)
+2026-11-18 04:02:59 V     trial 31 (seed 3073): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.04994300862233557}
+2026-11-18 04:03:00 V     trial 31 PRUNED: value -, best_epoch -, last epoch 11, 1.6 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:01 V     trial 32 (seed 3074): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.08779675751070783}
+2026-11-18 04:03:02 V     trial 32 PRUNED: value -, best_epoch -, last epoch 12, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:03 V     trial 33 (seed 3075): {'hidden_dim': 256, 'n_blocks': 2, 'dr': 0.048653042412998886}
+2026-11-18 04:03:05 V     trial 33 PRUNED: value -, best_epoch -, last epoch 18, 2.4 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:05 V     trial 34 (seed 3076): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.09585952151368561}
+2026-11-18 04:03:13 V     trial 34 COMPLETE: value 0.01052, best_epoch 41, last epoch 57, 8.2 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:13 V     trial 35 (seed 3077): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.008702810004846573}
+2026-11-18 04:03:15 V     trial 35 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:15 V     trial 36 (seed 3078): {'hidden_dim': 256, 'n_blocks': 3, 'dr': 0.1845285786751654}
+2026-11-18 04:03:17 V     trial 36 PRUNED: value -, best_epoch -, last epoch 11, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:17 V     trial 37 (seed 3079): {'hidden_dim': 64, 'n_blocks': 3, 'dr': 0.21388879609718647}
+2026-11-18 04:03:18 V     trial 37 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:19 V     trial 38 (seed 3080): {'hidden_dim': 128, 'n_blocks': 2, 'dr': 0.13902970392575342}
+2026-11-18 04:03:20 V     trial 38 PRUNED: value -, best_epoch -, last epoch 11, 1.7 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:21 V     trial 39 (seed 3081): {'hidden_dim': 64, 'n_blocks': 2, 'dr': 0.188483864420823}
+2026-11-18 04:03:22 V     trial 39 PRUNED: value -, best_epoch -, last epoch 13, 1.8 s | study best 0.007899 (trial 11)
+2026-11-18 04:03:22 I   [hpo] single_resnet: done in 201.0 s, best value 0.007899 (trial 11, best_epoch 120)
+2026-11-18 04:03:22 V   study diamonds/fold3/tangos opened in 0.1 s
+2026-11-18 04:03:22 I   [hpo] tangos: trials 0/30
+2026-11-18 04:03:23 V     trial 0 (seed 3042): {'lr': 0.00045355356384571853, 'wd': 8.324597114789227e-06, 'sparsity': 0.0003222441313671872, 'orthogonality': 0.005926966471134641}
+2026-11-18 04:06:20 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=5/200 | last update 22 s ago | running 14.3 h | rss 1956 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 04:11:20 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=13/200 | last update 12 s ago | running 14.4 h | rss 1954 MB, cuda 814/8020 MB allocated/reserved
+2026-11-18 04:16:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=20/200 | last update 38 s ago | running 14.5 h | rss 1953 MB, cuda 4649/8020 MB allocated/reserved
+2026-11-18 04:21:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=28/200 | last update 28 s ago | running 14.6 h | rss 1953 MB, cuda 820/8020 MB allocated/reserved
+2026-11-18 04:26:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=36/200 | last update 16 s ago | running 14.7 h | rss 1952 MB, cuda 4649/8020 MB allocated/reserved
+2026-11-18 04:31:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=44/200 | last update 5 s ago | running 14.8 h | rss 1953 MB, cuda 2095/8020 MB allocated/reserved
+2026-11-18 04:36:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=51/200 | last update 33 s ago | running 14.8 h | rss 1954 MB, cuda 820/8020 MB allocated/reserved
+2026-11-18 04:41:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=59/200 | last update 21 s ago | running 14.9 h | rss 1952 MB, cuda 2097/8020 MB allocated/reserved
+2026-11-18 04:46:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=0 seed=3042 epoch=67/200 | last update 10 s ago | running 15.0 h | rss 1954 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 04:47:29 V     trial 0 COMPLETE: value 0.01331, best_epoch 52, last epoch 68, 2646.4 s | study best 0.01331 (trial 0)
+2026-11-18 04:47:29 V     trial 1 (seed 3043): {'lr': 0.0030042907056585014, 'wd': 0.0004765726208500991, 'sparsity': 0.003959471198976943, 'orthogonality': 0.31991020176149865}
+2026-11-18 04:51:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=1 seed=3043 epoch=6/200 | last update 37 s ago | running 15.1 h | rss 1955 MB, cuda 820/8020 MB allocated/reserved
+2026-11-18 04:56:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=1 seed=3043 epoch=14/200 | last update 26 s ago | running 15.2 h | rss 1953 MB, cuda 5928/8020 MB allocated/reserved
+2026-11-18 04:59:49 V     trial 1 COMPLETE: value 0.0246, best_epoch 3, last epoch 19, 739.4 s | study best 0.01331 (trial 0)
+2026-11-18 04:59:49 V     trial 2 (seed 3044): {'lr': 0.004215858992307634, 'wd': 5.917975871905337e-06, 'sparsity': 0.01440189237313999, 'orthogonality': 0.029277507655249103}
+2026-11-18 05:01:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=2 seed=3044 epoch=3/200 | last update 14 s ago | running 15.3 h | rss 1955 MB, cuda 5925/8020 MB allocated/reserved
+2026-11-18 05:06:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=2 seed=3044 epoch=11/200 | last update 4 s ago | running 15.3 h | rss 1954 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 05:11:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=2 seed=3044 epoch=18/200 | last update 31 s ago | running 15.4 h | rss 1953 MB, cuda 5927/8020 MB allocated/reserved
+2026-11-18 05:16:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=2 seed=3044 epoch=26/200 | last update 21 s ago | running 15.5 h | rss 1954 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 05:17:18 V     trial 2 COMPLETE: value 0.01755, best_epoch 11, last epoch 27, 1049.4 s | study best 0.01331 (trial 0)
+2026-11-18 05:17:19 V     trial 3 (seed 3045): {'lr': 0.0003673665035289213, 'wd': 0.0005973936138194941, 'sparsity': 0.0527024473216201, 'orthogonality': 0.0018579814187844703}
+2026-11-18 05:21:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=7/200 | last update 10 s ago | running 15.6 h | rss 1953 MB, cuda 5927/8020 MB allocated/reserved
+2026-11-18 05:26:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=14/200 | last update 37 s ago | running 15.7 h | rss 1954 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 05:31:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=22/200 | last update 26 s ago | running 15.8 h | rss 1953 MB, cuda 4653/8020 MB allocated/reserved
+2026-11-18 05:36:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=30/200 | last update 15 s ago | running 15.8 h | rss 1954 MB, cuda 3368/8020 MB allocated/reserved
+2026-11-18 05:41:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=38/200 | last update 4 s ago | running 15.9 h | rss 1953 MB, cuda 5925/8020 MB allocated/reserved
+2026-11-18 05:46:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=45/200 | last update 31 s ago | running 16.0 h | rss 1954 MB, cuda 4653/8020 MB allocated/reserved
+2026-11-18 05:51:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=3 seed=3045 epoch=53/200 | last update 20 s ago | running 16.1 h | rss 1953 MB, cuda 3374/8020 MB allocated/reserved
+2026-11-18 05:53:37 V     trial 3 COMPLETE: value 0.01525, best_epoch 40, last epoch 56, 2178.3 s | study best 0.01331 (trial 0)
+2026-11-18 05:53:37 V     trial 4 (seed 3046): {'lr': 0.00043011353541316355, 'wd': 1.7849821841821618e-05, 'sparsity': 0.0009144666412843843, 'orthogonality': 0.6110311112247031}
+2026-11-18 05:56:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=5/200 | last update 9 s ago | running 16.2 h | rss 1955 MB, cuda 3372/8020 MB allocated/reserved
+2026-11-18 06:01:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=12/200 | last update 37 s ago | running 16.3 h | rss 1955 MB, cuda 4652/8020 MB allocated/reserved
+2026-11-18 06:06:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=20/200 | last update 25 s ago | running 16.3 h | rss 1953 MB, cuda 15/8020 MB allocated/reserved
+2026-11-18 06:11:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=28/200 | last update 14 s ago | running 16.4 h | rss 1954 MB, cuda 4653/8020 MB allocated/reserved
+2026-11-18 06:16:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=35/200 | last update 31 s ago | running 16.5 h | rss 1953 MB, cuda 2098/8020 MB allocated/reserved
+2026-11-18 06:21:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=43/200 | last update 21 s ago | running 16.6 h | rss 1954 MB, cuda 5930/8020 MB allocated/reserved
+2026-11-18 06:26:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=51/200 | last update 6 s ago | running 16.7 h | rss 1954 MB, cuda 5929/8020 MB allocated/reserved
+2026-11-18 06:31:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=58/200 | last update 35 s ago | running 16.8 h | rss 1954 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 06:36:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=66/200 | last update 23 s ago | running 16.8 h | rss 1953 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 06:41:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=4 seed=3046 epoch=74/200 | last update 12 s ago | running 16.9 h | rss 1953 MB, cuda 3375/8020 MB allocated/reserved
+2026-11-18 06:43:44 V     trial 4 COMPLETE: value 0.01322, best_epoch 61, last epoch 77, 3007.4 s | study best 0.01322 (trial 4)
+2026-11-18 06:43:45 V     trial 5 (seed 3047): {'lr': 0.00016482144664301841, 'wd': 2.843377798962829e-06, 'sparsity': 0.08320966009453817, 'orthogonality': 0.001983323449544105}
+2026-11-18 06:46:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=5 seed=3047 epoch=5/200 | last update 1 s ago | running 17.0 h | rss 1955 MB, cuda 820/8020 MB allocated/reserved
+2026-11-18 06:50:52 V     trial 5 PRUNED: value -, best_epoch -, last epoch 11, 427.2 s | study best 0.01322 (trial 4)
+2026-11-18 06:50:52 V     trial 6 (seed 3048): {'lr': 0.000838589954272313, 'wd': 1.3868558455691556e-06, 'sparsity': 0.0020921590595486725, 'orthogonality': 0.00802774155897961}
+2026-11-18 06:51:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=1/200 | last update 29 s ago | running 17.1 h | rss 1955 MB, cuda 813/8020 MB allocated/reserved
+2026-11-18 06:56:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=9/200 | last update 18 s ago | running 17.2 h | rss 1955 MB, cuda 2098/8020 MB allocated/reserved
+2026-11-18 07:01:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=17/200 | last update 6 s ago | running 17.3 h | rss 1954 MB, cuda 4648/8020 MB allocated/reserved
+2026-11-18 07:06:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=24/200 | last update 35 s ago | running 17.3 h | rss 1954 MB, cuda 820/8020 MB allocated/reserved
+2026-11-18 07:11:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=32/200 | last update 23 s ago | running 17.4 h | rss 1954 MB, cuda 3371/8020 MB allocated/reserved
+2026-11-18 07:16:21 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=40/200 | last update 12 s ago | running 17.5 h | rss 1954 MB, cuda 3368/8022 MB allocated/reserved
+2026-11-18 07:21:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=6 seed=3048 epoch=48/200 | last update 1 s ago | running 17.6 h | rss 1954 MB, cuda 2091/8022 MB allocated/reserved
+2026-11-18 07:25:53 V     trial 6 COMPLETE: value 0.01035, best_epoch 38, last epoch 54, 2100.6 s | study best 0.01035 (trial 6)
+2026-11-18 07:25:53 V     trial 7 (seed 3049): {'lr': 0.0002588090116834727, 'wd': 7.639125545680101e-06, 'sparsity': 0.016425255356905873, 'orthogonality': 0.0016534188851161711}
+2026-11-18 07:26:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=7 seed=3049 epoch=1/200 | last update 28 s ago | running 17.7 h | rss 1955 MB, cuda 4650/8022 MB allocated/reserved
+2026-11-18 07:31:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=7 seed=3049 epoch=9/200 | last update 18 s ago | running 17.8 h | rss 1953 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 07:36:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=7 seed=3049 epoch=17/200 | last update 5 s ago | running 17.8 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 07:41:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=7 seed=3049 epoch=24/200 | last update 34 s ago | running 17.9 h | rss 1954 MB, cuda 2098/8022 MB allocated/reserved
+2026-11-18 07:46:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=7 seed=3049 epoch=32/200 | last update 23 s ago | running 18.0 h | rss 1953 MB, cuda 2098/8022 MB allocated/reserved
+2026-11-18 07:51:12 V     trial 7 PRUNED: value -, best_epoch -, last epoch 39, 1518.4 s | study best 0.01035 (trial 6)
+2026-11-18 07:51:12 V     trial 8 (seed 3050): {'lr': 0.0003131007505309626, 'wd': 0.006430220334949547, 'sparsity': 0.0009142364201499102, 'orthogonality': 0.09905503421370822}
+2026-11-18 07:51:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=8 seed=3050 epoch=1/200 | last update 9 s ago | running 18.1 h | rss 1955 MB, cuda 3373/8022 MB allocated/reserved
+2026-11-18 07:56:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=8 seed=3050 epoch=8/200 | last update 37 s ago | running 18.2 h | rss 1955 MB, cuda 814/8022 MB allocated/reserved
+2026-11-18 07:58:19 V     trial 8 PRUNED: value -, best_epoch -, last epoch 11, 427.3 s | study best 0.01035 (trial 6)
+2026-11-18 07:58:20 V     trial 9 (seed 3051): {'lr': 0.0004912439599383002, 'wd': 0.0006661736561334698, 'sparsity': 0.009756002899384617, 'orthogonality': 0.00248796412842292}
+2026-11-18 08:01:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=9 seed=3051 epoch=5/200 | last update 25 s ago | running 18.3 h | rss 1952 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 08:05:29 V     trial 9 PRUNED: value -, best_epoch -, last epoch 11, 429.0 s | study best 0.01035 (trial 6)
+2026-11-18 08:05:30 V     trial 10 (seed 3052): {'lr': 0.0018120055032902942, 'wd': 4.128196889213273e-06, 'sparsity': 0.0009623340414957572, 'orthogonality': 0.0023263486737862935}
+2026-11-18 08:06:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=10 seed=3052 epoch=2/200 | last update 13 s ago | running 18.3 h | rss 1956 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 08:11:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=10 seed=3052 epoch=10/200 | last update 3 s ago | running 18.4 h | rss 1955 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 08:16:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=10 seed=3052 epoch=17/200 | last update 30 s ago | running 18.5 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 08:21:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=10 seed=3052 epoch=25/200 | last update 20 s ago | running 18.6 h | rss 1954 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 08:26:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=10 seed=3052 epoch=33/200 | last update 7 s ago | running 18.7 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 08:31:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=10 seed=3052 epoch=40/200 | last update 36 s ago | running 18.8 h | rss 1954 MB, cuda 2098/8022 MB allocated/reserved
+2026-11-18 08:33:23 V     trial 10 COMPLETE: value 0.01095, best_epoch 27, last epoch 43, 1674.5 s | study best 0.01035 (trial 6)
+2026-11-18 08:33:24 V     trial 11 (seed 3053): {'lr': 0.0015349480075719398, 'wd': 1.4567482853848948e-06, 'sparsity': 0.0016631979140398036, 'orthogonality': 0.006800482757094983}
+2026-11-18 08:36:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=11 seed=3053 epoch=5/200 | last update 23 s ago | running 18.8 h | rss 1954 MB, cuda 3368/8022 MB allocated/reserved
+2026-11-18 08:40:30 V     trial 11 PRUNED: value -, best_epoch -, last epoch 11, 427.0 s | study best 0.01035 (trial 6)
+2026-11-18 08:40:31 V     trial 12 (seed 3054): {'lr': 0.002081063266848946, 'wd': 8.096935039335884e-06, 'sparsity': 0.00029404396222060074, 'orthogonality': 0.0017619465390366425}
+2026-11-18 08:41:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=12 seed=3054 epoch=2/200 | last update 12 s ago | running 18.9 h | rss 1956 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 08:46:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=12 seed=3054 epoch=10/200 | last update 0 s ago | running 19.0 h | rss 1955 MB, cuda 3371/8022 MB allocated/reserved
+2026-11-18 08:51:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=12 seed=3054 epoch=17/200 | last update 28 s ago | running 19.1 h | rss 1953 MB, cuda 4648/8022 MB allocated/reserved
+2026-11-18 08:56:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=12 seed=3054 epoch=25/200 | last update 17 s ago | running 19.2 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 09:01:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=12 seed=3054 epoch=33/200 | last update 6 s ago | running 19.3 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 09:02:35 V     trial 12 COMPLETE: value 0.01487, best_epoch 18, last epoch 34, 1324.4 s | study best 0.01035 (trial 6)
+2026-11-18 09:02:36 V     trial 13 (seed 3055): {'lr': 0.002065847242074411, 'wd': 1.4812581393436852e-05, 'sparsity': 0.002463435165497361, 'orthogonality': 0.005858863816781554}
+2026-11-18 09:06:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=13 seed=3055 epoch=6/200 | last update 33 s ago | running 19.3 h | rss 1956 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 09:09:42 V     trial 13 PRUNED: value -, best_epoch -, last epoch 11, 427.0 s | study best 0.01035 (trial 6)
+2026-11-18 09:09:42 V     trial 14 (seed 3056): {'lr': 0.0008436427459857796, 'wd': 3.042870176243645e-06, 'sparsity': 0.008704799992354196, 'orthogonality': 0.0046968620617191354}
+2026-11-18 09:11:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=14 seed=3056 epoch=3/200 | last update 22 s ago | running 19.4 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 09:16:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=14 seed=3056 epoch=11/200 | last update 10 s ago | running 19.5 h | rss 1953 MB, cuda 5926/8022 MB allocated/reserved
+2026-11-18 09:16:52 V     trial 14 PRUNED: value -, best_epoch -, last epoch 11, 429.2 s | study best 0.01035 (trial 6)
+2026-11-18 09:16:52 V     trial 15 (seed 3057): {'lr': 0.0008181407822203798, 'wd': 2.7216763591281786e-05, 'sparsity': 0.0005312897742267348, 'orthogonality': 0.05360787407003239}
+2026-11-18 09:21:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=15 seed=3057 epoch=7/200 | last update 37 s ago | running 19.6 h | rss 1955 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 09:23:59 V     trial 15 PRUNED: value -, best_epoch -, last epoch 11, 427.0 s | study best 0.01035 (trial 6)
+2026-11-18 09:23:59 V     trial 16 (seed 3058): {'lr': 0.0013929302747662286, 'wd': 1.557783242065568e-05, 'sparsity': 0.0020112271747451432, 'orthogonality': 0.0012628337880008966}
+2026-11-18 09:26:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=4/200 | last update 27 s ago | running 19.7 h | rss 1956 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 09:31:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=12/200 | last update 15 s ago | running 19.8 h | rss 1954 MB, cuda 3371/8022 MB allocated/reserved
+2026-11-18 09:36:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=20/200 | last update 3 s ago | running 19.8 h | rss 1954 MB, cuda 2347/8022 MB allocated/reserved
+2026-11-18 09:41:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=27/200 | last update 31 s ago | running 19.9 h | rss 1954 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 09:46:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=35/200 | last update 20 s ago | running 20.0 h | rss 1954 MB, cuda 1069/8022 MB allocated/reserved
+2026-11-18 09:51:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=43/200 | last update 9 s ago | running 20.1 h | rss 1954 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 09:56:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=50/200 | last update 37 s ago | running 20.2 h | rss 1954 MB, cuda 3373/8022 MB allocated/reserved
+2026-11-18 10:01:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=58/200 | last update 26 s ago | running 20.3 h | rss 1953 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 10:06:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=66/200 | last update 14 s ago | running 20.3 h | rss 1954 MB, cuda 5925/8022 MB allocated/reserved
+2026-11-18 10:11:22 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=74/200 | last update 2 s ago | running 20.4 h | rss 1954 MB, cuda 4647/8022 MB allocated/reserved
+2026-11-18 10:16:23 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=16 seed=3058 epoch=81/200 | last update 26 s ago | running 20.5 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 10:19:51 V     trial 16 COMPLETE: value 0.009722, best_epoch 70, last epoch 86, 3352.5 s | study best 0.009722 (trial 16)
+2026-11-18 10:19:53 V     trial 17 (seed 3059): {'lr': 0.0005240374264776537, 'wd': 4.4156005867938793e-05, 'sparsity': 0.0011000527285458914, 'orthogonality': 0.0024164670200605663}
+2026-11-18 10:21:23 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=17 seed=3059 epoch=3/200 | last update 11 s ago | running 20.6 h | rss 1956 MB, cuda 3374/8022 MB allocated/reserved
+2026-11-18 10:26:23 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=17 seed=3059 epoch=11/200 | last update 1 s ago | running 20.7 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 10:31:23 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=17 seed=3059 epoch=18/200 | last update 17 s ago | running 20.8 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 10:36:23 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=17 seed=3059 epoch=26/200 | last update 3 s ago | running 20.8 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 10:41:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=17 seed=3059 epoch=33/200 | last update 16 s ago | running 20.9 h | rss 1954 MB, cuda 4650/8022 MB allocated/reserved
+2026-11-18 10:46:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=17 seed=3059 epoch=41/200 | last update 5 s ago | running 21.0 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 10:50:55 V     trial 17 COMPLETE: value 0.01141, best_epoch 31, last epoch 47, 1862.4 s | study best 0.009722 (trial 16)
+2026-11-18 10:50:56 V     trial 18 (seed 3060): {'lr': 0.004381112889759465, 'wd': 1.722419771181324e-06, 'sparsity': 0.0003336760251899782, 'orthogonality': 0.009731377227263489}
+2026-11-18 10:51:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=18 seed=3060 epoch=1/200 | last update 27 s ago | running 21.1 h | rss 1956 MB, cuda 13/8022 MB allocated/reserved
+2026-11-18 10:56:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=18 seed=3060 epoch=9/200 | last update 17 s ago | running 21.2 h | rss 1955 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 11:00:03 V     trial 18 PRUNED: value -, best_epoch -, last epoch 14, 547.7 s | study best 0.009722 (trial 16)
+2026-11-18 11:00:04 V     trial 19 (seed 3061): {'lr': 0.004732812191911951, 'wd': 2.7908334323992408e-05, 'sparsity': 0.0022445412459088402, 'orthogonality': 0.001177329989631175}
+2026-11-18 11:01:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=19 seed=3061 epoch=3/200 | last update 2 s ago | running 21.3 h | rss 1954 MB, cuda 3370/8022 MB allocated/reserved
+2026-11-18 11:06:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=19 seed=3061 epoch=10/200 | last update 30 s ago | running 21.3 h | rss 1955 MB, cuda 2096/8022 MB allocated/reserved
+2026-11-18 11:07:11 V     trial 19 PRUNED: value -, best_epoch -, last epoch 11, 428.0 s | study best 0.009722 (trial 16)
+2026-11-18 11:07:12 V     trial 20 (seed 3062): {'lr': 0.0016256346834605166, 'wd': 6.480946670877095e-05, 'sparsity': 0.00027808565180483956, 'orthogonality': 0.006001866993949248}
+2026-11-18 11:11:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=20 seed=3062 epoch=7/200 | last update 19 s ago | running 21.4 h | rss 1954 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 11:14:19 V     trial 20 PRUNED: value -, best_epoch -, last epoch 11, 427.9 s | study best 0.009722 (trial 16)
+2026-11-18 11:14:20 V     trial 21 (seed 3063): {'lr': 0.0019961687298524666, 'wd': 4.761484806876617e-06, 'sparsity': 0.0013061126357532386, 'orthogonality': 0.0013391075773953648}
+2026-11-18 11:16:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=21 seed=3063 epoch=4/200 | last update 7 s ago | running 21.5 h | rss 1955 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 11:21:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=21 seed=3063 epoch=11/200 | last update 34 s ago | running 21.6 h | rss 1954 MB, cuda 4647/8022 MB allocated/reserved
+2026-11-18 11:26:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=21 seed=3063 epoch=19/200 | last update 24 s ago | running 21.7 h | rss 1953 MB, cuda 815/8022 MB allocated/reserved
+2026-11-18 11:31:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=21 seed=3063 epoch=27/200 | last update 12 s ago | running 21.8 h | rss 1954 MB, cuda 5925/8022 MB allocated/reserved
+2026-11-18 11:36:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=21 seed=3063 epoch=35/200 | last update 1 s ago | running 21.8 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 11:41:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=21 seed=3063 epoch=42/200 | last update 29 s ago | running 21.9 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 11:45:29 V     trial 21 COMPLETE: value 0.01249, best_epoch 32, last epoch 48, 1869.3 s | study best 0.009722 (trial 16)
+2026-11-18 11:45:29 V     trial 22 (seed 3064): {'lr': 0.000878425851158685, 'wd': 1.0337529295302404e-05, 'sparsity': 0.0008539701525419445, 'orthogonality': 0.001177291641881494}
+2026-11-18 11:46:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=22 seed=3064 epoch=2/200 | last update 16 s ago | running 22.0 h | rss 1956 MB, cuda 2092/8022 MB allocated/reserved
+2026-11-18 11:51:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=22 seed=3064 epoch=10/200 | last update 6 s ago | running 22.1 h | rss 1954 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 11:52:36 V     trial 22 PRUNED: value -, best_epoch -, last epoch 11, 427.2 s | study best 0.009722 (trial 16)
+2026-11-18 11:52:36 V     trial 23 (seed 3065): {'lr': 0.0013176866252167156, 'wd': 1.010067197642623e-06, 'sparsity': 0.0016778068281435713, 'orthogonality': 0.0015394414822850484}
+2026-11-18 11:56:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=23 seed=3065 epoch=6/200 | last update 32 s ago | running 22.2 h | rss 1953 MB, cuda 45/8022 MB allocated/reserved
+2026-11-18 12:01:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=23 seed=3065 epoch=14/200 | last update 21 s ago | running 22.3 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 12:06:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=23 seed=3065 epoch=22/200 | last update 9 s ago | running 22.3 h | rss 1954 MB, cuda 2096/8022 MB allocated/reserved
+2026-11-18 12:11:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=23 seed=3065 epoch=29/200 | last update 37 s ago | running 22.4 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 12:16:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=23 seed=3065 epoch=37/200 | last update 25 s ago | running 22.5 h | rss 1954 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 12:19:54 V     trial 23 COMPLETE: value 0.01126, best_epoch 26, last epoch 42, 1637.4 s | study best 0.009722 (trial 16)
+2026-11-18 12:19:55 V     trial 24 (seed 3066): {'lr': 0.0010621240055875352, 'wd': 1.3007747506689697e-06, 'sparsity': 0.0008827132082335854, 'orthogonality': 0.038169730025835645}
+2026-11-18 12:21:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=24 seed=3066 epoch=3/200 | last update 11 s ago | running 22.6 h | rss 1956 MB, cuda 2098/8022 MB allocated/reserved
+2026-11-18 12:26:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=24 seed=3066 epoch=11/200 | last update 1 s ago | running 22.7 h | rss 1955 MB, cuda 820/8022 MB allocated/reserved
+2026-11-18 12:27:02 V     trial 24 PRUNED: value -, best_epoch -, last epoch 11, 428.3 s | study best 0.009722 (trial 16)
+2026-11-18 12:27:03 V     trial 25 (seed 3067): {'lr': 0.0020878459896805602, 'wd': 0.00010257739925825577, 'sparsity': 0.0052561337284366865, 'orthogonality': 0.0022067252325512123}
+2026-11-18 12:31:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=7/200 | last update 27 s ago | running 22.8 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 12:36:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=15/200 | last update 17 s ago | running 22.8 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+2026-11-18 12:41:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=23/200 | last update 4 s ago | running 22.9 h | rss 1954 MB, cuda 2098/8022 MB allocated/reserved
+2026-11-18 12:46:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=30/200 | last update 33 s ago | running 23.0 h | rss 1954 MB, cuda 622/8022 MB allocated/reserved
+2026-11-18 12:51:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=38/200 | last update 19 s ago | running 23.1 h | rss 1954 MB, cuda 5928/8022 MB allocated/reserved
+2026-11-18 12:56:24 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=46/200 | last update 9 s ago | running 23.2 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 13:01:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=25 seed=3067 epoch=53/200 | last update 35 s ago | running 23.3 h | rss 1954 MB, cuda 3198/8022 MB allocated/reserved
+2026-11-18 13:02:46 V     trial 25 COMPLETE: value 0.01045, best_epoch 39, last epoch 55, 2144.0 s | study best 0.009722 (trial 16)
+2026-11-18 13:02:47 V     trial 26 (seed 3068): {'lr': 0.0015695202132756695, 'wd': 0.0006139301530261968, 'sparsity': 0.011247015164843522, 'orthogonality': 0.0022111927417539797}
+2026-11-18 13:06:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=26 seed=3068 epoch=6/200 | last update 24 s ago | running 23.3 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 13:11:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=26 seed=3068 epoch=14/200 | last update 13 s ago | running 23.4 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 13:16:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=26 seed=3068 epoch=22/200 | last update 1 s ago | running 23.5 h | rss 1954 MB, cuda 4647/8022 MB allocated/reserved
+2026-11-18 13:21:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=26 seed=3068 epoch=29/200 | last update 30 s ago | running 23.6 h | rss 1954 MB, cuda 4653/8022 MB allocated/reserved
+2026-11-18 13:26:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=26 seed=3068 epoch=37/200 | last update 18 s ago | running 23.7 h | rss 1954 MB, cuda 4651/8022 MB allocated/reserved
+2026-11-18 13:30:00 V     trial 26 COMPLETE: value 0.01264, best_epoch 26, last epoch 42, 1633.2 s | study best 0.009722 (trial 16)
+2026-11-18 13:30:00 V     trial 27 (seed 3069): {'lr': 0.0017579200523513854, 'wd': 3.792000869508617e-05, 'sparsity': 0.002239931836954719, 'orthogonality': 0.0014954284563932798}
+2026-11-18 13:31:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=27 seed=3069 epoch=3/200 | last update 7 s ago | running 23.8 h | rss 1954 MB, cuda 3372/8022 MB allocated/reserved
+2026-11-18 13:36:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=27 seed=3069 epoch=10/200 | last update 35 s ago | running 23.8 h | rss 1954 MB, cuda 5930/8022 MB allocated/reserved
+2026-11-18 13:41:25 I [heartbeat] dataset=diamonds fold=3 phase=hpo method=tangos trial=27 seed=3069 epoch=18/200 | last update 23 s ago | running 23.9 h | rss 1954 MB, cuda 3375/8022 MB allocated/reserved
+[2026-11-18T13:41:55.030] error: *** JOB 1943712 ON stud-3 CANCELLED AT 2026-11-18T13:41:55 DUE TO TIME LIMIT ***

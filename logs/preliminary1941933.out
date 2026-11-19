@@ -1,0 +1,11 @@
+Run directory: /mnt/evafs/faculty/home/akingston/EL-Research-Project/results/smoke | device: cpu | stages: ['hpo', 'refit']
+
+=== ds1 (classification, n=100) ===
+ fold 0
+ fold 1
+
+=== ds3 (regression, n=100) ===
+ fold 0
+ fold 1
+
+All requested units finished.

@@ -41,9 +41,11 @@ datasets:
     task_type: regression
 
 models:
+  - resnet
   - tangos
   - batchensemble
   - ensemble_none
-  - ensemble_symmetric
+  - sym_cka
+  - sym_cos
   - sfo_cka
   - sfo_cos

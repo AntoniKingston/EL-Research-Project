@@ -129,6 +129,62 @@ stored in the run directory; use a new `run_name` or `--fresh` in that case.
   `src.run_tools.resume.load_results`, which drops rows duplicated by a crash.
 * `diagnostics.csv` – staged ensemble performance and member output norms.
 * `<dataset>/best_params/`, `<dataset>/similarity/`, `<dataset>/splits.npz`, `config.yaml`.
+* `logs/<timestamp>_<SLURM job id or pid>.log` – copy of the console log of every invocation.
+
+### Debugging cluster runs
+
+Console output is timestamped and flushed line by line, so it appears in the SLURM output file
+immediately. Useful tools when a job seems to do nothing:
+
+* `-v` logs every trial (parameters, result, duration) and every refit; `-vv` additionally
+  logs every epoch (train/validation loss, epoch time), progress inside epochs longer than
+  a minute, and checkpoint saves.
+* A heartbeat line is logged every 10 minutes (`--heartbeat-minutes`, 0 disables) with the
+  current stage (dataset, fold, phase, method, trial or seed, epoch), the time since that stage
+  last changed, and memory use. It comes from a background thread, so it keeps appearing while
+  the main thread is blocked: a stage that stops changing while "last update" keeps growing
+  means a hang, not slow training.
+* `scancel --signal=USR2 <jobid>` (or `kill -USR2 <pid>`) prints the Python stack of every
+  thread to stderr without stopping the run, showing exactly where it is stuck.
+  `--dump-stacks-minutes N` does this automatically every N minutes.
+* The startup lines report host, job id, library versions, device, GPU name, and torch/OpenMP
+  thread counts. Set `OMP_NUM_THREADS` to `SLURM_CPUS_PER_TASK` on CPU nodes to avoid
+  oversubscription.
+
+Common causes of a silent hang:
+
+* **No internet on compute nodes.** An OpenML dataset missing from `data/raw/` is downloaded on
+  first use and the download can block indefinitely. Run
+  `uv run python -m src.scripts.train_orchestrator --config ... --stages data` on a login node
+  first; it only downloads/caches the datasets and writes the splits. The log says
+  `using cached ...` or `not cached, downloading ...` for every dataset.
+* **`uv run` syncing the environment** without network access. Sync on the login node and use
+  `uv run --no-sync` (or `.venv/bin/python`) in the job.
+* **SQLite on a network filesystem.** `-v` logs how long opening each Optuna study takes; if
+  it is slow or never finishes, point `results_dir` to a local or scratch filesystem.
+
+Example `sbatch` script that stops gracefully 5 minutes before the time limit and resubmits
+itself until the suite is finished:
+
+```sh
+#!/bin/bash
+#SBATCH --job-name=el-experiments
+#SBATCH --time=24:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --gres=gpu:1
+#SBATCH --signal=USR1@300
+#SBATCH --output=slurm-%j.out
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+# srun puts Python in a job step so that it receives the USR1 signal itself.
+srun uv run --no-sync python -m src.scripts.train_orchestrator \
+    --config configs/experiment_config.yaml -v
+status=$?
+if [ "$status" -eq 3 ]; then
+    sbatch "$0"
+fi
+exit "$status"
+```
 
 ## 📚 Citation
 

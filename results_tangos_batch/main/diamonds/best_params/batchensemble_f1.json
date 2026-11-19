@@ -1,0 +1,14 @@
+{
+  "params": {
+    "lr": 0.002173269666183853,
+    "wd": 1.4391337417720561e-06,
+    "adapter_initialization": "random_sign"
+  },
+  "backbone": {
+    "hidden_dim": 128,
+    "n_blocks": 4,
+    "dr": 0.013023927602197855
+  },
+  "best_epoch": 191,
+  "best_value": 0.006818997208029032
+}

@@ -8,6 +8,7 @@ state in per-unit checkpoints. Everything assumes a single worker process per ru
 import csv
 import hashlib
 import json
+import logging
 import os
 import shutil
 import signal
@@ -25,6 +26,9 @@ from optuna.storages import RDBStorage
 from optuna.trial import TrialState
 
 from src.models.base import TrainingInterrupted
+from src.run_tools.logging_setup import VERBOSE
+
+log = logging.getLogger(__name__)
 
 EXIT_CODE_INTERRUPTED = 3
 # Config sections whose change would make previously stored results inconsistent.
@@ -92,7 +96,7 @@ class RunDirectory:
         if fresh and path.exists():
             backup = path.with_name(f"{path.name}.bak-{datetime.now():%Y%m%d-%H%M%S}")
             shutil.move(path, backup)
-            print(f"--fresh: previous run moved to {backup}")
+            log.info("--fresh: previous run moved to %s", backup)
         path.mkdir(parents=True, exist_ok=True)
         self._guard(raw_config, dataset_specs)
         self._done = self._load_done()
@@ -222,7 +226,11 @@ class StopController:
         if self.reason is not None and signum == signal.SIGINT:
             raise KeyboardInterrupt
         self.reason = f"signal {signal.Signals(signum).name}"
-        print(f"\n[stop] {self.reason} received; finishing the current epoch and checkpointing")
+        # print, not logging: logging is not safe inside a signal handler
+        print(
+            f"\n[stop] {self.reason} received; finishing the current epoch and checkpointing",
+            flush=True,
+        )
 
     def should_stop(self) -> bool:
         if self.reason is None and self.deadline is not None and time.monotonic() > self.deadline:
@@ -230,7 +238,7 @@ class StopController:
         return self.reason is not None
 
     def exit(self) -> None:
-        print(f"[stop] Stopped ({self.reason}). Re-run the same command to resume.")
+        log.info("[stop] Stopped (%s). Re-run the same command to resume.", self.reason)
         sys.exit(EXIT_CODE_INTERRUPTED)
 
 
@@ -275,9 +283,34 @@ def run_study(
         study.sampler = optuna.samplers.TPESampler(seed=base_seed + done)
         try:
             study.optimize(lambda t, s=base_seed + done: objective(t, s), n_trials=1)
+            _log_trial_end(study)
         except TrainingInterrupted:
             failed = study.get_trials(deepcopy=False, states=(TrialState.FAIL,))
             if failed:
                 study.enqueue_trial(failed[-1].params, skip_if_exists=False)
             return False
     return True
+
+
+def _log_trial_end(study: optuna.Study) -> None:
+    if not log.isEnabledFor(VERBOSE):
+        return
+    trial = study.trials[-1]
+    seconds = trial.duration.total_seconds() if trial.duration is not None else float("nan")
+    value = trial.value if trial.state == TrialState.COMPLETE else None
+    last_step = trial.last_step
+    try:
+        best = f"{study.best_value:.4g} (trial {study.best_trial.number})"
+    except ValueError:
+        best = "-"
+    log.log(
+        VERBOSE,
+        "    trial %d %s: value %s, best_epoch %s, last epoch %s, %.1f s | study best %s",
+        trial.number,
+        trial.state.name,
+        f"{value:.4g}" if value is not None else "-",
+        trial.user_attrs.get("best_epoch", "-"),
+        last_step + 1 if last_step is not None else "-",
+        seconds,
+        best,
+    )

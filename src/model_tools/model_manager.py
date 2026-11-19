@@ -1,3 +1,4 @@
+import logging
 from abc import ABC, abstractmethod
 from collections.abc import Callable
 from functools import partial
@@ -13,6 +14,9 @@ from src.models.batchensemble import BatchEnsemble
 from src.models.ensemble import Ensemble
 from src.models.resnet import Resnet
 from src.models.tangos import Tangos
+from src.run_tools.logging_setup import VERBOSE, set_stage
+
+log = logging.getLogger(__name__)
 
 STAGE1_MODEL = "single_resnet"
 BACKBONE_KEYS = ("hidden_dim", "n_blocks", "dr")
@@ -74,6 +78,8 @@ class IModelManager(ABC):
     ) -> float:
         """Optuna objective: inner validation task loss. Stores the best epoch on the trial."""
         params = self.suggest(trial, ctx)
+        set_stage(trial=trial.number, seed=seed)
+        log.log(VERBOSE, "    trial %d (seed %d): %s", trial.number, seed, params)
         lr, wd = self.optimization_params(params, ctx)
         set_seed(seed)
         score, best_epoch = fold_score(
@@ -136,6 +142,16 @@ class SingleResnetManager(IModelManager):
         return make_resnet(params, ctx)
 
 
+class ResnetManager(IModelManager):
+    """Stage 2 single-network baseline: the Stage 1 backbone with tuned optimization settings."""
+
+    def suggest(self, trial: optuna.Trial, ctx: RunContext) -> dict[str, Any]:
+        return suggest_optimization(trial)
+
+    def build(self, params, backbone, ctx, seed) -> TabularModel:
+        return make_resnet(backbone, ctx)
+
+
 class TangosManager(IModelManager):
     def suggest(self, trial: optuna.Trial, ctx: RunContext) -> dict[str, Any]:
         return {
@@ -196,10 +212,12 @@ class EnsembleResnetManager(IModelManager):
 
 MODEL_REGISTRY: dict[str, Callable[[str], IModelManager]] = {
     STAGE1_MODEL: SingleResnetManager,
+    "resnet": ResnetManager,
     "tangos": TangosManager,
     "batchensemble": BatchEnsembleManager,
     "ensemble_none": partial(EnsembleResnetManager, mask="none", similarity_metric="cosine"),
-    "ensemble_symmetric": partial(EnsembleResnetManager, mask="symmetric", similarity_metric="cka"),
+    "sym_cka": partial(EnsembleResnetManager, mask="symmetric", similarity_metric="cka"),
+    "sym_cos": partial(EnsembleResnetManager, mask="symmetric", similarity_metric="cosine"),
     "sfo_cka": partial(EnsembleResnetManager, mask="lower_triangular", similarity_metric="cka"),
     "sfo_cos": partial(EnsembleResnetManager, mask="lower_triangular", similarity_metric="cosine"),
 }

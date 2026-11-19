@@ -1,6 +1,8 @@
+import logging
 import math
 import os
 import random
+import time
 from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -8,6 +10,12 @@ from pathlib import Path
 import numpy as np
 import torch
 from torch import nn
+
+from src.run_tools.logging_setup import VERBOSE, set_stage
+
+log = logging.getLogger(__name__)
+# At DEBUG level, progress inside an epoch is logged at most this often.
+IN_EPOCH_LOG_SECONDS = 60.0
 
 
 class TrainingInterrupted(Exception):  # noqa: N818
@@ -140,6 +148,13 @@ class TabularModel(nn.Module):
             opt.load_state_dict(saved["optimizer"])
             state = _FitState(**saved["state"])
             _restore_rng_state(saved["rng"])
+            log.log(
+                VERBOSE,
+                "      resumed from checkpoint %s at epoch %d/%d",
+                ckpt,
+                state.epoch,
+                epochs,
+            )
 
         def save_checkpoint() -> None:
             if ckpt is None:
@@ -151,9 +166,13 @@ class TabularModel(nn.Module):
                 "rng": _capture_rng_state(),
             }
             atomic_torch_save(payload, ckpt)
+            log.debug("      checkpoint saved after epoch %d/%d", state.epoch, epochs)
 
+        debug = log.isEnabledFor(logging.DEBUG)
         while state.epoch < epochs:
             epoch = state.epoch
+            set_stage(epoch=f"{epoch + 1}/{epochs}")
+            epoch_start = last_log = time.monotonic()
             self.train()
             perm = torch.randperm(n, device=device)
             train_loss = 0.0
@@ -164,6 +183,16 @@ class TabularModel(nn.Module):
                 loss.backward()
                 opt.step()
                 train_loss += loss.item()
+                if debug and time.monotonic() - last_log > IN_EPOCH_LOG_SECONDS:
+                    last_log = time.monotonic()
+                    log.debug(
+                        "      epoch %d/%d: batch %d/%d, mean train loss %.4g",
+                        epoch + 1,
+                        epochs,
+                        i + 1,
+                        n_batches,
+                        train_loss / (i + 1),
+                    )
 
             mean_train_loss = train_loss / n_batches
             state.loss_history["train_loss"].append(mean_train_loss)
@@ -182,6 +211,17 @@ class TabularModel(nn.Module):
                 monitored = mean_train_loss
                 state.best_epoch = epoch + 1
 
+            if debug:
+                log.debug(
+                    "      epoch %d/%d: train %.4g, val %s, best epoch %d, bad epochs %d, %.1f s",
+                    epoch + 1,
+                    epochs,
+                    mean_train_loss,
+                    f"{monitored:.4g}" if val is not None else "-",
+                    state.best_epoch,
+                    state.bad_epochs,
+                    time.monotonic() - epoch_start,
+                )
             if on_epoch_end is not None:
                 on_epoch_end(epoch, monitored)
 

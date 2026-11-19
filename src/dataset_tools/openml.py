@@ -1,4 +1,5 @@
 import json
+import logging
 import re
 from pathlib import Path
 
@@ -6,6 +7,8 @@ import pandas as pd
 from sklearn.datasets import fetch_openml
 
 CATEGORICAL_DTYPES = ["category", "object", "bool"]
+
+log = logging.getLogger(__name__)
 
 
 def read_links(path: str | Path) -> dict[str, str]:
@@ -29,9 +32,16 @@ def download_dataset(name: str, link: str, data_dir: str | Path, force: bool = F
     raw_dir = Path(data_dir) / "raw"
     frame_path, meta_path = raw_dir / f"{name}.parquet", raw_dir / f"{name}.json"
     if frame_path.exists() and meta_path.exists() and not force:
+        log.info("  %s: using cached %s", name, frame_path)
         return frame_path
 
     openml_id = parse_openml_id(link)
+    log.info(
+        "  %s: not cached, downloading OpenML id %d (needs internet access; on a cluster run "
+        "`--stages data` on a login node first)",
+        name,
+        openml_id,
+    )
     # The default pandas ARFF parser crashes on integer-valued nominal attributes (e.g. diamonds).
     bunch = fetch_openml(
         data_id=openml_id,
