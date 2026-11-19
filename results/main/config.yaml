@@ -1,0 +1,56 @@
+run_name: main
+results_dir: /mnt/evafs/faculty/home/akingston/EL-Research-Project/results
+data_dir: /mnt/evafs/faculty/home/akingston/EL-Research-Project/data
+device: auto
+save_models: false
+master_seed: 42
+n_outer_folds: 5
+refit_seeds:
+- 42
+- 67
+- 69
+- 228
+- 2137
+training:
+  optimizer: AdamW
+  max_epochs: 200
+  patience: 16
+  batch_size: 1024
+hpo:
+  stage1_trials: 40
+  stage2_trials: 30
+  stage1_lr: 0.001
+  stage1_wd: 0.0001
+  hidden_dims:
+  - 64
+  - 128
+  - 256
+  ensemble_size: 8
+  pruner_warmup: 10
+checkpoint:
+  every_n_epochs: 5
+  time_budget_hours: null
+openml_links: /mnt/evafs/faculty/home/akingston/EL-Research-Project/data/links.csv
+datasets:
+  covertype:
+    max_samples: 50000
+run_datasets:
+- california
+- house_16H
+- diamonds
+- elevators
+- Ailerons
+- Bike_Sharing_Demand
+- electricity
+- credit
+- default-of-credit-card-clients
+- covertype
+- pol
+- MiniBooNE
+models:
+- resnet
+- ensemble_none
+- sym_cka
+- sym_cos
+- sfo_cka
+- sfo_cos

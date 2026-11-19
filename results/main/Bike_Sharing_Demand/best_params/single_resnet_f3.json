@@ -1,0 +1,10 @@
+{
+  "params": {
+    "hidden_dim": 256,
+    "n_blocks": 3,
+    "dr": 0.006900885751315901
+  },
+  "backbone": null,
+  "best_epoch": 41,
+  "best_value": 0.06098061054944992
+}
