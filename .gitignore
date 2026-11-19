@@ -214,6 +214,6 @@ __marimo__/
 # Downloaded datasets and experiment outputs
 data/raw/
 data/openml/
-results/
+results/*.db
 saved_models/
 datasets/*/split.pkl
