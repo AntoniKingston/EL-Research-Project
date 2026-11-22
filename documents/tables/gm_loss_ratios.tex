@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+    \centering
+    \caption{Geometric mean over datasets of the loss ratio $r_{d,c} = \hat{\mu}_{d,c} / \hat{\mu}_{d,\text{ref}}$ relative to ResNet (Stage 1) (values below 1 are better).}
+    \label{tab:gm_loss_ratios}
+    \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Method} & \textbf{Classification NLL} & \textbf{Regression RMSE} & \textbf{Regression MAE} & \textbf{All (NLL/RMSE)} \\
+        \midrule
+        ResNet (Stage 1) & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\
+        ResNet (tuned) & \textbf{0.9772} & 0.9988 & 0.9985 & \textbf{0.9879} \\
+        Ens. (unreg.) & 1.0132 & 1.0122 & 1.0053 & 1.0127 \\
+        Sym. CKA & 1.0068 & 0.9945 & 0.9973 & 1.0007 \\
+        Sym. Cos & 1.0081 & 0.9930 & 0.9892 & 1.0005 \\
+        SFO CKA & 1.0330 & \textbf{0.9912} & \textbf{0.9891} & 1.0119 \\
+        SFO Cos & 1.0082 & 0.9924 & 0.9919 & 1.0003 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}

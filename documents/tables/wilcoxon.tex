@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+    \centering
+    \caption{Two-sided Wilcoxon signed-rank tests of the SFOvTSGM ensembles against the baselines over datasets: number of datasets on which the SFOvTSGM ensemble is better, raw $p$-value, and Holm-adjusted $p$-value (family: the 10 comparisons of one column group). Classification uses NLL and regression RMSE ($N = 6$); the combined test uses the loss ratios relative to ResNet (Stage 1) ($N = 12$).}
+    \label{tab:wilcoxon}
+    \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
+    \begin{tabular}{lccccccccc}
+        \toprule
+        \textbf{Comparison} & \multicolumn{3}{c}{\textbf{Classification (NLL)}} & \multicolumn{3}{c}{\textbf{Regression (RMSE)}} & \multicolumn{3}{c}{\textbf{All (loss ratio)}} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} & better & $p$ & $p_{\text{Holm}}$ & better & $p$ & $p_{\text{Holm}}$ & better & $p$ & $p_{\text{Holm}}$ \\
+        \midrule
+        SFO CKA vs.\ Ens. (unreg.) & 3/6 & 0.844 & 1.000 & 5/6 & 0.156 & 1.000 & 8/12 & 0.380 & 1.000 \\
+        SFO CKA vs.\ Sym. CKA & 4/6 & 1.000 & 1.000 & 5/6 & 0.219 & 1.000 & 9/12 & 0.339 & 1.000 \\
+        SFO CKA vs.\ Sym. Cos & 2/6 & 0.562 & 1.000 & 3/6 & 0.562 & 1.000 & 5/12 & 0.910 & 1.000 \\
+        SFO CKA vs.\ ResNet (tuned) & 0/6 & 0.031 & 0.312 & 5/6 & 0.062 & 0.625 & 5/12 & 0.470 & 1.000 \\
+        SFO CKA vs.\ ResNet (Stage 1) & 1/6 & 0.062 & 0.500 & 3/6 & 0.562 & 1.000 & 4/12 & 0.233 & 1.000 \\
+        SFO Cos vs.\ Ens. (unreg.) & 5/6 & 0.156 & 1.000 & 5/6 & 0.062 & 0.625 & 10/12 & 0.052 & 0.522 \\
+        SFO Cos vs.\ Sym. CKA & 3/6 & 0.844 & 1.000 & 4/6 & 0.562 & 1.000 & 7/12 & 0.791 & 1.000 \\
+        SFO Cos vs.\ Sym. Cos & 3/6 & 1.000 & 1.000 & 3/6 & 0.562 & 1.000 & 6/12 & 0.970 & 1.000 \\
+        SFO Cos vs.\ ResNet (tuned) & 0/6 & 0.031 & 0.312 & 4/6 & 0.219 & 1.000 & 4/12 & 0.204 & 1.000 \\
+        SFO Cos vs.\ ResNet (Stage 1) & 1/6 & 0.438 & 1.000 & 3/6 & 0.562 & 1.000 & 4/12 & 0.677 & 1.000 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}
