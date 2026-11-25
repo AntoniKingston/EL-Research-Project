@@ -1,15 +1,15 @@
 {
   "params": {
-    "lr": 0.0028448309592185765,
-    "wd": 8.763456029188093e-05,
-    "additive_coef": 0.2583833932160128,
-    "orthogonality_weight": 0.19489127914490573
+    "lr": 0.004729500854447364,
+    "wd": 0.0014054388681235992,
+    "additive_coef": 0.06734397721730027,
+    "orthogonality_weight": 0.12419875058523673
   },
   "backbone": {
     "hidden_dim": 128,
     "n_blocks": 3,
     "dr": 0.07800932022121826
   },
-  "best_epoch": 9,
-  "best_value": 0.5691140294075012
+  "best_epoch": 7,
+  "best_value": 0.5676681995391846
 }
