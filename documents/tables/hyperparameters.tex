@@ -1,0 +1,22 @@
+\begin{table}[htbp]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \caption{Selected hyperparameters: median and [first, third] quartile over the $60$ dataset--fold pairs. $\eta$: learning rate, $\gamma$: weight decay, $\nu$: additive coefficient, $\lambda$: penalty weight, $e^\star$: best inner-validation epoch (the refit length). The Stage~1 ResNet uses the fixed $\eta = 10^{-3}$, $\gamma = 10^{-4}$.}
+    \label{tab:hyperparameters_selected}
+    \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
+    \begin{tabular}{lccccc}
+        \toprule
+        \textbf{Method} & $\eta$ & $\gamma$ & $\nu$ & $\lambda$ & $e^\star$ \\
+        \midrule
+        ResNet (Stage 1) & -- & -- & -- & -- & \begin{tabular}[t]{@{}c@{}}72\\{\scriptsize [54, 97]}\end{tabular} \\
+        ResNet (tuned) & \begin{tabular}[t]{@{}c@{}}$1.2{\times}10^{-3}$\\{\scriptsize [$4.7{\times}10^{-4}$, $1.9{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$5.3{\times}10^{-5}$\\{\scriptsize [$9.8{\times}10^{-6}$, $1.1{\times}10^{-3}$]}\end{tabular} & -- & -- & \begin{tabular}[t]{@{}c@{}}70\\{\scriptsize [42, 106]}\end{tabular} \\
+        Ens. (unreg.) & \begin{tabular}[t]{@{}c@{}}$1.2{\times}10^{-3}$\\{\scriptsize [$7.0{\times}10^{-4}$, $2.8{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$6.7{\times}10^{-5}$\\{\scriptsize [$5.4{\times}10^{-6}$, $4.1{\times}10^{-4}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}0.120\\{\scriptsize [0.064, 0.248]}\end{tabular} & -- & \begin{tabular}[t]{@{}c@{}}52\\{\scriptsize [32, 84]}\end{tabular} \\
+        Sym. CKA & \begin{tabular}[t]{@{}c@{}}$1.2{\times}10^{-3}$\\{\scriptsize [$6.9{\times}10^{-4}$, $2.4{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$2.4{\times}10^{-4}$\\{\scriptsize [$1.8{\times}10^{-5}$, $1.4{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}0.111\\{\scriptsize [0.076, 0.227]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$6.9{\times}10^{-2}$\\{\scriptsize [$9.2{\times}10^{-3}$, $5.9{\times}10^{-1}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}68\\{\scriptsize [39, 86]}\end{tabular} \\
+        Sym. Cos & \begin{tabular}[t]{@{}c@{}}$1.7{\times}10^{-3}$\\{\scriptsize [$7.2{\times}10^{-4}$, $3.1{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$2.0{\times}10^{-4}$\\{\scriptsize [$1.4{\times}10^{-5}$, $1.3{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}0.125\\{\scriptsize [0.068, 0.252]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$2.0{\times}10^{-1}$\\{\scriptsize [$5.0{\times}10^{-3}$, $2.9{\times}10^{0}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}58\\{\scriptsize [36, 90]}\end{tabular} \\
+        SFO CKA & \begin{tabular}[t]{@{}c@{}}$9.9{\times}10^{-4}$\\{\scriptsize [$5.3{\times}10^{-4}$, $2.0{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$1.2{\times}10^{-4}$\\{\scriptsize [$1.1{\times}10^{-5}$, $7.1{\times}10^{-4}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}0.167\\{\scriptsize [0.084, 0.338]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$2.9{\times}10^{-1}$\\{\scriptsize [$1.2{\times}10^{-2}$, $2.1{\times}10^{0}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}64\\{\scriptsize [35, 88]}\end{tabular} \\
+        SFO Cos & \begin{tabular}[t]{@{}c@{}}$1.4{\times}10^{-3}$\\{\scriptsize [$8.3{\times}10^{-4}$, $2.7{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$2.2{\times}10^{-4}$\\{\scriptsize [$8.7{\times}10^{-6}$, $2.7{\times}10^{-3}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}0.125\\{\scriptsize [0.072, 0.215]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}$1.8{\times}10^{-1}$\\{\scriptsize [$5.7{\times}10^{-3}$, $4.8{\times}10^{0}$]}\end{tabular} & \begin{tabular}[t]{@{}c@{}}54\\{\scriptsize [35, 81]}\end{tabular} \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}

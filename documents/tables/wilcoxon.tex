@@ -7,16 +7,16 @@
         \toprule
         \textbf{Comparison} & \multicolumn{3}{c}{\textbf{Classification (NLL)}} & \multicolumn{3}{c}{\textbf{Regression (RMSE)}} & \multicolumn{3}{c}{\textbf{All (loss ratio)}} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} & better & $p$ & $p_{\text{Holm}}$ & better & $p$ & $p_{\text{Holm}}$ & better & $p$ & $p_{\text{Holm}}$ \\
         \midrule
-        SFO CKA vs.\ Ens. (unreg.) & 3/6 & 0.844 & 1.000 & 5/6 & 0.156 & 1.000 & 8/12 & 0.380 & 1.000 \\
-        SFO CKA vs.\ Sym. CKA & 4/6 & 1.000 & 1.000 & 5/6 & 0.219 & 1.000 & 9/12 & 0.339 & 1.000 \\
-        SFO CKA vs.\ Sym. Cos & 2/6 & 0.562 & 1.000 & 3/6 & 0.562 & 1.000 & 5/12 & 0.910 & 1.000 \\
-        SFO CKA vs.\ ResNet (tuned) & 0/6 & 0.031 & 0.312 & 5/6 & 0.062 & 0.625 & 5/12 & 0.470 & 1.000 \\
-        SFO CKA vs.\ ResNet (Stage 1) & 1/6 & 0.062 & 0.500 & 3/6 & 0.562 & 1.000 & 4/12 & 0.233 & 1.000 \\
-        SFO Cos vs.\ Ens. (unreg.) & 5/6 & 0.156 & 1.000 & 5/6 & 0.062 & 0.625 & 10/12 & 0.052 & 0.522 \\
-        SFO Cos vs.\ Sym. CKA & 3/6 & 0.844 & 1.000 & 4/6 & 0.562 & 1.000 & 7/12 & 0.791 & 1.000 \\
-        SFO Cos vs.\ Sym. Cos & 3/6 & 1.000 & 1.000 & 3/6 & 0.562 & 1.000 & 6/12 & 0.970 & 1.000 \\
-        SFO Cos vs.\ ResNet (tuned) & 0/6 & 0.031 & 0.312 & 4/6 & 0.219 & 1.000 & 4/12 & 0.204 & 1.000 \\
-        SFO Cos vs.\ ResNet (Stage 1) & 1/6 & 0.438 & 1.000 & 3/6 & 0.562 & 1.000 & 4/12 & 0.677 & 1.000 \\
+        SFO CKA vs.\ Ens. (unreg.) & 4/6 & 0.312 & 1.000 & 5/6 & 0.062 & 0.500 & 9/12 & 0.151 & 0.605 \\
+        SFO CKA vs.\ Sym. CKA & 4/6 & 0.312 & 1.000 & 1/6 & 0.438 & 1.000 & 5/12 & 0.910 & 1.000 \\
+        SFO CKA vs.\ Sym. Cos & 5/6 & 0.062 & 0.562 & 6/6 & 0.031 & 0.312 & 11/12 & $<$0.001 & 0.010 \\
+        SFO CKA vs.\ ResNet (tuned) & 0/6 & 0.031 & 0.312 & 1/6 & 0.156 & 1.000 & 1/12 & 0.003 & 0.031 \\
+        SFO CKA vs.\ ResNet (Stage 1) & 1/6 & 0.438 & 1.000 & 1/6 & 0.438 & 1.000 & 2/12 & 0.110 & 0.549 \\
+        SFO Cos vs.\ Ens. (unreg.) & 5/6 & 0.219 & 1.000 & 3/6 & 1.000 & 1.000 & 8/12 & 0.850 & 1.000 \\
+        SFO Cos vs.\ Sym. CKA & 1/6 & 0.438 & 1.000 & 2/6 & 0.219 & 1.000 & 3/12 & 0.064 & 0.448 \\
+        SFO Cos vs.\ Sym. Cos & 3/6 & 0.844 & 1.000 & 3/6 & 1.000 & 1.000 & 6/12 & 0.850 & 1.000 \\
+        SFO Cos vs.\ ResNet (tuned) & 1/6 & 0.219 & 1.000 & 0/6 & 0.031 & 0.312 & 1/12 & 0.009 & 0.074 \\
+        SFO Cos vs.\ ResNet (Stage 1) & 1/6 & 0.438 & 1.000 & 1/6 & 0.156 & 1.000 & 2/12 & 0.077 & 0.463 \\
         \bottomrule
     \end{tabular}%
     }

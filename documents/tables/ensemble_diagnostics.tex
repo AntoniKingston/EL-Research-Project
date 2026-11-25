@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+    \centering
+    \caption{Ensemble diagnostics. Staged loss of the first $m$ members relative to the full ensemble of $M = 8$ (NLL for classification, RMSE for regression; geometric mean over runs and datasets), and the mean off-diagonal pairwise CKA and squared cosine similarity of the members' penultimate representations on the outer test fold (mean over all runs).}
+    \label{tab:ensemble_diagnostics}
+    \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Method} & \multicolumn{2}{c}{\textbf{Classification}} & \multicolumn{2}{c}{\textbf{Regression}} & \multicolumn{2}{c}{\textbf{Similarity}} \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} & $L(1)/L(8)$ & $L(4)/L(8)$ & $L(1)/L(8)$ & $L(4)/L(8)$ & CKA & Cosine \\
+        \midrule
+        Ens. (unreg.) & 0.992 & 0.994 & 0.979 & 0.989 & 0.612 & 0.101 \\
+        Sym. CKA & 1.000 & 0.997 & 0.990 & 0.993 & 0.037 & 0.021 \\
+        Sym. Cos & 0.991 & 0.992 & 0.982 & 0.989 & 0.468 & 0.018 \\
+        SFO CKA & 1.000 & 0.996 & 0.984 & 0.991 & 0.060 & 0.021 \\
+        SFO Cos & 0.990 & 0.991 & 0.982 & 0.990 & 0.395 & 0.021 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}

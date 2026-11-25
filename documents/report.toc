@@ -33,23 +33,40 @@
 \contentsline {paragraph}{3. Within-Dataset Hypothesis Testing.}{11}{equation.8}%
 \contentsline {subsection}{\numberline {4.7}Implementation and Computational Environment}{12}{subsection.4.7}%
 \contentsline {section}{\numberline {5}Deviations from the Initial Plan}{12}{section.5}%
-\contentsline {section}{\numberline {6}Results and Statistical Analysis}{12}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Per-Dataset Results}{12}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Cross-Dataset Aggregation}{12}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Statistical Tests}{12}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Ensemble Diagnostics}{12}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Stability}{12}{subsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Computational Cost}{12}{subsection.6.6}%
-\contentsline {subsection}{\numberline {6.7}Selected Hyperparameters}{12}{subsection.6.7}%
-\contentsline {section}{\numberline {7}Conclusions and Discussion}{12}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Key Findings}{12}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Explanation of Successes and Failures}{12}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Limitations}{12}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}Future Work}{12}{subsection.7.4}%
-\contentsline {section}{\numberline {8}Reproducibility and Running the Code}{12}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Reproducibility}{12}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Running the Code}{13}{subsection.8.2}%
-\contentsline {section}{\numberline {9}External Code and AI Usage Disclosure}{13}{section.9}%
-\contentsline {paragraph}{Planned Use and Modification of External Code.}{13}{section.9}%
-\contentsline {paragraph}{AI Usage Disclosure.}{13}{section.9}%
-\contentsline {section}{\numberline {A}Additional Results}{14}{appendix.A}%
+\contentsline {paragraph}{Evaluated methods.}{12}{section.5}%
+\contentsline {paragraph}{Datasets.}{12}{section.5}%
+\contentsline {paragraph}{Preprocessing.}{13}{section.5}%
+\contentsline {paragraph}{Training configuration.}{13}{section.5}%
+\contentsline {paragraph}{Evaluation and reporting.}{13}{section.5}%
+\contentsline {paragraph}{Reproducibility.}{14}{equation.9}%
+\contentsline {section}{\numberline {6}Results and Statistical Analysis}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Per-Dataset Results}{14}{subsection.6.1}%
+\contentsline {paragraph}{Classification.}{14}{subsection.6.1}%
+\contentsline {paragraph}{Regression.}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Cross-Dataset Aggregation}{15}{subsection.6.2}%
+\contentsline {paragraph}{Mean ranks.}{19}{subsection.6.2}%
+\contentsline {paragraph}{Loss ratios.}{19}{Item.18}%
+\contentsline {paragraph}{Win/tie/loss.}{19}{Item.18}%
+\contentsline {subsection}{\numberline {6.3}Statistical Tests}{21}{subsection.6.3}%
+\contentsline {paragraph}{Omnibus tests.}{21}{subsection.6.3}%
+\contentsline {paragraph}{Nemenyi post-hoc test.}{21}{subsection.6.3}%
+\contentsline {paragraph}{Wilcoxon signed-rank tests.}{21}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Ensemble Diagnostics}{21}{subsection.6.4}%
+\contentsline {paragraph}{Staged performance.}{23}{subsection.6.4}%
+\contentsline {paragraph}{Member output norms.}{23}{subsection.6.4}%
+\contentsline {paragraph}{Member similarity.}{24}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Stability}{24}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Computational Cost}{26}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Selected Hyperparameters}{27}{subsection.6.7}%
+\contentsline {section}{\numberline {7}Conclusions and Discussion}{29}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Key Findings}{29}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Explanation of Successes and Failures}{29}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Limitations}{29}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Future Work}{29}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Reproducibility and Running the Code}{29}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Reproducibility}{29}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Running the Code}{29}{subsection.8.2}%
+\contentsline {section}{\numberline {9}External Code and AI Usage Disclosure}{29}{section.9}%
+\contentsline {paragraph}{Planned Use and Modification of External Code.}{29}{section.9}%
+\contentsline {paragraph}{AI Usage Disclosure.}{30}{section.9}%
+\contentsline {section}{\numberline {A}Additional Results}{31}{appendix.A}%
