@@ -122,6 +122,24 @@ A resumed run produces the same numbers as an uninterrupted one. The run refuses
 result-affecting settings (`training`, `hpo`, seeds, dataset definitions) differ from those
 stored in the run directory; use a new `run_name` or `--fresh` in that case.
 
+### Ensemble training objective and re-running single methods
+
+The additive ensembles are trained by dynamic boosting: all members are trained simultaneously,
+member 1 predicts the target, and member m fits the residual of the stop-gradient prediction of
+members 1..m-1 (one task loss per stage, summed). Run directories created with the former joint
+objective (one task loss on the full ensemble prediction) are rejected by the config guard. To
+re-run only some methods while keeping the others' results, purge them and resume:
+
+```sh
+uv run python -m src.scripts.purge_methods --run results/main \
+    --methods ensemble_none sym_cka sym_cos sfo_cka sfo_cos
+```
+
+This copies the run to `results/main.bak-<timestamp>`, deletes the methods' Optuna studies,
+result rows, best parameters, similarity matrices, models and checkpoints, and marks the run as
+using the current objective. `single_resnet` cannot be purged, since all Stage 2 methods depend
+on its backbone.
+
 ### Outputs (`results/<run_name>/`)
 
 * `metrics.csv` – test metrics per dataset, fold, method and seed (accuracy, ROC-AUC, NLL or
@@ -130,6 +148,19 @@ stored in the run directory; use a new `run_name` or `--fresh` in that case.
 * `diagnostics.csv` – staged ensemble performance and member output norms.
 * `<dataset>/best_params/`, `<dataset>/similarity/`, `<dataset>/splits.npz`, `config.yaml`.
 * `logs/<timestamp>_<SLURM job id or pid>.log` – copy of the console log of every invocation.
+
+### Aggregation and statistical tests
+
+```sh
+uv run python -m src.scripts.analyze_results --run results/main
+```
+
+Computes the within-dataset aggregation (mean and standard deviation over all fold-seed
+results, plus fold-level paired t-tests against the baselines), the cross-dataset aggregation
+(mean ranks, geometric-mean loss ratios, win/tie/loss counts) and the statistical tests
+(Friedman with Iman–Davenport, Nemenyi critical difference, Wilcoxon signed-rank with Holm
+correction). CSVs go to `<run>/analysis/`, LaTeX tables to `documents/tables/` and critical
+difference diagrams to `documents/figures/`.
 
 ### Debugging cluster runs
 

@@ -73,5 +73,6 @@
       "link": "https://www.openml.org/d/44128"
     }
   },
-  "hash": "8284013aa59ed1ba43084920cc7a2a869fd6f09dc25457ce015ea6d739844d07"
+  "hash": "8284013aa59ed1ba43084920cc7a2a869fd6f09dc25457ce015ea6d739844d07",
+  "ensemble_training": "dynamic_boosting"
 }

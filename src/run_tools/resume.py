@@ -33,6 +33,10 @@ log = logging.getLogger(__name__)
 EXIT_CODE_INTERRUPTED = 3
 # Config sections whose change would make previously stored results inconsistent.
 GUARDED_KEYS = ("master_seed", "n_outer_folds", "training", "hpo")
+# Training objective of the additive ensembles; fingerprints written before it was recorded
+# belong to the former joint objective.
+ENSEMBLE_TRAINING = "dynamic_boosting"
+LEGACY_ENSEMBLE_TRAINING = "joint"
 DATASET_GUARDED_KEYS = (
     "source",
     "link",
@@ -57,6 +61,7 @@ def _fingerprint(raw_config: dict[str, Any], dataset_specs: dict[str, dict]) -> 
     return {
         "guarded": {k: raw_config.get(k) for k in GUARDED_KEYS},
         "datasets": datasets,
+        "ensemble_training": ENSEMBLE_TRAINING,
     }
 
 
@@ -120,6 +125,12 @@ class RunDirectory:
             if saved["datasets"][name] != current["datasets"][name]:
                 old, new = saved["datasets"][name], current["datasets"][name]
                 problems.append(f"datasets.{name}: {old} -> {new}")
+        saved_training = saved.get("ensemble_training", LEGACY_ENSEMBLE_TRAINING)
+        if saved_training != ENSEMBLE_TRAINING:
+            problems.append(
+                f"ensemble_training: {saved_training!r} -> {ENSEMBLE_TRAINING!r} (purge the "
+                "ensemble methods with `python -m src.scripts.purge_methods`)"
+            )
         if problems:
             raise ConfigMismatchError(
                 f"Config differs from the one stored in {self.path} in result-affecting "

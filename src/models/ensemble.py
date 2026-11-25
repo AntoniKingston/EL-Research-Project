@@ -35,6 +35,10 @@ SIMILARITY_METRICS = {"cosine": cosine_similarity_matrix, "cka": cka_matrix}
 class Ensemble(TabularModel):
     """Additive ensemble Y = f_1(X) + nu * sum_{m>=2} f_m(X) of independent Tabular ResNets.
 
+    Trained by dynamic boosting: all members are trained simultaneously, and stage m is the task
+    loss of sg(sum_{j<m} w_j f_j) + w_m f_m (w_1 = 1, w_m = nu), so member 1 predicts Y and each
+    later member fits the residual of its detached predecessors. The stage losses are summed.
+
     mask:
         "none"             - unregularized ensemble (lambda = 0)
         "symmetric"        - pairwise repulsion with gradients flowing to both members
@@ -117,7 +121,10 @@ class Ensemble(TabularModel):
 
     def training_loss(self, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
         latents, outputs = self._members_forward(x)
-        loss = self.task_loss(self._format_output(self._combine(outputs)), y)
+        weighted = self.member_weights[:, None, None] * outputs
+        previous = torch.cumsum(weighted, dim=0) - weighted
+        stages = previous.detach() + weighted
+        loss = torch.stack([self.task_loss(self._format_output(s), y) for s in stages]).sum()
         if self.mask_type != "none" and self.orthogonality_weight > 0:
             loss = loss + self.orthogonality_weight * self.orthogonality_penalty(latents)
         return loss
