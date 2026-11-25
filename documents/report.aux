@@ -111,30 +111,91 @@
 \@writefile{toc}{\contentsline {paragraph}{1. Omnibus Multi-Model Comparison (Friedman Test with Iman--Davenport Correction).}{11}{subsubsection.4.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{2. Post-Hoc Comparisons and Critical Difference Diagrams.}{11}{equation.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{3. Within-Dataset Hypothesis Testing.}{11}{equation.8}\protected@file@percent }
+\citation{jeffares2023tangos}
+\citation{wen2020batchensemble}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Implementation and Computational Environment}{12}{subsection.4.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Deviations from the Initial Plan}{12}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results and Statistical Analysis}{12}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Per-Dataset Results}{12}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Cross-Dataset Aggregation}{12}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Statistical Tests}{12}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Ensemble Diagnostics}{12}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Stability}{12}{subsection.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Computational Cost}{12}{subsection.6.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Selected Hyperparameters}{12}{subsection.6.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions and Discussion}{12}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Key Findings}{12}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Explanation of Successes and Failures}{12}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Limitations}{12}{subsection.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Future Work}{12}{subsection.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Reproducibility and Running the Code}{12}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Reproducibility}{12}{subsection.8.1}\protected@file@percent }
+\newlabel{sec:deviations}{{5}{12}{Deviations from the Initial Plan}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Evaluated methods.}{12}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Datasets.}{12}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Preprocessing.}{13}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Training configuration.}{13}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Evaluation and reporting.}{13}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{14}{equation.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results and Statistical Analysis}{14}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Per-Dataset Results}{14}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Classification.}{14}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Regression.}{15}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Cross-Dataset Aggregation}{15}{subsection.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Classification: outer-test NLL (lower is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$).}}{16}{table.4}\protected@file@percent }
+\newlabel{tab:results_nll}{{4}{16}{Classification: outer-test NLL (lower is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$)}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Classification: outer-test Accuracy (higher is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$).}}{16}{table.5}\protected@file@percent }
+\newlabel{tab:results_accuracy}{{5}{16}{Classification: outer-test Accuracy (higher is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$)}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Classification: outer-test ROC-AUC (higher is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$).}}{17}{table.6}\protected@file@percent }
+\newlabel{tab:results_roc_auc}{{6}{17}{Classification: outer-test ROC-AUC (higher is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$)}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Regression: outer-test RMSE (lower is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$).}}{17}{table.7}\protected@file@percent }
+\newlabel{tab:results_rmse}{{7}{17}{Regression: outer-test RMSE (lower is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$)}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Regression: outer-test MAE (lower is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$).}}{18}{table.8}\protected@file@percent }
+\newlabel{tab:results_mae}{{8}{18}{Regression: outer-test MAE (lower is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$)}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Regression: outer-test $R^2$ (higher is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$).}}{18}{table.9}\protected@file@percent }
+\newlabel{tab:results_r2}{{9}{18}{Regression: outer-test $R^2$ (higher is better), mean $\pm $ standard deviation over 5 outer folds $\times $ 5 seeds. Best mean in bold; $^{\uparrow }$/$^{\downarrow }$: significantly better/worse than Ens. (unreg.) (paired $t$-test over fold means, $p < 0.05$)}{table.9}{}}
+\@writefile{toc}{\contentsline {paragraph}{Mean ranks.}{19}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Loss ratios.}{19}{Item.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Win/tie/loss.}{19}{Item.18}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Mean rank of each method (1 = best) over the 6 classification datasets, the 6 regression datasets, and all 12 datasets (ranked by NLL for classification and RMSE for regression).}}{20}{table.10}\protected@file@percent }
+\newlabel{tab:mean_ranks}{{10}{20}{Mean rank of each method (1 = best) over the 6 classification datasets, the 6 regression datasets, and all 12 datasets (ranked by NLL for classification and RMSE for regression)}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Geometric mean over datasets of the loss ratio $r_{d,c} = \hat  {\mu }_{d,c} / \hat  {\mu }_{d,\text  {ref}}$ relative to ResNet (Stage 1) (values below 1 are better).}}{20}{table.11}\protected@file@percent }
+\newlabel{tab:gm_loss_ratios}{{11}{20}{Geometric mean over datasets of the loss ratio $r_{d,c} = \hat {\mu }_{d,c} / \hat {\mu }_{d,\text {ref}}$ relative to ResNet (Stage 1) (values below 1 are better)}{table.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Win/tie/loss counts over datasets against the baselines: a win (loss) is a significantly better (worse) result in the paired $t$-test over the 5 fold means ($p < 0.05$), otherwise a tie. 6 datasets per metric.}}{20}{table.12}\protected@file@percent }
+\newlabel{tab:win_tie_loss}{{12}{20}{Win/tie/loss counts over datasets against the baselines: a win (loss) is a significantly better (worse) result in the paired $t$-test over the 5 fold means ($p < 0.05$), otherwise a tie. 6 datasets per metric}{table.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Statistical Tests}{21}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Omnibus tests.}{21}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Nemenyi post-hoc test.}{21}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Wilcoxon signed-rank tests.}{21}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Ensemble Diagnostics}{21}{subsection.6.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Friedman test with the Iman--Davenport correction ($F_F$ with $(K-1)$ and $(K-1)(N-1)$ degrees of freedom) and the Nemenyi critical difference (CD, $\alpha = 0.05$) of the mean ranks.}}{22}{table.13}\protected@file@percent }
+\newlabel{tab:friedman}{{13}{22}{Friedman test with the Iman--Davenport correction ($F_F$ with $(K-1)$ and $(K-1)(N-1)$ degrees of freedom) and the Nemenyi critical difference (CD, $\alpha = 0.05$) of the mean ranks}{table.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Critical difference diagrams (Nemenyi, $\alpha = 0.05$) of the mean ranks on classification NLL (top), regression RMSE (middle), and all $12$ datasets ranked by NLL / RMSE (bottom). Methods connected by a bar are not significantly different.}}{22}{figure.1}\protected@file@percent }
+\newlabel{fig:cd}{{1}{22}{Critical difference diagrams (Nemenyi, $\alpha = 0.05$) of the mean ranks on classification NLL (top), regression RMSE (middle), and all $12$ datasets ranked by NLL / RMSE (bottom). Methods connected by a bar are not significantly different}{figure.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Two-sided Wilcoxon signed-rank tests of the SFOvTSGM ensembles against the baselines over datasets: number of datasets on which the SFOvTSGM ensemble is better, raw $p$-value, and Holm-adjusted $p$-value (family: the 10 comparisons of one column group). Classification uses NLL and regression RMSE ($N = 6$); the combined test uses the loss ratios relative to ResNet (Stage 1) ($N = 12$).}}{23}{table.14}\protected@file@percent }
+\newlabel{tab:wilcoxon}{{14}{23}{Two-sided Wilcoxon signed-rank tests of the SFOvTSGM ensembles against the baselines over datasets: number of datasets on which the SFOvTSGM ensemble is better, raw $p$-value, and Holm-adjusted $p$-value (family: the 10 comparisons of one column group). Classification uses NLL and regression RMSE ($N = 6$); the combined test uses the loss ratios relative to ResNet (Stage 1) ($N = 12$)}{table.14}{}}
+\@writefile{toc}{\contentsline {paragraph}{Staged performance.}{23}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Member output norms.}{23}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Member similarity.}{24}{subsection.6.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces Ensemble diagnostics. Staged loss of the first $m$ members relative to the full ensemble of $M = 8$ (NLL for classification, RMSE for regression; geometric mean over runs and datasets), and the mean off-diagonal pairwise CKA and squared cosine similarity of the members' penultimate representations on the outer test fold (mean over all runs).}}{24}{table.15}\protected@file@percent }
+\newlabel{tab:ensemble_diagnostics}{{15}{24}{Ensemble diagnostics. Staged loss of the first $m$ members relative to the full ensemble of $M = 8$ (NLL for classification, RMSE for regression; geometric mean over runs and datasets), and the mean off-diagonal pairwise CKA and squared cosine similarity of the members' penultimate representations on the outer test fold (mean over all runs)}{table.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Staged loss of the first $m$ members, $\hat  {Y}^{(m)} = f_1(X) + \nu \DOTSB \sum@ \slimits@ _{j=2}^{m} f_j(X)$, relative to the full ensemble ($M = 8$). Geometric mean over the $25$ runs of each dataset and then over the $6$ datasets of each task.}}{24}{figure.2}\protected@file@percent }
+\newlabel{fig:staged_loss}{{2}{24}{Staged loss of the first $m$ members, $\hat {Y}^{(m)} = f_1(X) + \nu \sum _{j=2}^{m} f_j(X)$, relative to the full ensemble ($M = 8$). Geometric mean over the $25$ runs of each dataset and then over the $6$ datasets of each task}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Stability}{24}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:stability}{{6.5}{24}{Stability}{subsection.6.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Root-mean-square output norm of each member on the outer test fold relative to the first member, without (left) and with (right) the member weight $w_1 = 1$, $w_m = \nu $ for $m \ge 2$. Geometric mean over all $300$ runs per method.}}{25}{figure.3}\protected@file@percent }
+\newlabel{fig:member_norms}{{3}{25}{Root-mean-square output norm of each member on the outer test fold relative to the first member, without (left) and with (right) the member weight $w_1 = 1$, $w_m = \nu $ for $m \ge 2$. Geometric mean over all $300$ runs per method}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Pairwise linear CKA (top) and squared cosine similarity (bottom) between the centered penultimate representations of the members on the outer test fold, averaged over all $300$ runs per method. The diagonal (equal to $1$) is omitted; each row shares one color scale.}}{25}{figure.4}\protected@file@percent }
+\newlabel{fig:similarity}{{4}{25}{Pairwise linear CKA (top) and squared cosine similarity (bottom) between the centered penultimate representations of the members on the outer test fold, averaged over all $300$ runs per method. The diagonal (equal to $1$) is omitted; each row shares one color scale}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces Stability: geometric mean over datasets of the standard deviation of the primary metric (NLL / RMSE) relative to ResNet (Stage 1) (values below 1 are more stable). $\sigma $: over all $25$ fold--seed results; $\sigma _{\text  {fold}}$: over the $5$ fold means; $\bar  {\sigma }_{\text  {seed}}$: mean over folds of the standard deviation over the $5$ seeds.}}{26}{table.16}\protected@file@percent }
+\newlabel{tab:stability}{{16}{26}{Stability: geometric mean over datasets of the standard deviation of the primary metric (NLL / RMSE) relative to ResNet (Stage 1) (values below 1 are more stable). $\sigma $: over all $25$ fold--seed results; $\sigma _{\text {fold}}$: over the $5$ fold means; $\bar {\sigma }_{\text {seed}}$: mean over folds of the standard deviation over the $5$ seeds}{table.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Computational Cost}{26}{subsection.6.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces Computational cost of the final refits: median over all $300$ refits per method, and geometric mean over datasets of the per-dataset mean relative to ResNet (Stage 1) ($\times $ref). Training time is the wall-clock time of the refit on a GPU.}}{27}{table.17}\protected@file@percent }
+\newlabel{tab:cost}{{17}{27}{Computational cost of the final refits: median over all $300$ refits per method, and geometric mean over datasets of the per-dataset mean relative to ResNet (Stage 1) ($\times $ref). Training time is the wall-clock time of the refit on a GPU}{table.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Selected Hyperparameters}{27}{subsection.6.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces Selected hyperparameters: median and [first, third] quartile over the $60$ dataset--fold pairs. $\eta $: learning rate, $\gamma $: weight decay, $\nu $: additive coefficient, $\lambda $: penalty weight, $e^\star $: best inner-validation epoch (the refit length). The Stage~1 ResNet uses the fixed $\eta = 10^{-3}$, $\gamma = 10^{-4}$.}}{28}{table.18}\protected@file@percent }
+\newlabel{tab:hyperparameters_selected}{{18}{28}{Selected hyperparameters: median and [first, third] quartile over the $60$ dataset--fold pairs. $\eta $: learning rate, $\gamma $: weight decay, $\nu $: additive coefficient, $\lambda $: penalty weight, $e^\star $: best inner-validation epoch (the refit length). The Stage~1 ResNet uses the fixed $\eta = 10^{-3}$, $\gamma = 10^{-4}$}{table.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Selected additive coefficient $\nu $ and penalty weight $\lambda $ for each of the $60$ dataset--fold pairs (points) and their median (black line). Dashed lines mark the bounds of the search range.}}{28}{figure.5}\protected@file@percent }
+\newlabel{fig:hyperparameters}{{5}{28}{Selected additive coefficient $\nu $ and penalty weight $\lambda $ for each of the $60$ dataset--fold pairs (points) and their median (black line). Dashed lines mark the bounds of the search range}{figure.5}{}}
 \citation{grinsztajn2022why}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions and Discussion}{29}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Key Findings}{29}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Explanation of Successes and Failures}{29}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Limitations}{29}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Future Work}{29}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Reproducibility and Running the Code}{29}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Reproducibility}{29}{subsection.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Running the Code}{29}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}External Code and AI Usage Disclosure}{29}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Planned Use and Modification of External Code.}{29}{section.9}\protected@file@percent }
 \citation{jeffares2023tangos}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Running the Code}{13}{subsection.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}External Code and AI Usage Disclosure}{13}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Planned Use and Modification of External Code.}{13}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{AI Usage Disclosure.}{13}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{AI Usage Disclosure.}{30}{section.9}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{bibliography}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Additional Results}{14}{appendix.A}\protected@file@percent }
-\gdef \@abspage@last{15}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Additional Results}{31}{appendix.A}\protected@file@percent }
+\gdef \@abspage@last{32}

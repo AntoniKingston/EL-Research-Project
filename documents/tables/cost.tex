@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+    \centering
+    \caption{Computational cost of the final refits: median over all $300$ refits per method, and geometric mean over datasets of the per-dataset mean relative to ResNet (Stage 1) ($\times$ref). Training time is the wall-clock time of the refit on a GPU.}
+    \label{tab:cost}
+    \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Method} & \multicolumn{2}{c}{\textbf{Trainable parameters}} & \multicolumn{2}{c}{\textbf{Refit epochs}} & \multicolumn{2}{c}{\textbf{Training time [s]}} \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} & median & $\times$ref & median & $\times$ref & median & $\times$ref \\
+        \midrule
+        ResNet (Stage 1) & 136,578 & 1.00 & 72.0 & 1.00 & 2.4 & 1.00 \\
+        ResNet (tuned) & 136,578 & 1.00 & 70.5 & 0.98 & 2.4 & 0.86 \\
+        Ens. (unreg.) & 1,092,624 & 8.00 & 52.0 & 0.77 & 8.7 & 3.79 \\
+        Sym. CKA & 1,092,624 & 8.00 & 68.0 & 0.94 & 15.1 & 5.17 \\
+        Sym. Cos & 1,092,624 & 8.00 & 58.5 & 0.81 & 11.8 & 4.30 \\
+        SFO CKA & 1,092,624 & 8.00 & 64.0 & 0.84 & 11.7 & 4.43 \\
+        SFO Cos & 1,092,624 & 8.00 & 54.0 & 0.77 & 10.4 & 4.05 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}

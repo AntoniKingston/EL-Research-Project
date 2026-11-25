@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+    \centering
+    \caption{Stability: geometric mean over datasets of the standard deviation of the primary metric (NLL / RMSE) relative to ResNet (Stage 1) (values below 1 are more stable). $\sigma$: over all $25$ fold--seed results; $\sigma_{\text{fold}}$: over the $5$ fold means; $\bar{\sigma}_{\text{seed}}$: mean over folds of the standard deviation over the $5$ seeds.}
+    \label{tab:stability}
+    \resizebox{\ifdim\width>\textwidth\textwidth\else\width\fi}{!}{%
+    \begin{tabular}{lcccccc}
+        \toprule
+        \textbf{Method} & \multicolumn{3}{c}{\textbf{Classification (NLL)}} & \multicolumn{3}{c}{\textbf{Regression (RMSE)}} \\ \cmidrule(lr){2-4} \cmidrule(lr){5-7} & $\sigma$ & $\sigma_{\text{fold}}$ & $\bar{\sigma}_{\text{seed}}$ & $\sigma$ & $\sigma_{\text{fold}}$ & $\bar{\sigma}_{\text{seed}}$ \\
+        \midrule
+        ResNet (Stage 1) & 1.000 & 1.000 & 1.000 & \textbf{1.000} & 1.000 & \textbf{1.000} \\
+        ResNet (tuned) & 0.993 & 1.138 & \textbf{0.848} & 1.014 & 0.977 & 1.005 \\
+        Ens. (unreg.) & 1.166 & 1.217 & 1.412 & 1.433 & 1.407 & 1.497 \\
+        Sym. CKA & 1.318 & 1.479 & 1.320 & 1.026 & \textbf{0.877} & 1.257 \\
+        Sym. Cos & 1.750 & 1.779 & 1.817 & 1.303 & 1.285 & 1.417 \\
+        SFO CKA & 1.322 & 1.514 & 1.118 & 1.181 & 0.961 & 1.388 \\
+        SFO Cos & \textbf{0.912} & \textbf{0.964} & 1.020 & 1.368 & 1.174 & 1.668 \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}
