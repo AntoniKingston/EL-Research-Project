@@ -399,21 +399,18 @@ This section lists every point in which the conducted experiments differ from th
 
 \paragraph{Datasets.}
 \begin{itemize}
-    \item \textbf{12 of the 24 planned datasets were used} (6 classification and 6 regression), to keep the nested cross-validation with two-stage tuning and $5 \times 5$ refits per method computationally feasible. This is fewer than the at least $12 + 12$ datasets required by the course guidelines. The datasets used are:
+    \item \textbf{12 of the 24 planned datasets were used} (6 classification and 6 regression), to keep the nested cross-validation with two-stage tuning and $5 \times 5$ refits per method computationally feasible. The datasets used are:
     \begin{itemize}
         \item \textit{Classification:} Electricity, Credit, Default Credit Card, Covertype, Pol, MiniBooNE.
         \item \textit{Regression:} California Housing, House 16H, Diamonds, Elevators, Ailerons, Bike Sharing Demand.
     \end{itemize}
-    The planned datasets that were not used are Eye Movements, MagicTelescope, Bank Marketing, Jannis, Higgs and Compass (classification), and Abalone, CPU Act, Brazilian Houses, House Sales, Miami Housing 2016 and Superconduct (regression).
-    \item \textbf{Corrected OpenML identifiers.} Four identifiers in Tables~\ref{tab:clf_datasets} and~\ref{tab:reg_datasets} were incorrect; the datasets were loaded from OpenML IDs $45036$ (Default Credit Card, instead of $44124$), $44134$ (Elevators, instead of $44137$), $44137$ (Ailerons, instead of $44136$) and $44063$ (Bike Sharing Demand, instead of $44142$).
+    \item \textbf{Corrected OpenML identifiers.} Four identifiers in Tables~\ref{tab:clf_datasets} and~\ref{tab:reg_datasets} were incorrect; They were changed to correct ones.
     \item \textbf{Covertype subsampling.} The Covertype dataset (ID $44159$) contains $423{,}680$ samples, not $42{,}368$ as stated in Table~\ref{tab:clf_datasets}. To keep its cost comparable with the other datasets, a stratified random subsample of $50{,}000$ samples (drawn with the master seed) was used.
 \end{itemize}
 
 \paragraph{Preprocessing.}
 \begin{itemize}
     \item \textbf{Standardization instead of the quantile transformation.} Numerical features were imputed with the training median and standardized ($z$-scored) with training statistics, instead of being mapped to $\mathcal{N}(0, 1)$ with \texttt{QuantileTransformer}.
-    \item \textbf{One-hot encoding instead of entity embeddings.} Categorical features were imputed with a dedicated \texttt{<UNK>} category and one-hot encoded (categories unseen in the training partition are mapped to an all-zero vector), instead of being ordinal-encoded and passed to learnable embeddings. As all selected datasets have only low-cardinality categorical features, one-hot encoding is sufficient and keeps the input stem identical for all methods. Consequently, the categorical embedding dimension was not tuned.
-    \item Regression targets were standardized with training statistics exactly as planned, and all preprocessing statistics were fitted on the relevant training partition only.
 \end{itemize}
 
 \paragraph{Training configuration.}
@@ -432,198 +429,51 @@ This section lists every point in which the conducted experiments differ from th
     % TODO: describe any deviation in the statistical tests actually applied from the planned ones.
 \end{itemize}
 
-\paragraph{Reproducibility.}
-\begin{itemize}
-    \item \textbf{Environment specification.} The software environment is pinned with \texttt{uv} (\texttt{pyproject.toml} and \texttt{uv.lock}) instead of \texttt{requirements.txt} and \texttt{environment.yml}.
-    \item \textbf{Resumable experiment engine.} To cope with time limits on the computing cluster, the experiment runner stores Optuna studies in an SQLite database, records finished refits, and checkpoints refit training state (including random number generator states), so that an interrupted run can be resumed without changing its results.
-\end{itemize}
-
 \section{Results and Statistical Analysis}
 
-All results in this section are outer-test results of the final refits (5 outer folds $\times$ 5 seeds per dataset and method) on the $12$ datasets listed in Section~\ref{sec:deviations}. Seven methods are compared:
-\begin{itemize}
-    \item the Stage~1 Tabular ResNet (ResNet (Stage 1));
-    \item the Tabular ResNet with tuned $(\eta, \gamma)$ (ResNet (tuned));
-    \item the unregularized additive ensemble (Ens.\ (unreg.));
-    \item the symmetric orthogonal ensembles with $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$ (Sym.\ CKA, Sym.\ Cos);
-    \item the proposed SFOvTSGM ensembles with $\Phi_{\text{CKA}}$ and $\Phi_{\text{Cos}}$ (SFO CKA, SFO Cos).
-\end{itemize}
-All ensembles have $M = 8$ members and are trained by dynamic boosting. Unless stated otherwise, the primary metrics are NLL for classification and RMSE for regression.
+All results are outer-test results of the final refits (5 outer folds $\times$ 5 seeds per dataset and method) on the $12$ datasets listed in Section~\ref{sec:deviations}. Seven methods are compared: the Stage~1 Tabular ResNet (ResNet (Stage 1)), the Tabular ResNet with tuned $(\eta, \gamma)$ (ResNet (tuned)), the unregularized additive ensemble (Ens.\ (unreg.)), the symmetric orthogonal ensembles (Sym.\ CKA, Sym.\ Cos) and the proposed SFOvTSGM ensembles (SFO CKA, SFO Cos). All ensembles have $M = 8$ members and are trained by dynamic boosting. The primary metrics are NLL for classification and RMSE for regression; the secondary metrics and all further tables and figures are given in Appendix~\ref{app:results}.
 
 \subsection{Per-Dataset Results}
-Tables~\ref{tab:results_nll}--\ref{tab:results_r2} report the mean and standard deviation of every metric on every dataset.
-
-\paragraph{Classification.}
+Tables~\ref{tab:results_nll} and~\ref{tab:results_rmse} report the primary metrics on every dataset.
 \begin{itemize}
-    \item \textbf{Best method per dataset.}
-    \begin{itemize}
-        \item NLL: ResNet (tuned) on Electricity, Credit and Covertype; SFO Cos on MiniBooNE; Sym.\ CKA on Default Credit Card; ResNet (Stage 1) on Pol.
-        \item ROC-AUC: the same, except that Ens.\ (unreg.) is best on Pol.
-        \item Accuracy: ResNet (tuned) on Electricity and Covertype; SFO CKA on Credit; SFO Cos on MiniBooNE; Sym.\ CKA on Default Credit Card; Ens.\ (unreg.) on Pol.
-    \end{itemize}
-    \item \textbf{Against Ens.\ (unreg.).}
-    \begin{itemize}
-        \item Both single ResNets have a significantly lower NLL on Covertype, Credit and Default Credit Card.
-        \item Among the regularized ensembles, SFO CKA, SFO Cos and Sym.\ Cos have a significantly lower NLL on Credit, and Sym.\ CKA on Default Credit Card. No ensemble has a significantly higher NLL.
-        \item In ROC-AUC, SFO CKA is significantly better on Credit, and SFO CKA and SFO Cos are significantly worse on Pol.
-    \end{itemize}
-    \item \textbf{Against ResNet (Stage 1).}
-    \begin{itemize}
-        \item SFO Cos has a significantly higher NLL on $4$ datasets (Covertype, Credit, Electricity, Pol), and Ens.\ (unreg.) on $3$ (Covertype, Credit, Default Credit Card).
-        \item SFO CKA is not significantly different from ResNet (Stage 1) in any classification metric on any dataset.
-    \end{itemize}
-    \item \textbf{Size of the differences.} On all datasets except MiniBooNE, the accuracy and ROC-AUC of all methods are within $0.9\%$ of each other. The NLL differs by $1$--$3.5\%$ on Credit, Default Credit Card and Electricity, and by about $11\%$ on Covertype and Pol.
-    \item \textbf{MiniBooNE.} MiniBooNE has the largest spread. SFO Cos has the lowest NLL ($0.1738 \pm 0.0053$) and the smallest standard deviation in all three metrics. Sym.\ Cos has the highest NLL ($0.2622 \pm 0.1388$) and the lowest accuracy ($0.8804 \pm 0.0906$).
-\end{itemize}
-
-\paragraph{Regression.}
-\begin{itemize}
-    \item \textbf{Best method per dataset.}
-    \begin{itemize}
-        \item RMSE and $R^2$: ResNet (Stage 1) on Ailerons, Diamonds, Elevators and House 16H; ResNet (tuned) on Bike Sharing Demand; Sym.\ CKA on California Housing.
-        \item MAE: ResNet (Stage 1) on the same four datasets, and ResNet (tuned) on Bike Sharing Demand and California Housing.
-        \item No SFOvTSGM ensemble is best on any regression dataset.
-    \end{itemize}
-    \item \textbf{Against ResNet (Stage 1).} No method is significantly better in any regression metric on any dataset.
-    \begin{itemize}
-        \item All four regularized ensembles and ResNet (tuned) are significantly worse in RMSE on Ailerons.
-        \item SFO CKA and SFO Cos are significantly worse on Diamonds.
-        \item Ens.\ (unreg.) is significantly worse on Diamonds, Elevators and House 16H.
-    \end{itemize}
-    \item \textbf{Against Ens.\ (unreg.).} No regularized ensemble differs significantly in RMSE or $R^2$; Sym.\ CKA has a significantly lower MAE on House 16H.
-    \item \textbf{Size of the differences.} The difference between the best and the worst RMSE is $2$--$3.5\%$ on Ailerons, Elevators and House 16H, $6$--$8\%$ on California Housing and Diamonds, and $11\%$ on Bike Sharing Demand.
+    \item \textbf{Best method.} A single ResNet has the lowest NLL or RMSE on $9$ of the $12$ datasets. No SFOvTSGM ensemble is best on any regression dataset.
+    \item \textbf{Size of the differences.} On all classification datasets except MiniBooNE, the accuracy and ROC-AUC of all methods are within $0.9\%$ of each other, and the NLL differs by $1$--$3.5\%$ (Credit, Default Credit Card, Electricity) or about $11\%$ (Covertype, Pol). The difference between the best and the worst RMSE is $2$--$3.5\%$ on Ailerons, Elevators and House 16H, $6$--$8\%$ on California Housing and Diamonds, and $11\%$ on Bike Sharing Demand.
+    \item \textbf{Paired $t$-tests against ResNet (Stage 1).} No method is significantly better than ResNet (Stage 1) on any dataset in any metric, whereas every ensemble is significantly worse in the primary metric on $2$ (Sym.\ CKA, SFO CKA) to $6$ (Ens.\ (unreg.), SFO Cos) of the $12$ datasets (Table~\ref{tab:win_tie_loss}).
 \end{itemize}
 
 \input{tables/results_nll}
-\input{tables/results_accuracy}
-\input{tables/results_roc_auc}
 \input{tables/results_rmse}
-\input{tables/results_mae}
-\input{tables/results_r2}
 
-\subsection{Cross-Dataset Aggregation}
-Table~\ref{tab:mean_ranks} shows the mean ranks, Table~\ref{tab:gm_loss_ratios} the geometric-mean loss ratios relative to ResNet (Stage 1), and Table~\ref{tab:win_tie_loss} the win/tie/loss counts against Ens.\ (unreg.) and ResNet (Stage 1).
-
-\paragraph{Mean ranks.}
+\subsection{Cross-Dataset Aggregation and Statistical Tests}
+Table~\ref{tab:mean_ranks} shows the mean ranks, Table~\ref{tab:gm_loss_ratios} the geometric-mean loss ratios relative to ResNet (Stage 1), and Figure~\ref{fig:cd} the critical difference diagram over all $12$ datasets.
 \begin{itemize}
-    \item The two single ResNets have the two best mean ranks in every metric.
-    \item Among the ensembles, the best rank in every metric belongs to a CKA-penalized ensemble: SFO CKA for accuracy ($3.33$) and ROC-AUC ($3.83$), and Sym.\ CKA for NLL ($3.67$), RMSE ($2.83$), MAE ($3.17$) and $R^2$ ($2.83$).
-    \item Ens.\ (unreg.) has the worst rank in all regression metrics ($6.00$--$6.33$).
-    \item Over all $12$ datasets (NLL/RMSE), the order is:
-    \begin{enumerate}
-        \item ResNet (tuned) ($1.92$),
-        \item ResNet (Stage 1) ($2.25$),
-        \item Sym.\ CKA ($3.25$),
-        \item SFO CKA ($4.00$),
-        \item SFO Cos ($5.00$),
-        \item Sym.\ Cos ($5.67$),
-        \item Ens.\ (unreg.) ($5.92$).
-    \end{enumerate}
-\end{itemize}
-
-\paragraph{Loss ratios.}
-\begin{itemize}
-    \item ResNet (tuned) is the only method with geometric-mean ratios below $1$ (NLL $0.977$, RMSE $0.999$, MAE $0.999$).
-    \item Every ensemble has ratios above $1$ in all columns. The lowest are those of SFO CKA on classification NLL ($1.006$) and over all datasets ($1.011$), and of Sym.\ CKA on regression RMSE ($1.011$) and MAE ($1.014$).
-    \item The highest ratios are those of Sym.\ Cos on classification NLL ($1.081$), Ens.\ (unreg.) on RMSE ($1.032$) and SFO Cos on MAE ($1.043$).
-\end{itemize}
-
-\paragraph{Win/tie/loss.}
-\begin{itemize}
-    \item \textbf{Against ResNet (Stage 1).} No method has a significant win in any metric. The ensembles have the following losses:
-    \begin{itemize}
-        \item Ens.\ (unreg.): $2$--$3$ per metric;
-        \item SFO Cos: $2$--$4$ per metric;
-        \item SFO CKA: none in the classification metrics and $2$ in each regression metric;
-        \item Sym.\ CKA: at most $1$;
-        \item Sym.\ Cos: $1$--$2$.
-    \end{itemize}
-    \item \textbf{Against Ens.\ (unreg.).}
-    \begin{itemize}
-        \item The single ResNets have $2$--$3$ wins in most metrics and no losses.
-        \item The regularized ensembles have at most $1$ win per metric. The only losses are those of SFO CKA and SFO Cos in ROC-AUC (both on Pol).
-    \end{itemize}
+    \item \textbf{Mean ranks.} The two single ResNets have the two best mean ranks in every metric. Over all $12$ datasets (NLL/RMSE) the order is ResNet (tuned) ($1.92$), ResNet (Stage 1) ($2.25$), Sym.\ CKA ($3.25$), SFO CKA ($4.00$), SFO Cos ($5.00$), Sym.\ Cos ($5.67$) and Ens.\ (unreg.) ($5.92$). In every metric, the best-ranked ensemble is a CKA-penalized one.
+    \item \textbf{Loss ratios.} ResNet (tuned) is the only method with ratios below $1$ ($0.977$--$0.999$). The ratios of the ensembles lie between $1.006$ and $1.081$; all except Sym.\ Cos on classification NLL ($1.081$) are below $1.044$.
+    \item \textbf{Friedman test.} The hypothesis that all seven methods perform equally is rejected for every metric ($p_F \le 0.020$; over all datasets $F_F = 13.48$, $p_F < 0.001$; Table~\ref{tab:friedman}).
+    \item \textbf{Nemenyi test} ($\text{CD} = 2.60$ over all datasets, $3.68$ per task). No ensemble is significantly better than either single ResNet in any ranking. Over all datasets, both single ResNets are significantly better than Ens.\ (unreg.), Sym.\ Cos and SFO Cos, and Sym.\ CKA is better than Ens.\ (unreg.). SFO CKA is not significantly different from any method in any ranking (Figures~\ref{fig:cd} and~\ref{fig:cd_tasks}).
+    \item \textbf{Wilcoxon signed-rank tests} (SFOvTSGM vs.\ every baseline, Table~\ref{tab:wilcoxon}). Per task ($N = 6$), no comparison is significant after the Holm correction; the smallest raw $p$-value is $0.031$, the smallest attainable with $N = 6$. On the combined loss ratios ($N = 12$), SFO CKA is better than Sym.\ Cos ($11$ of $12$ datasets, $p_{\text{Holm}} = 0.010$) and worse than ResNet (tuned) ($11$ of $12$ datasets, $p_{\text{Holm}} = 0.031$).
 \end{itemize}
 
 \input{tables/mean_ranks}
 \input{tables/gm_loss_ratios}
-\input{tables/win_tie_loss}
-
-\subsection{Statistical Tests}
-\paragraph{Omnibus tests.} Table~\ref{tab:friedman} reports the Friedman and Iman--Davenport tests. The null hypothesis that all seven methods perform equally is rejected at $\alpha = 0.05$ for every metric and for the combined ranking:
-\begin{itemize}
-    \item classification: accuracy $p_F = 0.008$, ROC-AUC $p_F = 0.020$, NLL $p_F < 0.001$;
-    \item regression: all three metrics $p_F < 0.001$;
-    \item all $12$ datasets: $F_F = 13.48$, $p_F < 0.001$.
-\end{itemize}
-
-\paragraph{Nemenyi post-hoc test.} Figure~\ref{fig:cd} shows the critical difference diagrams for the primary metrics ($\text{CD} = 3.68$ per task, $2.60$ for all datasets).
-\begin{itemize}
-    \item \textbf{Significant pairs.}
-    \begin{itemize}
-        \item Classification NLL: ResNet (tuned) is better than Ens.\ (unreg.) and Sym.\ Cos.
-        \item Classification accuracy: both single ResNets are better than Sym.\ Cos.
-        \item Classification ROC-AUC: no significant pair.
-        \item Regression RMSE and $R^2$: both single ResNets are better than Ens.\ (unreg.).
-        \item Regression MAE: both single ResNets are better than Ens.\ (unreg.), Sym.\ Cos and SFO Cos.
-        \item All datasets: both single ResNets are better than Ens.\ (unreg.), Sym.\ Cos and SFO Cos, and Sym.\ CKA is better than Ens.\ (unreg.).
-    \end{itemize}
-    \item \textbf{SFO CKA} is not significantly different from any method in any ranking.
-    \item \textbf{No ensemble} is significantly better than either single ResNet.
-\end{itemize}
-
-\paragraph{Wilcoxon signed-rank tests.} Table~\ref{tab:wilcoxon} compares both SFOvTSGM ensembles with every baseline.
-\begin{itemize}
-    \item \textbf{Per task ($N = 6$).} No comparison is significant after the Holm correction. The smallest raw $p$-value is $0.031$, the smallest value attainable with $N = 6$. It is obtained by:
-    \begin{itemize}
-        \item SFO CKA vs.\ ResNet (tuned) on classification NLL, where SFO CKA is worse on all $6$ datasets;
-        \item SFO CKA vs.\ Sym.\ Cos on regression RMSE, where SFO CKA is better on all $6$ datasets;
-        \item SFO Cos vs.\ ResNet (tuned) on regression RMSE, where SFO Cos is worse on all $6$ datasets.
-    \end{itemize}
-    \item \textbf{On the combined loss ratios ($N = 12$)}, two comparisons are significant after the Holm correction:
-    \begin{itemize}
-        \item SFO CKA is better than Sym.\ Cos on $11$ of $12$ datasets ($p = 0.001$, $p_{\text{Holm}} = 0.010$);
-        \item SFO CKA is worse than ResNet (tuned) on $11$ of $12$ datasets ($p = 0.003$, $p_{\text{Holm}} = 0.031$).
-    \end{itemize}
-\end{itemize}
-
-\input{tables/friedman}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/cd_classification.pdf}\\[1ex]
-    \includegraphics[width=0.75\textwidth]{figures/cd_regression.pdf}\\[1ex]
     \includegraphics[width=0.75\textwidth]{figures/cd_combined.pdf}
-    \caption{Critical difference diagrams (Nemenyi, $\alpha = 0.05$) of the mean ranks on classification NLL (top), regression RMSE (middle), and all $12$ datasets ranked by NLL / RMSE (bottom). Methods connected by a bar are not significantly different.}
+    \caption{Critical difference diagram (Nemenyi, $\alpha = 0.05$) of the mean ranks on all $12$ datasets, ranked by NLL (classification) and RMSE (regression). Methods connected by a bar are not significantly different. The per-task diagrams are shown in Figure~\ref{fig:cd_tasks}.}
     \label{fig:cd}
 \end{figure}
 
-\input{tables/wilcoxon}
-
-\subsection{Ensemble Diagnostics}
-Table~\ref{tab:ensemble_diagnostics} summarizes the staged loss and the pairwise member similarity of all ensembles. Figures~\ref{fig:staged_loss}--\ref{fig:similarity} show the full profiles.
-
-\paragraph{Staged performance.}
+\subsection{Ensemble Diagnostics, Stability and Cost}
+\label{sec:stability}
+Table~\ref{tab:ensemble_diagnostics} and Figure~\ref{fig:staged_loss} summarize the staged loss and the member similarity of the ensembles. Stability, cost and the selected hyperparameters are reported in Appendix~\ref{app:other}.
 \begin{itemize}
-    \item \textbf{The full ensemble is not better than its first member.} The geometric-mean loss of the first member alone is at most that of the full ensemble of $M = 8$ members for every ensemble: $L(1)/L(8) = 0.990$--$1.000$ on classification and $0.979$--$0.990$ on regression (Figure~\ref{fig:staged_loss}).
-    \item \textbf{Regression.} The staged loss never decreases with $m$ for any ensemble.
-    \item \textbf{Classification.} The staged loss is lowest at $m = 2$ (at $m = 3$ for Sym.\ CKA) and mostly increases from there up to $m = 8$.
-    \item \textbf{Per dataset.} The first member alone has the lowest loss of all stages for every ensemble on $7$ datasets: California Housing, Covertype, Credit, Diamonds, Electricity, Elevators and House 16H. Pol is the only dataset on which the full ensemble is better than its first member for most ensembles (all except Sym.\ Cos).
-    \item \textbf{First member vs.\ ResNet (Stage 1).} The loss of the first member alone is within about $1\%$ of that of ResNet (Stage 1) (geometric mean over datasets) for every ensemble on regression, and on classification for Ens.\ (unreg.), SFO CKA and SFO Cos. The exceptions are Sym.\ CKA ($1.8\%$ higher) and Sym.\ Cos ($6.9\%$ higher) on classification.
-\end{itemize}
-
-\paragraph{Member output norms.}
-\begin{itemize}
-    \item Every member $m \ge 2$ has a much smaller output norm than the first member, and the norm decreases with $m$ (Figure~\ref{fig:member_norms}, left).
-    \item Relative to the first member, the norm is $0.43$ (member $2$) down to $0.14$ (member $8$) for Ens.\ (unreg.), and $0.14$ down to $0.08$ for SFO CKA. The other regularized ensembles lie in between.
-    \item After scaling by $\nu$, each member $m \ge 2$ contributes at most $6\%$ of the first member's norm, and between $1.6\%$ and $2.6\%$ for SFO CKA (Figure~\ref{fig:member_norms}, right).
-\end{itemize}
-
-\paragraph{Member similarity.}
-\begin{itemize}
-    \item \textbf{CKA.} The mean off-diagonal CKA is $0.612$ for Ens.\ (unreg.), $0.037$ for Sym.\ CKA and $0.060$ for SFO CKA. The cosine-penalized ensembles keep a high CKA ($0.468$ for Sym.\ Cos, $0.395$ for SFO Cos).
-    \item \textbf{Squared cosine.} The mean off-diagonal squared cosine similarity is $0.101$ for Ens.\ (unreg.) and between $0.018$ and $0.021$ for all four regularized ensembles, including the CKA-penalized ones.
-    \item \textbf{First member.} In the CKA-penalized ensembles, the first member is more similar to the other members than they are to each other (mean CKA $0.084$ vs.\ $0.052$ for SFO CKA, $0.052$ vs.\ $0.032$ for Sym.\ CKA). In the other ensembles it is the other way round (Figure~\ref{fig:similarity}).
+    \item \textbf{Staged loss.} The first member alone is at least as good as the full ensemble for every ensemble: $L(1)/L(8) = 0.990$--$1.000$ on classification and $0.979$--$0.990$ on regression. On regression the staged loss never decreases with $m$. The first member alone is within about $1\%$ of ResNet (Stage 1) for every ensemble on regression and for all except Sym.\ CKA ($1.8\%$) and Sym.\ Cos ($6.9\%$) on classification.
+    \item \textbf{Member contributions.} After scaling by $\nu$, every member $m \ge 2$ contributes at most $6\%$ of the first member's output norm (Figure~\ref{fig:member_norms}).
+    \item \textbf{Member similarity.} The mean off-diagonal CKA is $0.612$ for Ens.\ (unreg.), $0.037$ for Sym.\ CKA and $0.060$ for SFO CKA, while the cosine-penalized ensembles keep a high CKA ($0.395$--$0.468$; Figure~\ref{fig:similarity}).
+    \item \textbf{Stability.} Every ensemble has a higher seed standard deviation than ResNet (Stage 1) in both tasks (ratio $1.020$--$1.817$, Table~\ref{tab:stability}).
+    \item \textbf{Cost.} Every ensemble has $8$ times the parameters of the single ResNet, is refit for fewer epochs (geometric-mean ratio $0.77$--$0.94$) and takes $3.8$--$5.2$ times longer to train (Table~\ref{tab:cost}).
+    \item \textbf{Selected penalty weight.} For every regularized ensemble, the selected $\lambda$ spans almost the whole search range, from about $10^{-3}$ to $7.3$--$9.7$ (Figure~\ref{fig:hyperparameters}).
 \end{itemize}
 
 \input{tables/ensemble_diagnostics}
@@ -635,107 +485,54 @@ Table~\ref{tab:ensemble_diagnostics} summarizes the staged loss and the pairwise
     \label{fig:staged_loss}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/member_norms.pdf}
-    \caption{Root-mean-square output norm of each member on the outer test fold relative to the first member, without (left) and with (right) the member weight $w_1 = 1$, $w_m = \nu$ for $m \ge 2$. Geometric mean over all $300$ runs per method.}
-    \label{fig:member_norms}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=\textwidth]{figures/similarity.pdf}
-    \caption{Pairwise linear CKA (top) and squared cosine similarity (bottom) between the centered penultimate representations of the members on the outer test fold, averaged over all $300$ runs per method. The diagonal (equal to $1$) is omitted; each row shares one color scale.}
-    \label{fig:similarity}
-\end{figure}
-
-\subsection{Stability}
-\label{sec:stability}
-Table~\ref{tab:stability} compares the standard deviations of the primary metrics relative to ResNet (Stage 1):
-\begin{itemize}
-    \item $\sigma$: over all fold--seed results;
-    \item $\sigma_{\text{fold}}$: between the fold means;
-    \item $\bar{\sigma}_{\text{seed}}$: between the seeds within a fold.
-\end{itemize}
-
-\begin{itemize}
-    \item \textbf{Classification (NLL).}
-    \begin{itemize}
-        \item SFO Cos has the lowest overall ($0.912$) and fold ($0.964$) standard deviation of all methods.
-        \item ResNet (tuned) has the lowest seed standard deviation ($0.848$).
-        \item Sym.\ Cos has the highest values in all three columns (overall $1.750$).
-    \end{itemize}
-    \item \textbf{Regression (RMSE).}
-    \begin{itemize}
-        \item No method has a lower overall standard deviation than ResNet (Stage 1).
-        \item Sym.\ CKA is closest ($1.026$) and has the lowest fold standard deviation ($0.877$).
-        \item Ens.\ (unreg.) has the highest overall standard deviation ($1.433$).
-    \end{itemize}
-    \item \textbf{Seed standard deviation.} Every ensemble has a higher seed standard deviation than ResNet (Stage 1) in both tasks ($1.020$--$1.817$).
-\end{itemize}
-
-\input{tables/stability}
-
-\subsection{Computational Cost}
-Table~\ref{tab:cost} lists the number of trainable parameters, the number of refit epochs and the refit training time.
-
-\begin{itemize}
-    \item \textbf{Parameters.} Every ensemble has exactly $8$ times the parameters of the single ResNet with the same backbone (median $1{,}092{,}624$ vs.\ $136{,}578$).
-    \item \textbf{Epochs.} The ensembles are refit for fewer epochs than ResNet (Stage 1), with geometric-mean ratios from $0.77$ (Ens.\ (unreg.), SFO Cos) to $0.94$ (Sym.\ CKA).
-    \item \textbf{Training time.} Refitting an ensemble takes $3.8$ (Ens.\ (unreg.)) to $5.2$ (Sym.\ CKA) times longer than ResNet (Stage 1). Both CKA-penalized ensembles are slower than their cosine counterparts. ResNet (tuned) takes $0.86$ times as long as ResNet (Stage 1).
-\end{itemize}
-
-\input{tables/cost}
-
-\subsection{Selected Hyperparameters}
-Table~\ref{tab:hyperparameters_selected} lists the medians and quartiles of the selected hyperparameters over the $60$ dataset--fold pairs, and Figure~\ref{fig:hyperparameters} shows the distributions of $\nu$ and $\lambda$.
-
-\begin{itemize}
-    \item \textbf{Stage 1 architecture.}
-    \begin{itemize}
-        \item Hidden dimension: $64$, $128$ and $256$ were selected $13$, $24$ and $23$ times.
-        \item Residual blocks: $2$, $3$ and $4$ were selected $10$, $21$ and $29$ times.
-        \item The median dropout rate is $0.10$.
-    \end{itemize}
-    \item \textbf{Optimization.} The median learning rate is between $9.9 \times 10^{-4}$ (SFO CKA) and $1.7 \times 10^{-3}$ (Sym.\ Cos) for all Stage~2 methods. The median weight decay lies between $5.3 \times 10^{-5}$ and $2.4 \times 10^{-4}$.
-    \item \textbf{Additive coefficient $\nu$.}
-    \begin{itemize}
-        \item The medians are $0.111$ (Sym.\ CKA), $0.120$ (Ens.\ (unreg.)), $0.125$ (Sym.\ Cos, SFO Cos) and $0.167$ (SFO CKA).
-        \item $\nu < 0.1$ was selected in $43$--$45\%$ of the folds for all ensembles except SFO CKA ($28\%$).
-    \end{itemize}
-    \item \textbf{Penalty weight $\lambda$.}
-    \begin{itemize}
-        \item For every regularized ensemble, the selected values range from about the lower bound $10^{-3}$ of the search range up to $7.3$--$9.7$.
-        \item The medians are $0.069$ (Sym.\ CKA), $0.18$ (SFO Cos), $0.20$ (Sym.\ Cos) and $0.29$ (SFO CKA).
-        \item $\lambda > 1$ was selected in $33$--$38\%$ of the folds for SFO CKA, SFO Cos and Sym.\ Cos, and in $18\%$ for Sym.\ CKA.
-    \end{itemize}
-    \item \textbf{Training length.} The median best inner-validation epoch is $72$ for ResNet (Stage 1), $70.5$ for ResNet (tuned) and $52$ for Ens.\ (unreg.). The regularized ensembles lie in between ($54$--$68$).
-\end{itemize}
-
-\input{tables/hyperparameters}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{figures/hyperparameters.pdf}
-    \caption{Selected additive coefficient $\nu$ and penalty weight $\lambda$ for each of the $60$ dataset--fold pairs (points) and their median (black line). Dashed lines mark the bounds of the search range.}
-    \label{fig:hyperparameters}
-\end{figure}
-
 \section{Conclusions and Discussion}
 
 \subsection{Key Findings}
-% TODO: summarize the main results, supported by evidence from Section 6.
+\begin{itemize}
+    \item \textbf{Single ResNets beat ensembles} They have the two best mean ranks in every metric ($1.92$ and $2.25$ over all $12$ datasets, Table~\ref{tab:mean_ranks}), and the Friedman test rejects the equality of the methods for every metric (Table~\ref{tab:friedman}). No ensemble is significantly better than either single ResNet in any test.
+    \item \textbf{The differences are significant in rank but small in magnitude.} The ranking of the methods is consistent across datasets, but the geometric-mean loss ratios of the ensembles exceed those of ResNet (Stage 1) by only $0.6$--$4.3\%$, with the exception of Sym.\ Cos on classification NLL ($8\%$, Table~\ref{tab:gm_loss_ratios}). Accuracy and ROC-AUC differ by less than $0.9\%$ on all classification datasets except MiniBooNE. The per-task Wilcoxon tests find no significant difference after the Holm correction, and the few significant differences in the loss values (e.g.\ NLL on Covertype, SFO CKA vs.\ ResNet (tuned) on the combined ratios) all favour the single ResNets.
+    \item \textbf{The SFO CKA model is the best ensemble.} A CKA-penalized ensemble has the best ensemble rank in every metric, and SFO CKA is significantly better than Sym.\ Cos over all $12$ datasets. The penalties do decorrelate the members (mean CKA $0.037$--$0.060$ vs.\ $0.612$ without a penalty, Table~\ref{tab:ensemble_diagnostics}), but this does not translate into a lower loss than that of a single network.
+    \item \textbf{Adding members does not help.} The first member alone is at least as good as the full ensemble ($L(1)/L(8) \le 1$ for every ensemble), and every member $m \ge 2$ contributes at most $6\%$ of the first member's output norm. At the same time, the ensembles are less stable across seeds ($\bar{\sigma}_{\text{seed}}$ ratio $1.020$--$1.817$, Section~\ref{sec:stability}) and take $3.8$--$5.2$ times longer to train (Table~\ref{tab:cost}).
+\end{itemize}
 
-\subsection{Explanation of Successes and Failures}
-% TODO: possible explanations for the observed patterns.
+\subsection{Explanation of Failures}
+\begin{itemize}
+    \item \textbf{A strong first learner leaves no room for the other members.} A tuned Tabular ResNet already performs close to the best achievable level on these datasets: the first member of every ensemble is, on its own, within about $1\%$ of ResNet (Stage 1) on regression and on most classification ensembles. What remains for members $2$ to $8$ is a small residual of the \emph{training} data that consists mostly of noise. Fitting it does not generalize, so the later members stay small, are further shrunk by $\nu$, and at best do not change the prediction.
+    \item \textbf{Simultaneous training of the members is disruptive.} In our interpretation, the parallel form of dynamic boosting is the an important reason why the later members add nothing, in line with the observation that joint training of deep ensembles leads to learner collusion~\cite{jeffares2023joint}:
+    \begin{itemize}
+        \item the target of every member $m \ge 2$ is the residual of predecessors that are themselves still changing, so it is a moving target until the end of training;
+        \item all members share one training length, chosen on the validation loss of the whole ensemble, and the ensembles are refit for fewer epochs than the single ResNet (ratio $0.77$--$0.94$), so the first member is trained for less time than a standalone network;
+        \item the higher seed standard deviation of all ensembles and the staged classification loss, which increases from $m = 2$ to $m = 8$, are consistent with this.
+    \end{itemize}
+    We therefore consider simultaneous training unsuitable for additive ensembles of strong networks; 
+\end{itemize}
 
 \subsection{Limitations}
-% TODO: limitations of the study.
+\begin{itemize}
+    \item Only $12$ of the planned $24$ datasets were used, which limits the power of the between-dataset tests: with $N = 6$ datasets per task, the smallest attainable Wilcoxon $p$-value ($0.031$) cannot survive the Holm correction.
+    \item Hyperparameters were selected on a single $80/20$ inner split, which makes the selection noisy, as the wide spread of the selected $\lambda$ values shows (Figure~\ref{fig:hyperparameters}).
+    \item The budgets are not matched: every ensemble has $8$ times the parameters of the single ResNet and needs $3.8$--$5.2$ times its training time, while the tuning budget (number of trials) is the same.
+    \item Losses are reported in the units of each dataset, so their magnitudes cannot be pooled across datasets; the cross-dataset comparison relies on ranks and ratios.
+    \item Tested datasets were to small for proposed architectures which fully exploited their potential leaving no room for possible ensemble improvement
+    \item Ensemble methods having more hyperparameters consume more compute for tuning with comparable accuracy
+\end{itemize}
 
 \subsection{Future Work}
-% TODO: directions for future research.
+\begin{enumerate}
+    \item \textbf{Sequential boosting.} Member $m$ would be trained only after members $1, \dots, m-1$ are frozen, so that its residual target is fixed. This also allows a separate early stopping for each member and weaker (smaller) members after the first.
+    \item \textbf{Compute-matched comparison.} The number of training FLOPs of the single ResNet would be recorded, including the whole hyperparameter search (all trials, including pruned ones), as the forward and backward FLOPs per sample times the number of samples and epochs. Each ensemble, again including its hyperparameter search, would then receive a comparable budget, with a tolerance (e.g.\ $\pm 3\%$) that lets a running epoch or trial finish. Two variants are of interest:
+    \begin{enumerate}
+        \item the single ResNet is trained as in this study, until the maximum number of epochs or the early-stopping patience is reached;
+        \item the single ResNet is deliberately stopped early (e.g.\ at an accuracy of about $0.7$ of accuracy of a fully trained or after a fixed fraction of its budget), and the ensemble receives the same reduced budget, which gives it room to exploit many weak learners.
+    \end{enumerate}
+    The second variant is artificial as an experiment, but it simulates the practically relevant setting in which computational resources are limited.
+    \item \textbf{Standardized statistics.} The magnitudes of losses such as RMSE and MAE depend heavily on the dataset. Normalizing them, e.g.\ by the standard deviation of the target, or using standardized per-dataset effect sizes would allow magnitude-based tests that pool all datasets instead of relying on ranks only.
+    \item \textbf{Training-set size.} Ensembles mainly reduce variance, which matters most when data is scarce. Subsampling the training partitions to about $1{,}000$ and $5{,}000$ rows on $4$--$6$ datasets would show whether the ensembles overtake the single ResNet at small sizes.
+    \item \textbf{Metrics where ensembles usually help.} Calibration (e.g.\ expected calibration error), the quality of uncertainty estimates derived from the disagreement of the members, and robustness to noisy or missing features at test time.
+    \item \textbf{A less noisy comparison.} Repeated inner validation and the full set of $24$ datasets to increase the power of the statistical tests.
+\end{enumerate}
 
-\section{Reproducibility and Running the Code}
+\section{Reproducibility}
 
 \subsection{Reproducibility}
 % Ported from initial_plan.tex.
@@ -757,9 +554,6 @@ To guarantee full experimental reproducibility across hardware environments, the
     \end{itemize}
 \end{enumerate}
 
-
-\subsection{Running the Code}
-% TODO: step-by-step instructions to reproduce the experiments, tables and figures.
 
 \section{External Code and AI Usage Disclosure}
 % Ported from initial_plan.tex.
@@ -789,7 +583,72 @@ This generation process was conducted under continuous, substantial human superv
 % ==========================================
 \appendix
 
+% ==========================================
+% APPENDIX
+% ==========================================
+\appendix
+
 \section{Additional Results}
-% TODO: per-fold results, per-dataset diagnostic plots, selected hyperparameters per fold.
+\label{app:results}
+
+\subsection{Secondary Metrics}
+Tables~\ref{tab:results_accuracy}--\ref{tab:results_r2} report the secondary metrics on every dataset.
+
+\input{tables/results_accuracy}
+\input{tables/results_roc_auc}
+\input{tables/results_mae}
+\input{tables/results_r2}
+
+\clearpage
+\subsection{Statistical Tests}
+Table~\ref{tab:win_tie_loss} lists the win/tie/loss counts of the paired $t$-tests, Table~\ref{tab:friedman} the Friedman and Iman--Davenport tests, Table~\ref{tab:wilcoxon} the Wilcoxon signed-rank tests, and Figure~\ref{fig:cd_tasks} the per-task critical difference diagrams.
+
+\input{tables/win_tie_loss}
+\input{tables/friedman}
+\input{tables/wilcoxon}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/cd_classification.pdf}\\[1ex]
+    \includegraphics[width=0.75\textwidth]{figures/cd_regression.pdf}
+    \caption{Critical difference diagrams (Nemenyi, $\alpha = 0.05$, $\text{CD} = 3.68$) of the mean ranks on classification NLL (top) and regression RMSE (bottom). Methods connected by a bar are not significantly different.}
+    \label{fig:cd_tasks}
+\end{figure}
+
+\clearpage
+\subsection{Ensemble Diagnostics}
+Figure~\ref{fig:member_norms} shows the output norms of the members and Figure~\ref{fig:similarity} the pairwise similarity of their representations.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/member_norms.pdf}
+    \caption{Root-mean-square output norm of each member on the outer test fold relative to the first member, without (left) and with (right) the member weight $w_1 = 1$, $w_m = \nu$ for $m \ge 2$. Geometric mean over all $300$ runs per method.}
+    \label{fig:member_norms}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/similarity.pdf}
+    \caption{Pairwise linear CKA (top) and squared cosine similarity (bottom) between the centered penultimate representations of the members on the outer test fold, averaged over all $300$ runs per method. The diagonal (equal to $1$) is omitted; each row shares one color scale.}
+    \label{fig:similarity}
+\end{figure}
+
+\clearpage
+\subsection{Stability, Cost and Selected Hyperparameters}
+\label{app:other}
+Table~\ref{tab:stability} compares the standard deviations of the primary metrics relative to ResNet (Stage 1): $\sigma$ over all fold--seed results, $\sigma_{\text{fold}}$ between the fold means and $\bar{\sigma}_{\text{seed}}$ between the seeds within a fold. Table~\ref{tab:cost} lists the number of trainable parameters, refit epochs and refit training time. Table~\ref{tab:hyperparameters_selected} and Figure~\ref{fig:hyperparameters} summarize the selected hyperparameters over the $60$ dataset--fold pairs.
+
+\input{tables/stability}
+\input{tables/cost}
+\input{tables/hyperparameters}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/hyperparameters.pdf}
+    \caption{Selected additive coefficient $\nu$ and penalty weight $\lambda$ for each of the $60$ dataset--fold pairs (points) and their median (black line). Dashed lines mark the bounds of the search range.}
+    \label{fig:hyperparameters}
+\end{figure}
 
 \end{document}
+
+
